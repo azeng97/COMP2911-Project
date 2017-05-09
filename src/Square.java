@@ -15,8 +15,11 @@ public class Square
 	{
 		if (isEmpty())
 		{
-			boolean was
+			e.getSquare().removeContents();
+			contents = e;
+			e.setSquare(this);
 		}
+		return false;
 	}
 	public boolean isEmpty()
 	{
@@ -24,7 +27,7 @@ public class Square
 	}
 	public boolean canPush(int direction)
 	{
-		Square neighbour = game.squareAt(position.adjacentPos(direction));
+		Square neighbour = game.squareAt((Position)position.adjacentPos(direction));
 		return (contents != null && neighbour != null && neighbour.isEmpty());
 	}
 	public Position getPosition()
@@ -38,7 +41,7 @@ public class Square
 		{
 			return false;
 		}
-		Square neighbour = game.squareAt(position.adjacentPos(direction));
+		Square neighbour = game.squareAt((Position)position.adjacentPos(direction));
 		neighbour.addEntity(contents);
 		
 		return true;
@@ -46,7 +49,6 @@ public class Square
 	public void removeContents()
 	{
 		contents = null;
-		this.display();
 	}
 	protected Position position;
 	protected WarehouseBoss game;

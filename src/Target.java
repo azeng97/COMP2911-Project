@@ -4,8 +4,4 @@ public class Target extends Square{
 	{
 		super(p,g);
 	}
-	public String getImage()
-	{
-		return "X";
-	}
 }
