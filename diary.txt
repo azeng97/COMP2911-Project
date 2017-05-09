@@ -1,0 +1,35 @@
+6/5/2017
+what did I do yesterday?
+assignment 2
+what did I do today?
+- Researched implementation and classes required as well as representation of game board
+- drew basic UML relationship diagram
+what will I do tomorrow?
+Start coding - implement classes for objects 
+
+7/5/2017
+what did I do yesterday?
+UML and research
+what did I do today?
+- Set up git for group
+- created all classes
+- implemented grid and square/entity classes
+what will I do tomorrow?
+look through puzzle generation algorithms
+
+8/5/2017
+what did I do yesterday?
+- Started implementing classes
+- set up group git
+what did I do today?
+read some sokoban papers about procedural generation
+what will I do tomorrow?
+continue implementation of classes
+
+9/5/2017
+what did I do yesterday?
+Some research on puzzle generation
+what did I do today?
+finished implementing object classes, basic implementation of top level classes
+what will I do tomorrow?
+implement input/output classes (basic no GUI)
