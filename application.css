@@ -1,0 +1,17 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#display_player {
+	-fx-fill: yellow;
+}
+#display_wall {
+	-fx-fill: aliceblue;
+	/*dropshadow for the wall perhaps */
+}
+#display_box {
+	-fx-fill: blanchedalmond;	
+}
+#display_target {
+	-fx-fill: aqua 	
+}
+#display_match {
+	-fx-fill: blue;	
+}
