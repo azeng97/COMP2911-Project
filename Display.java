@@ -57,7 +57,7 @@ public class Display extends Application {
 		window.setTitle("puzzle mzaze #pick a name");
 		Scene scene = new Scene(createContent());
 		window.setScene(scene);
-		scene.getStylesheets().add("application/application.css");
+		scene.getStylesheets().add("application.css");
 		window.show();
 	}
 	
