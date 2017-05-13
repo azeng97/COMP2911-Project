@@ -11,14 +11,32 @@ import javafx.stage.Stage;
 
 public class Display extends Application {
 	private static final int TILE_SIZE = 40;
+	private static final int MAX_ARRAY_SIZE = 10;
+	private int arr[MAX_ARRAY_SIZE][MAX_ARRAY_SIZE];
+	private int arrayWidth;
+	private int arrayHeight;
+	
+	public Display(int arr[][], int arrayWidth, int arrayHeight) {
+		this.arr = arr;
+		this.arrayWidth = arrayWidth;
+		this.arrayHeight = arrayHeight;
+	}
+	public void move(int newArr[][]) {
+		for (int y = 0; y < arrayHeight; y ++) {
+			for (int x = 0; x < arrayWidth; x ++) {
+				this.arr[x][y] = newArr[x][y];
+			}
+		}
+		createContent();
+	}
 	
 	private Parent createContent() {
 		Pane root = new Pane();
 		root.setPrefSize(400, 400);
 		// change the size later
-		for(int y = 0; y < 10; y ++) {
-			for (int x = 0; x < 10; x ++) {
-				Tile tile = new Tile(x, y, (int)(Math.random() * 0.5 * 10)); // change the input
+		for(int y = 0; y < arrayHeight; y ++) {
+			for (int x = 0; x < arrayWidth; x ++) {
+				Tile tile = new Tile(x, y, arr[x][y]); // change the input
 				root.getChildren().add(tile);
 			}
 		}
