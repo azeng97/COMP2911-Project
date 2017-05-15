@@ -36,8 +36,13 @@ public class Board {
 			String line = new String();
 			for (int col=0;col<nCols;col++)
 			{
-				if (board[row][col] instanceof Wall) line += "#";
-				else if (board[row][col] instanceof Target) line += "O";
+				Square s = (Square) board[row][col];
+				if (s instanceof Wall) line += "#";
+				else if (s instanceof Target)
+				{
+					if (s.getContents() instanceof Box) line += "X";
+					else line += "O";
+				}
 				else if (board[row][col] instanceof Space)
 				{
 					if (((Square) board[row][col]).getContents() == null) line += " ";

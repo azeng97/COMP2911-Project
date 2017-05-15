@@ -15,9 +15,21 @@ public class Square extends Object
 	{
 		if (isEmpty())
 		{
+			boolean wasTarget = (e.getSquare() instanceof Target);
 			e.getSquare().removeContents();
 			contents = e;
 			e.setSquare(this);
+			
+			if (this instanceof Target && e instanceof Box && !wasTarget)
+			{
+				game.decrementTargets();
+				System.out.println("Remaining targets: " + game.emptyTargets());
+			} 
+			else if (!(this instanceof Target) && e instanceof Box && wasTarget)
+			{
+				game.incrementTargets();
+				System.out.println("Remaining targets: " + game.emptyTargets());
+			}
 		}
 		return false;
 	}
