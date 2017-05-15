@@ -4,4 +4,8 @@ public class Box extends Entity{
 	{
 		super(s,g);
 	}
+	public String getName()
+	{
+		return "Box";
+	}
 }

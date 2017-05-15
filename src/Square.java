@@ -4,7 +4,7 @@
  * @author Avan
  *
  */
-public class Square 
+public class Square extends Object 
 {
 	public Square(Position p, WarehouseBoss g)
 	{
@@ -35,6 +35,10 @@ public class Square
 		return position;
 	}
 	
+	public Entity getContents()
+	{
+		return this.contents;
+	}
 	public boolean pushContents(int direction)
 	{
 		if(!canPush(direction))

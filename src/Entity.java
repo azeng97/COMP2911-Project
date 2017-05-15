@@ -21,4 +21,5 @@ abstract class Entity {
 	{
 		this.square = s;
 	}
+	abstract public String getName();
 }

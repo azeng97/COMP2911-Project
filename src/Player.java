@@ -21,5 +21,8 @@ public class Player extends Entity{
 		}
 		return false;
 	}
-	
+	public String getName()
+	{
+		return "Player";
+	}
 }

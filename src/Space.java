@@ -6,6 +6,10 @@ public class Space extends Square{
 	}
 	public boolean isEmpty()
 	{
-		return false; 
+		return true; 
+	}
+	public String getName()
+	{
+		return "Space";
 	}
 }

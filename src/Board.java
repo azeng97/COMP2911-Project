@@ -29,6 +29,25 @@ public class Board {
 	{
 		return nRows;
 	}
+	public void printBoard()
+	{
+		for (int row=0;row<nRows;row++)
+		{
+			String line = new String();
+			for (int col=0;col<nCols;col++)
+			{
+				if (board[row][col] instanceof Wall) line += "#";
+				else if (board[row][col] instanceof Target) line += "O";
+				else if (board[row][col] instanceof Space)
+				{
+					if (((Square) board[row][col]).getContents() == null) line += " ";
+					else if (((Square) board[row][col]).getContents().getName().equals("Player")) line += "P";
+					else if (((Square) board[row][col]).getContents().getName().equals("Box")) line += "$";		
+				}
+			}
+			System.out.print(line + "\n");
+		}
+	}
 	private int nRows;
 	private int nCols;
 	private Object board[][];
