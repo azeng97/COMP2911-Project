@@ -16,7 +16,7 @@ public class WarehouseBoss {
 
 		this.buildBoard(0);
 		output = new Output(this, board);
-		System.out.println("Game starting");
+		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
 		output.printBoard();
 		
 		String input = new String();
