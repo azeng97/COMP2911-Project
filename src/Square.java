@@ -10,6 +10,7 @@ public class Square extends Object
 	{
 		this.position = p;
 		this.game = g;
+		this.contents = null;
 	}
 	public boolean addEntity(Entity e)
 	{
@@ -39,6 +40,7 @@ public class Square extends Object
 	}
 	public boolean canPush(int direction)
 	{
+		if (this instanceof Wall) return false;
 		Square neighbour = game.squareAt((Position)position.adjacentPos(direction));
 		return (contents != null && neighbour != null && neighbour.isEmpty());
 	}
@@ -55,6 +57,7 @@ public class Square extends Object
 	{
 		if(!canPush(direction))
 		{
+			//System.out.println("Can't Push");
 			return false;
 		}
 		Square neighbour = game.squareAt((Position)position.adjacentPos(direction));
