@@ -4,8 +4,20 @@ import java.util.*;
 public class WarehouseBoss {
 	public static void main(String args[])
 	{
-		WarehouseBoss game = new WarehouseBoss();
-		game.play();
+		launch();
+		
+		//WarehouseBoss game = new WarehouseBoss();
+		//game.play();
+	}
+	
+	@Override
+	public void start(Stage arg0) throws Exception {
+		gameOver = false;
+		emptyTargets = 0;
+		menuUI ui = new menuUI(arg0);
+		//ui.showMenu();
+		//TODO: GET INPUTS
+		//System.exit(1);		
 	}
 	
 	public void play()
