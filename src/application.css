@@ -15,3 +15,24 @@
 #display_match {
 	-fx-fill: blue;	
 }
+
+
+#labNewGame {
+	-fx-background-color: #969696;
+}
+
+#labLoadGame {
+	-fx-background-color: #969696;
+}
+
+#labSettings {
+	-fx-background-color: #969696;
+}
+
+#labExit {
+	-fx-background-color: #969696;
+}
+
+.root:hover {
+  -fx-background-color:#dae7f3;
+}
