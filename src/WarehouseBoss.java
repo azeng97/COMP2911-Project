@@ -16,7 +16,6 @@ public class WarehouseBoss {
 		emptyTargets = 0;
 		menuUI ui = new menuUI(arg0);
 		//ui.showMenu();
-		//TODO: GET INPUTS
 		//System.exit(1);		
 	}
 	
