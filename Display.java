@@ -1,5 +1,3 @@
-package application;
-
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,38 +13,34 @@ public class Display extends Application {
 	private static final int TILE_SIZE = 40;
 	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][];
-	private int arrayWidth = 10; // change
-	private int arrayHeight = 10; // change
+	private int arrayWidth; // change
+	private int arrayHeight; // change
 	
-	
-	/*public Display(int arr[][], int arrayWidth, int arrayHeight) {
-		arr = new int[MAX_ARRAY_SIZE][MAX_ARRAY_SIZE];
-		this.arr = arr;
+
+	public void dimension(int arrayWidth, int arrayHeight) {
 		this.arrayWidth = arrayWidth;
 		this.arrayHeight = arrayHeight;
-		for (int x = 0; x < 10; x ++) {
-			for(int y = 0; y < 10; y ++) {
-				this.arr[x][y] = 0;
-			}
-		}
-	}*/
-/*	public void move(int newArr[][]) {
-		for (int y = 0; y < arrayHeight; y ++) {
-			for (int x = 0; x < arrayWidth; x ++) {
-				this.arr[x][y] = newArr[x][y];
-			}
-		}
-	}*/
+		
+	}
+	public void move(int newArr[][]) {
+		this.arr = newArr;
+	}
 	
 	private Parent createContent() {
 		Pane root = new Pane();
 		root.setPrefSize(400, 400);
-		arr = new int[10][10];
+		
+		// initialise done in backend.
+		int array[][] = new int[MAX_ARRAY_SIZE][MAX_ARRAY_SIZE];
 		for (int x = 0; x < 10; x ++) {
 			for (int y = 0; y < 10; y ++) {
-				arr[x][y] = (int)(Math.random() * 0.5 * 10);
+				array[x][y] = (int)(Math.random() * 0.5 * 10);
 			}
 		}
+		dimension(10, 10);
+		move(array);
+		//
+		
 		// change the size later
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
@@ -99,3 +93,7 @@ public class Display extends Application {
 	}
 
 }
+
+/* things to do
+	- make a name for the game.
+*/
