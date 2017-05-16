@@ -33,3 +33,28 @@ what did I do today?
 finished implementing object classes, basic implementation of top level classes
 what will I do tomorrow?
 implement input/output classes (basic no GUI)
+
+13/05/2017
+what did I do yesterday?
+Nothing
+what did I do today?
+learned how to use javaFX
+what will I do tomorrow?
+implement input functions
+
+14/05/2017
+what did I do yesterday?
+learned how to use javaFX
+what did I do today?
+implemented input functions in console to test game mechanics
+what will I do tomorrow?
+implement output to console
+
+15/05/2017
+what did I do yesterday?
+implemented input
+what did I do today?
+implemented output and debugged game
+what will I do tomorrow?
+link back end to front end
+
