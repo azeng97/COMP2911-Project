@@ -8,40 +8,29 @@ import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 
-public class MenuController {
+public class SettingMenuController {
+	
+	@FXML private javafx.scene.control.Button butBack;
 
-	@FXML private javafx.scene.control.Button butNewGame;
-	
-	@FXML private javafx.scene.control.Button butSettings;
-	
 	@FXML
-	public void newGame () {
-		System.out.println("Selected: New Game");
-		
-		Stage stage = (Stage) butNewGame.getScene().getWindow();
-	    stage.close();
-	    
-		WarehouseBoss game = new WarehouseBoss();
-		game.play();
-		
-		
-		
+	public void toggleSound () {
+		System.out.println("Selected: Settings > Toggle sound");
+//		
 	}
 	
-	public void loadGame() {
-		System.out.println("Selected: Load Game");
+	public void toggleDifficulty() {
+		System.out.println("Selected: Settings > Toggle difficulty");
 	}
 	
-	public void settings() {
+	public void back() {
 		System.out.println("Selected: Settings");
-		
-		Stage stage = (Stage) butNewGame.getScene().getWindow();
+		Stage stage = (Stage) butBack.getScene().getWindow();
 	    stage.close();
 		
 		Stage primaryStage = new Stage();
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
+			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
@@ -53,7 +42,7 @@ public class MenuController {
 		}
 	}
 	
-	public void exit() {
-		System.exit(0);
+	public void deleteSave() {
+
 	}
 }

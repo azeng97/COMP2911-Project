@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 public class WarehouseBoss extends Application {
 	public static void main(String args[])
 	{
+		//Stage arg0 = new Stage();
+		//menuUI ui = new menuUI(arg0);
+		
 		launch();
 		
 		//WarehouseBoss game = new WarehouseBoss();
@@ -14,12 +17,8 @@ public class WarehouseBoss extends Application {
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
-		gameOver = false;
-		emptyTargets = 0;
-		menuUI ui = new menuUI(arg0);
-		//ui.showMenu();
-		//TODO: GET INPUTS
-		//System.exit(1);		
+		Stage s = new Stage();
+		menuUI ui = new menuUI(s);
 	}
 	
 	public void play()
