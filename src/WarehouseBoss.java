@@ -19,6 +19,9 @@ public class WarehouseBoss {
 		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
 		output.printBoard();
 		
+		//edit test
+		
+		
 		String input = new String();
 		Scanner in = new Scanner(System.in); 
 		while (gameOver == false)
