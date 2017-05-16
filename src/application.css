@@ -36,3 +36,12 @@
 .root:hover {
   -fx-background-color:#dae7f3;
 }
+
+#soundToggle:checked {
+	-fx-background-color:red;
+}
+
+.soundToggle:after {
+	-fx-background-color:green;
+}
+
