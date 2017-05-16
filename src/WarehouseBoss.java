@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class WarehouseBoss {
+public class WarehouseBoss extends Application {
 	public static void main(String args[])
 	{
 		launch();
