@@ -20,7 +20,7 @@ public class WarehouseBoss {
 		output.printBoard();
 		
 		//edit test
-		
+		//edit test 2
 		
 		String input = new String();
 		Scanner in = new Scanner(System.in); 
