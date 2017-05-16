@@ -23,7 +23,7 @@ public class SettingMenuController {
 	}
 	
 	public void back() {
-		System.out.println("Selected: Settings");
+		System.out.println("Selected: Settings > Back");
 		Stage stage = (Stage) butBack.getScene().getWindow();
 	    stage.close();
 		
