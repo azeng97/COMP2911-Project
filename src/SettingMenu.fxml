@@ -5,6 +5,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -51,7 +54,7 @@
             </ImageView>
         </buttons>
       </ButtonBar>
-      <Label fx:id="labNewGame" alignment="CENTER" contentDisplay="BOTTOM" layoutX="39.0" layoutY="37.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
+      <Label fx:id="labNewGame" alignment="CENTER" contentDisplay="BOTTOM" layoutX="39.0" layoutY="37.0" opacity="0.45" prefHeight="50.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -62,7 +65,7 @@
             <Insets bottom="100.0" right="10.0" top="10.0" />
          </opaqueInsets>
       </Label>
-      <Label fx:id="labNewGame1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="39.0" layoutY="37.0" prefHeight="50.0" prefWidth="200.0" text="New Game" textFill="WHITE">
+      <Label fx:id="labNewGame1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="39.0" layoutY="37.0" prefHeight="50.0" prefWidth="140.0" text="Sound" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -73,17 +76,6 @@
             <Insets bottom="100.0" right="10.0" top="10.0" />
          </opaqueInsets>
       </Label>
-    <Button fx:id="butNewGame" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" layoutX="39.0" layoutY="37.0" mnemonicParsing="false" onAction="#newGame" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="New Game" textAlignment="CENTER">
-         <font>
-            <Font name="Courier New" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow height="45.0" radius="22.0" spread="0.3" width="45.0" />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Label fx:id="labLoadGame" alignment="CENTER" layoutX="300.0" layoutY="37.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
@@ -92,7 +84,7 @@
             <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
          </effect>
       </Label>
-      <Label fx:id="labLoadGame2" alignment="CENTER" layoutX="300.0" layoutY="37.0" prefHeight="50.0" prefWidth="200.0" text="Load Game" textFill="WHITE">
+      <Label fx:id="labLoadGame2" alignment="CENTER" layoutX="300.0" layoutY="37.0" prefHeight="50.0" prefWidth="200.0" text="Delete Save" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -100,7 +92,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Load Game" textAlignment="CENTER">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Delete Save" textAlignment="CENTER">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
@@ -111,7 +103,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="labSettings" alignment="CENTER" layoutX="39.0" layoutY="137.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
+      <Label fx:id="labSettings" alignment="CENTER" layoutX="39.0" layoutY="137.0" opacity="0.45" prefHeight="50.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -119,7 +111,7 @@
             <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
          </effect>
       </Label>
-      <Label fx:id="labSettings1" alignment="CENTER" layoutX="39.0" layoutY="136.0" prefHeight="50.0" prefWidth="200.0" text="Settings" textFill="WHITE">
+      <Label fx:id="labSettings1" alignment="CENTER" layoutX="39.0" layoutY="136.0" prefHeight="50.0" prefWidth="140.0" text="Difficulty" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -127,43 +119,12 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="136.0" mnemonicParsing="false" onAction="#settings" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Settings" textAlignment="CENTER">
-         <font>
-            <Font name="Courier New" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow height="45.0" radius="22.0" spread="0.3" width="45.0" />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Label fx:id="labExit" alignment="CENTER" layoutX="300.0" layoutY="136.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
-         <font>
-            <Font name="Courier New Bold" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
-         </effect>
-      </Label>
-      <Label fx:id="labExit2" alignment="CENTER" layoutX="300.0" layoutY="137.0" prefHeight="50.0" prefWidth="200.0" text="Exit" textFill="WHITE">
-         <font>
-            <Font name="Courier New Bold" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
-         </effect>
-      </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="136.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Exit" textAlignment="CENTER">
-         <font>
-            <Font name="Courier New" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow height="56.86" radius="24.965" spread="1.0" width="45.0" />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <ToggleButton fx:id="soundToggle" layoutX="179.0" layoutY="37.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" selected="true" />
+      <MenuButton layoutX="180.0" layoutY="137.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="320.0" text="Easy">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>
