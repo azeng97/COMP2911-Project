@@ -100,7 +100,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Load Game" textAlignment="CENTER">
+      <Button fx:id="butLoadGame" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Load Game" textAlignment="CENTER">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
@@ -127,7 +127,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="136.0" mnemonicParsing="false" onAction="#settings" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Settings" textAlignment="CENTER">
+      <Button fx:id="butSettings" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="136.0" mnemonicParsing="false" onAction="#settings" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Settings" textAlignment="CENTER">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
@@ -154,7 +154,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="136.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Exit" textAlignment="CENTER">
+      <Button fx:id="butExit" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="136.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="50.0" prefWidth="200.0" text="Exit" textAlignment="CENTER">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
