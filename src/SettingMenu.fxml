@@ -104,7 +104,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <ToggleButton fx:id="soundToggle" layoutX="179.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="50.0" prefWidth="71.0" selected="true" />
+      <ToggleButton fx:id="butSoundToggle" layoutX="179.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="50.0" prefWidth="71.0" selected="true" />
       <Label fx:id="labBack" alignment="CENTER" layoutX="300.0" layoutY="236.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
@@ -132,15 +132,32 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="240.0" layoutY="136.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="135.0" text="Easy">
+      <Button fx:id="butDiffEasy" layoutX="240.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeDifficultyEasy" prefHeight="50.0" prefWidth="135.0" text="Easy">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="375.0" layoutY="136.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="135.0" text="Hard">
+      <Button fx:id="butDiffHard" layoutX="375.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeDifficultyHard" prefHeight="50.0" prefWidth="135.0" text="Hard">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
+      <Label fx:id="labSoundToggle" alignment="CENTER" layoutX="179.0" layoutY="236.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
+         </effect>
+      </Label>
+      <Label fx:id="labSoundToggleText" alignment="CENTER" layoutX="179.0" layoutY="236.0" prefHeight="50.0" prefWidth="200.0" text="Sound on" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
+         </effect>
+      </Label>
+      <ImageView fx:id="muteUnmute" src="http://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg" fitHeight="59.0" fitWidth="71.0" layoutX="360.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

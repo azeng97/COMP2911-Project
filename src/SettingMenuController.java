@@ -11,24 +11,31 @@ import javafx.stage.Stage;
 public class SettingMenuController {
 	
 	@FXML private javafx.scene.control.Button butBack;
+	@FXML private javafx.scene.control.Button butSoundToggle;
+	@FXML private javafx.scene.control.Label labSoundToggleText;
 
 	@FXML
 	public void toggleSound () {
 		System.out.println("Selected: Settings > Toggle sound");
+		if (labSoundToggleText.getText().equals("Sound on"))
+			labSoundToggleText.setText("Sound muted");
+		else labSoundToggleText.setText("Sound on");
 //		
 	}
 	
-	public void toggleDifficulty() {
-		System.out.println("Selected: Settings > Toggle difficulty");
+	public void changeDifficultyEasy() {
+		System.out.println("Selected: Settings > Difficulty set to Easy");
+	}
+	
+	public void changeDifficultyHard() {
+		System.out.println("Selected: Settings > Difficulty set to Hard");
 	}
 	
 	public void back() {
 		System.out.println("Selected: Settings > Back");
 		
 		Stage stage = (Stage) butBack.getScene().getWindow();
-	    stage.close();
-		
-		Stage primaryStage = new Stage();
+		Stage primaryStage = stage;
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -44,6 +51,6 @@ public class SettingMenuController {
 	}
 	
 	public void deleteSave() {
-
+		System.out.println("Selected: Settings > Delete save");
 	}
 }

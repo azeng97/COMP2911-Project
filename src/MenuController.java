@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MenuController {
@@ -36,10 +37,10 @@ public class MenuController {
 		System.out.println("Selected: Settings");
 		
 		Stage stage = (Stage) butNewGame.getScene().getWindow();
-	    stage.close();
+		Stage primaryStage = stage;
+		primaryStage.setTitle("Settings");
 		
-		Stage primaryStage = new Stage();
-		Parent root;
+		Pane root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
 			Scene scene = new Scene(root);

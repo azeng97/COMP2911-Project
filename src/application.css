@@ -48,6 +48,10 @@
 	-fx-background-color: #969696;
 }
 
+#labSoundToggle {
+	-fx-background-color: #969696;
+}
+
 .root:hover {
   -fx-background-color:#dae7f3;
 }
