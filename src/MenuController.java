@@ -34,7 +34,7 @@ public class MenuController {
 	}
 	
 	public void settings() {
-		System.out.println("Selected: Settings");
+		//System.out.println("Selected: Settings");
 		
 		Stage stage = (Stage) butNewGame.getScene().getWindow();
 		Stage primaryStage = stage;

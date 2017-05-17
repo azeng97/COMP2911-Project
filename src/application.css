@@ -36,6 +36,31 @@
 	-fx-background-color: #969696;
 }
 
+
+#labSoundButOff {
+	-fx-background-color: #4d4d4d;
+}
+
+#labSoundButOn {
+	-fx-background-color: #d6d6d6;
+}
+
+#labDifficultyEasyOff {
+	-fx-background-color: #4d4d4d;
+}
+
+#labDifficultyEasyOn {
+	-fx-background-color: #d6d6d6;
+}
+
+#labDifficultyHardOff {
+	-fx-background-color: #4d4d4d;
+}
+
+#labDifficultyHardOn {
+	-fx-background-color: #d6d6d6;
+}
+
 #labLoadGame {
 	-fx-background-color: #969696;
 }

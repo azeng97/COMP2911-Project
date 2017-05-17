@@ -132,16 +132,94 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="butDiffEasy" layoutX="240.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeDifficultyEasy" prefHeight="50.0" prefWidth="135.0" text="Easy">
+      <Label fx:id="labDifficultyEasyOff" alignment="CENTER" layoutX="240.0" layoutY="137.0" opacity="0.51" prefHeight="50.0" prefWidth="135.0" textFill="#d6d6d6" visible="false">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.68" width="25.0" />
+         </effect>
+      </Label>
+      <Label fx:id="labDifficultyEasyOn" alignment="CENTER" layoutX="240.0" layoutY="137.0" opacity="0.59" prefHeight="50.0" prefWidth="135.0" textFill="#d6d6d6">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.68" width="25.0" />
+         </effect>
+      </Label>
+      <Label fx:id="labDifficultyHardText" alignment="CENTER" contentDisplay="BOTTOM" layoutX="238.0" layoutY="136.0" prefHeight="50.0" prefWidth="140.0" text="Easy" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="100.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </Label>
+      <Button fx:id="butDiffEasy" layoutX="240.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeDifficultyEasy" opacity="0.0" prefHeight="50.0" prefWidth="135.0" text="Easy">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="butDiffHard" layoutX="375.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeDifficultyHard" prefHeight="50.0" prefWidth="135.0" text="Hard">
+      <Label fx:id="labDifficultyHardOff" alignment="CENTER" layoutX="376.0" layoutY="137.0" opacity="0.51" prefHeight="50.0" prefWidth="135.0" textFill="#d6d6d6">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.68" width="25.0" />
+         </effect>
+      </Label>
+      <Label fx:id="labDifficultyHardOn" alignment="CENTER" layoutX="376.0" layoutY="137.0" opacity="0.59" prefHeight="50.0" prefWidth="135.0" textFill="#d6d6d6" visible="false">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.68" width="25.0" />
+         </effect>
+      </Label>
+      <Label fx:id="labDifficultyHardText" alignment="CENTER" contentDisplay="BOTTOM" layoutX="375.0" layoutY="136.0" prefHeight="50.0" prefWidth="140.0" text="Hard" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="100.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </Label>
+      <Button fx:id="butDiffHard" layoutX="376.0" layoutY="136.0" mnemonicParsing="false" onAction="#changeDifficultyHard" opacity="0.0" prefHeight="50.0" prefWidth="135.0" text="Hard">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
+      <Label fx:id="labMuteIcon" alignment="CENTER" layoutX="292.0" layoutY="37.0" opacity="0.4" prefHeight="50.0" prefWidth="65.0" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="39.83" radius="20.155" spread="0.67" width="42.79" />
+         </effect>
+      </Label>
+      <ImageView fx:id="unmuteImg" fitHeight="50.0" fitWidth="68.0" layoutX="292.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speaker.png" />
+         </image>
+         <effect>
+            <InnerShadow height="152.70499999999998" radius="77.70625" width="160.12" />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="muteImg" fitHeight="50.0" fitWidth="68.0" layoutX="292.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/mute.png" />
+         </image>
+         <effect>
+            <InnerShadow height="152.70499999999998" radius="77.70625" width="160.12" />
+         </effect>
+      </ImageView>
       <Label fx:id="labSoundToggle" alignment="CENTER" layoutX="360.0" layoutY="37.0" opacity="0.45" prefHeight="50.0" prefWidth="150.0" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
@@ -158,30 +236,25 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <ToggleButton fx:id="butSound" layoutX="179.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="50.0" prefWidth="68.0" />
-      <Label fx:id="labMuteIcon" alignment="CENTER" layoutX="292.0" layoutY="37.0" opacity="0.4" prefHeight="50.0" prefWidth="65.0" textFill="WHITE">
+      <Label fx:id="labSoundButOff" alignment="CENTER" layoutX="181.0" layoutY="37.0" opacity="0.6" prefHeight="50.0" prefWidth="65.0" textFill="#d6d6d6" visible="false">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
          <effect>
-            <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
+            <DropShadow height="25.0" radius="12.0" spread="0.68" width="25.0" />
          </effect>
       </Label>
-      <ImageView fx:id="unmuteImg" fitHeight="50.0" fitWidth="68.0" layoutX="292.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/speaker.png" />
-         </image>
+      <Label fx:id="labSoundButOn" alignment="CENTER" layoutX="181.0" layoutY="37.0" opacity="0.59" prefHeight="50.0" prefWidth="65.0" textFill="#d6d6d6">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
          <effect>
-            <InnerShadow height="145.29" radius="75.85249999999999" width="160.12" />
+            <DropShadow height="25.0" radius="12.0" spread="0.68" width="25.0" />
          </effect>
-      </ImageView>
-      <ImageView fx:id="muteImg" fitHeight="50.0" fitWidth="68.0" layoutX="292.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/mute.png" />
-         </image>
+      </Label>
+      <ToggleButton fx:id="butSound" layoutX="179.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleSound" opacity="0.0" prefHeight="50.0" prefWidth="68.0" textFill="#aeaeae">
          <effect>
-            <InnerShadow height="145.29" radius="75.85249999999999" width="160.12" />
-         </effect>
-      </ImageView>
+            <InnerShadow />
+         </effect></ToggleButton>
    </children>
 </AnchorPane>

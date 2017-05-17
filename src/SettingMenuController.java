@@ -16,6 +16,12 @@ public class SettingMenuController {
 	@FXML private javafx.scene.control.Label labSoundToggleText;
 	@FXML private javafx.scene.image.ImageView unmuteImg;
 	@FXML private javafx.scene.image.ImageView muteImg;
+	@FXML private javafx.scene.control.Label labSoundButOn;
+	@FXML private javafx.scene.control.Label labSoundButOff;
+	@FXML private javafx.scene.control.Label labDifficultyEasyOff;
+	@FXML private javafx.scene.control.Label labDifficultyEasyOn;
+	@FXML private javafx.scene.control.Label labDifficultyHardOff;
+	@FXML private javafx.scene.control.Label labDifficultyHardOn;
 
 	public void toggleSound () {
 		System.out.println("Selected: Settings > Toggle sound");
@@ -23,21 +29,37 @@ public class SettingMenuController {
 			labSoundToggleText.setText("Sound muted");
 			unmuteImg.setVisible(false);
 			muteImg.setVisible(true);
-			
+			labSoundButOn.setVisible(false);
+			labSoundButOff.setVisible(true);
 		} else {
 			labSoundToggleText.setText("Sound on");
 			unmuteImg.setVisible(true);
 			muteImg.setVisible(false);
+			labSoundButOn.setVisible(true);
+			labSoundButOff.setVisible(false);
 		}
 //		
 	}
 	
 	public void changeDifficultyEasy() {
 		System.out.println("Selected: Settings > Difficulty set to Easy");
+		if (labDifficultyEasyOn.isVisible() != true) {
+			labDifficultyEasyOff.setVisible(false);
+			labDifficultyEasyOn.setVisible(true);
+			labDifficultyHardOff.setVisible(true);
+			labDifficultyHardOn.setVisible(false);
+		}
+		
 	}
 	
 	public void changeDifficultyHard() {
 		System.out.println("Selected: Settings > Difficulty set to Hard");
+		if (labDifficultyHardOn.isVisible() != true) {
+			labDifficultyHardOff.setVisible(false);
+			labDifficultyHardOn.setVisible(true);
+			labDifficultyEasyOff.setVisible(true);
+			labDifficultyEasyOn.setVisible(false);
+		}
 	}
 	
 	public void back() {
