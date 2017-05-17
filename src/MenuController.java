@@ -17,7 +17,7 @@ public class MenuController {
 	
 	@FXML
 	public void newGame () {
-		System.out.println("Selected: New Game");
+		//System.out.println("Selected: New Game");
 		
 		Stage stage = (Stage) butNewGame.getScene().getWindow();
 	    stage.close();

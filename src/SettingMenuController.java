@@ -13,36 +13,27 @@ public class SettingMenuController {
 	
 	@FXML private javafx.scene.control.Button butBack;
 	@FXML private javafx.scene.control.ToggleButton butSound;
-	@FXML private javafx.scene.control.Label labSoundToggleText;
 	@FXML private javafx.scene.image.ImageView unmuteImg;
 	@FXML private javafx.scene.image.ImageView muteImg;
-	@FXML private javafx.scene.control.Label labSoundButOn;
-	@FXML private javafx.scene.control.Label labSoundButOff;
 	@FXML private javafx.scene.control.Label labDifficultyEasyOff;
 	@FXML private javafx.scene.control.Label labDifficultyEasyOn;
 	@FXML private javafx.scene.control.Label labDifficultyHardOff;
 	@FXML private javafx.scene.control.Label labDifficultyHardOn;
 
 	public void toggleSound () {
-		System.out.println("Selected: Settings > Toggle sound");
-		if (labSoundToggleText.getText().equals("Sound on")) {
-			labSoundToggleText.setText("Sound muted");
+		//System.out.println("Selected: Settings > Toggle sound");
+		if (unmuteImg.isVisible() == true) {
 			unmuteImg.setVisible(false);
 			muteImg.setVisible(true);
-			labSoundButOn.setVisible(false);
-			labSoundButOff.setVisible(true);
 		} else {
-			labSoundToggleText.setText("Sound on");
 			unmuteImg.setVisible(true);
 			muteImg.setVisible(false);
-			labSoundButOn.setVisible(true);
-			labSoundButOff.setVisible(false);
 		}
 //		
 	}
 	
 	public void changeDifficultyEasy() {
-		System.out.println("Selected: Settings > Difficulty set to Easy");
+		//System.out.println("Selected: Settings > Difficulty set to Easy");
 		if (labDifficultyEasyOn.isVisible() != true) {
 			labDifficultyEasyOff.setVisible(false);
 			labDifficultyEasyOn.setVisible(true);
@@ -53,7 +44,7 @@ public class SettingMenuController {
 	}
 	
 	public void changeDifficultyHard() {
-		System.out.println("Selected: Settings > Difficulty set to Hard");
+		//System.out.println("Selected: Settings > Difficulty set to Hard");
 		if (labDifficultyHardOn.isVisible() != true) {
 			labDifficultyHardOff.setVisible(false);
 			labDifficultyHardOn.setVisible(true);
@@ -63,7 +54,7 @@ public class SettingMenuController {
 	}
 	
 	public void back() {
-		System.out.println("Selected: Settings > Back");
+		//System.out.println("Selected: Settings > Back");
 		
 		Stage stage = (Stage) butBack.getScene().getWindow();
 		Stage primaryStage = stage;

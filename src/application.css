@@ -60,66 +60,73 @@
   -fx-background-color:#d6d6d6;
 }
 
-#labBack {
-	-fx-background-color: #969696;
-}
 
-#labDeleteSave {
-	-fx-background-color: #969696;
+
+
+/* Settings Menu */
+#butSound {
+	-fx-background-color: transparent;
 }
 #labSound {
 	-fx-background-color: #969696;
 }
+#butSound:hover {
+  -fx-background-color:#d6d6d6;
+}
+#labMuteIcon {
+	-fx-background-color: black;
+	
+}
+
+
+
+#butDeleteSave {
+	-fx-background-color: transparent;
+}
+#labDeleteSave {
+	-fx-background-color: #969696;
+}
+#butDeleteSave:hover {
+  -fx-background-color:#d6d6d6;
+}
+
 
 #labDifficulty {
 	-fx-background-color: #969696;
 }
 
-
-#labSoundButOff {
-	-fx-background-color: #4d4d4d;
-}
-
-#labSoundButOn {
-	-fx-background-color: #d6d6d6;
-}
-
 #labDifficultyEasyOff {
 	-fx-background-color: #4d4d4d;
 }
-
 #labDifficultyEasyOn {
 	-fx-background-color: #d6d6d6;
+}
+#butDiffEasy {
+	-fx-background-color: transparent;
+}
+#butDiffEasy:hover {
+  -fx-background-color:#969696;
 }
 
 #labDifficultyHardOff {
 	-fx-background-color: #4d4d4d;
 }
-
 #labDifficultyHardOn {
 	-fx-background-color: #d6d6d6;
 }
-
-
-
-#labSoundToggle {
-	-fx-background-color: #969696;
+#butDiffHard {
+	-fx-background-color: transparent;
+}
+#butDiffHard:hover {
+  -fx-background-color:#969696;
 }
 
-#labMuteIcon {
+#butBack {
+	-fx-background-color: transparent;
+}
+#labBack {
 	-fx-background-color: #969696;
 }
-
-#butNewGame:hover {
+#butBack:hover {
   -fx-background-color:#d6d6d6;
- 
 }
-
-#soundToggle:checked {	
-	-fx-background-color:red;
-}
-
-.soundToggle:after {
-	-fx-background-color:green;
-}
-
