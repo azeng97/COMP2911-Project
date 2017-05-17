@@ -19,6 +19,9 @@ public class WarehouseBoss extends Application {
 	public void start(Stage arg0) throws Exception {
 		Stage s = new Stage();
 		menuUI ui = new menuUI(s);
+//		menuUI ui = new menuUI(arg0);
+		//ui.showMenu();
+		//System.exit(1);		
 	}
 	
 	public void play()
