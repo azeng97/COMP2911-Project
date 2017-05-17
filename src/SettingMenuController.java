@@ -11,10 +11,9 @@ import javafx.stage.Stage;
 public class SettingMenuController {
 	
 	@FXML private javafx.scene.control.Button butBack;
-	@FXML private javafx.scene.control.Button butSoundToggle;
+	@FXML private javafx.scene.control.ToggleButton butSound;
 	@FXML private javafx.scene.control.Label labSoundToggleText;
 
-	@FXML
 	public void toggleSound () {
 		System.out.println("Selected: Settings > Toggle sound");
 		if (labSoundToggleText.getText().equals("Sound on"))

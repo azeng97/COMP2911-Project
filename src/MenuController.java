@@ -40,7 +40,7 @@ public class MenuController {
 		Stage primaryStage = stage;
 		primaryStage.setTitle("Settings");
 		
-		Pane root;
+		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
 			Scene scene = new Scene(root);
