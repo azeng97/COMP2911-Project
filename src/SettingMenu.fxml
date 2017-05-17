@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -158,10 +159,29 @@
          </effect>
       </Label>
       <ToggleButton fx:id="butSound" layoutX="179.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="50.0" prefWidth="68.0" />
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="310.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="labMuteIcon" alignment="CENTER" layoutX="292.0" layoutY="37.0" opacity="0.4" prefHeight="50.0" prefWidth="65.0" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
+         </effect>
+      </Label>
+      <ImageView fx:id="unmuteImg" fitHeight="50.0" fitWidth="68.0" layoutX="292.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/speaker.png" />
          </image>
+         <effect>
+            <InnerShadow height="145.29" radius="75.85249999999999" width="160.12" />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="muteImg" fitHeight="50.0" fitWidth="68.0" layoutX="292.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/mute.png" />
+         </image>
+         <effect>
+            <InnerShadow height="145.29" radius="75.85249999999999" width="160.12" />
+         </effect>
       </ImageView>
    </children>
 </AnchorPane>

@@ -52,7 +52,11 @@
 	-fx-background-color: #969696;
 }
 
-.root:hover {
+#labMuteIcon {
+	-fx-background-color: #969696;
+}
+
+.butNewGame:hover {
   -fx-background-color:#dae7f3;
 }
 

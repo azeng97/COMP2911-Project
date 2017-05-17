@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 
@@ -13,12 +14,21 @@ public class SettingMenuController {
 	@FXML private javafx.scene.control.Button butBack;
 	@FXML private javafx.scene.control.ToggleButton butSound;
 	@FXML private javafx.scene.control.Label labSoundToggleText;
+	@FXML private javafx.scene.image.ImageView unmuteImg;
+	@FXML private javafx.scene.image.ImageView muteImg;
 
 	public void toggleSound () {
 		System.out.println("Selected: Settings > Toggle sound");
-		if (labSoundToggleText.getText().equals("Sound on"))
+		if (labSoundToggleText.getText().equals("Sound on")) {
 			labSoundToggleText.setText("Sound muted");
-		else labSoundToggleText.setText("Sound on");
+			unmuteImg.setVisible(false);
+			muteImg.setVisible(true);
+			
+		} else {
+			labSoundToggleText.setText("Sound on");
+			unmuteImg.setVisible(true);
+			muteImg.setVisible(false);
+		}
 //		
 	}
 	
