@@ -16,9 +16,48 @@
 	-fx-fill: blue;	
 }
 
-
+/* Main Menu */
+#butNewGame {
+	-fx-background-color: transparent;
+}
 #labNewGame {
 	-fx-background-color: #969696;
+}
+#butNewGame:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butLoadGame {
+	-fx-background-color: transparent;
+}
+#labLoadGame {
+	-fx-background-color: #969696;
+}
+#butLoadGame:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butSettings {
+	-fx-background-color: transparent;
+}
+#labSettings {
+	-fx-background-color: #969696;
+}
+#butSettings:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butExit {
+	-fx-background-color: transparent;
+}
+#labExit {
+	-fx-background-color: #969696;
+}
+#butExit:hover {
+  -fx-background-color:#d6d6d6;
 }
 
 #labBack {
@@ -61,17 +100,7 @@
 	-fx-background-color: #d6d6d6;
 }
 
-#labLoadGame {
-	-fx-background-color: #969696;
-}
 
-#labSettings {
-	-fx-background-color: #969696;
-}
-
-#labExit {
-	-fx-background-color: #969696;
-}
 
 #labSoundToggle {
 	-fx-background-color: #969696;
@@ -81,11 +110,12 @@
 	-fx-background-color: #969696;
 }
 
-.butNewGame:hover {
-  -fx-background-color:#dae7f3;
+#butNewGame:hover {
+  -fx-background-color:#d6d6d6;
+ 
 }
 
-#soundToggle:checked {
+#soundToggle:checked {	
 	-fx-background-color:red;
 }
 
