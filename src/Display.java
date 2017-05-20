@@ -161,13 +161,12 @@ public class Display extends Application {
         stage.show();
 	}
 	private void setImage() {
-<<<<<<< HEAD
+
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png");
 		boxImage = new Image("http://i.imgur.com/urtoFLR.png");
-=======
 		playerImage = new Image("file:///images/player.png");
 		boxImage = new Image("file:///images/box.png");
->>>>>>> branch 'master' of git@github.com:azeng97/COMP2911-Project
+
 		player = new ImageView(playerImage);
 		box = new ImageView(boxImage);
 	}
