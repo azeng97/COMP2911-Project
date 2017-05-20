@@ -132,8 +132,8 @@ public class Display extends Application {
 		private Node setImage() {
 			Node retval = null;
 			if (contains == 0) retval = new Text();
-			if (contains == 1) retval = new ImageView(new Image("file:///Users/justindaerolee/school/comp2911/workspace/cs2911project/src/images/wall.png"));
-			if (contains >= 2) retval = new ImageView(new Image("file:///Users/justindaerolee/school/comp2911/workspace/cs2911project/src/images/target.png"));
+			if (contains == 1) retval = new ImageView(new Image("file:///src/images/wall.png"));
+			if (contains >= 2) retval = new ImageView(new Image("file:///src/images/target.png"));
 			return retval;
 		}
 	}
@@ -161,8 +161,8 @@ public class Display extends Application {
         stage.show();
 	}
 	private void setImage() {
-		playerImage = new Image("file:///Users/justindaerolee/school/comp2911/workspace/cs2911project/src/images/player.png");
-		boxImage = new Image("file:///Users/justindaerolee/school/comp2911/workspace/cs2911project/src/images/box.png");
+		playerImage = new Image("file:///src/images/player.png");
+		boxImage = new Image("file:///images/box.png");
 		player = new ImageView(playerImage);
 		box = new ImageView(boxImage);
 	}
