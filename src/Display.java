@@ -20,10 +20,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Display extends Application {
-	private static final int TILE_SIZE = 30;
+	private static final int TILE_SIZE = 40;
 	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][] = new int[MAX_ARRAY_SIZE][MAX_ARRAY_SIZE];
-	private static final int W = 300, H = 300;
+	private static final int W = 400, H = 400;
 	
 	private Image playerImage;
 	private Image boxImage;
@@ -86,7 +86,7 @@ public class Display extends Application {
 	
 	private Parent createContent() {
 		Pane root = new Pane();
-		root.setPrefSize(300, 300);
+		root.setPrefSize(TILE_SIZE * MAX_ARRAY_SIZE, TILE_SIZE * MAX_ARRAY_SIZE);
 		Group p = new Group(player);
 		Group b = new Group(box);
 		// initialise done in backend.
@@ -132,8 +132,8 @@ public class Display extends Application {
 		private Node setImage() {
 			Node retval = null;
 			if (contains == 0) retval = new Text();
-			if (contains == 1) retval = new ImageView(new Image("file:///images/wall.png"));
-			if (contains >= 2) retval = new ImageView(new Image("file:///images/target.png"));
+			if (contains == 1) retval = new ImageView(new Image("http://i.imgur.com/nnBEDMn.png"));
+			if (contains >= 2) retval = new ImageView(new Image("http://i.imgur.com/DIbYuK3.png"));
 			return retval;
 		}
 	}
@@ -147,10 +147,10 @@ public class Display extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    movePlayerBy(0, -30); break;
-                    case DOWN:  movePlayerBy(0, 30); break;
-                    case LEFT:  movePlayerBy(-30, 0); break;
-                    case RIGHT: movePlayerBy(30, 0); break;
+                    case UP:    movePlayerBy(0, -40); break;
+                    case DOWN:  movePlayerBy(0, 40); break;
+                    case LEFT:  movePlayerBy(-40, 0); break;
+                    case RIGHT: movePlayerBy(40, 0); break;
 				default:
 					break;
                 }
@@ -161,8 +161,8 @@ public class Display extends Application {
         stage.show();
 	}
 	private void setImage() {
-		playerImage = new Image("file:///images/player.png");
-		boxImage = new Image("file:///box.png");
+		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png");
+		boxImage = new Image("http://i.imgur.com/urtoFLR.png");
 		player = new ImageView(playerImage);
 		box = new ImageView(boxImage);
 	}
