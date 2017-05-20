@@ -164,8 +164,6 @@ public class Display extends Application {
 
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png");
 		boxImage = new Image("http://i.imgur.com/urtoFLR.png");
-		playerImage = new Image("file:///images/player.png");
-		boxImage = new Image("file:///images/box.png");
 
 		player = new ImageView(playerImage);
 		box = new ImageView(boxImage);
