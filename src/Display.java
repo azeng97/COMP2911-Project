@@ -95,9 +95,9 @@ public class Display extends Application {
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
 				if (arr[x][y] == 3) {
-					movePlayerTo(TILE_SIZE * x, TILE_SIZE * y);
+					movePlayerTo(TILE_SIZE * x + TILE_SIZE/2, TILE_SIZE * y + TILE_SIZE/2);
 				} else if (arr[x][y] == 4) {
-					moveBoxTo(TILE_SIZE * x, TILE_SIZE * y);
+					moveBoxTo(TILE_SIZE * x + TILE_SIZE/2, TILE_SIZE * y + TILE_SIZE/2);
 				} else {
 					Tile tile = new Tile(x, y, arr[x][y]); // change the input
 					root.getChildren().add(tile);
