@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
+import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -14,10 +15,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Display extends Application {
 	private static final int TILE_SIZE = 40;
@@ -41,26 +44,38 @@ public class Display extends Application {
 		this.arrayHeight = arrayHeight;
 		
 	}
-	public void movePlayerBy(int dx, int dy) {
+	public void movePlayerBy(double dx, double dy) {
 		if (dx == 0 && dy == 0) return;
 		final double cx = player.getBoundsInLocal().getWidth()  / 2;
 		final double cy = player.getBoundsInLocal().getHeight() / 2;
 		
 		double x = cx + player.getLayoutX() + dx;
         double y = cy + player.getLayoutY() + dy;
-
+        System.out.println(player.getLayoutX());
+        System.out.println(player.getLayoutY());
+        System.out.println(x + " " + y);
         movePlayerTo(x, y);
 	}
 	private void movePlayerTo(double x, double y) {
         final double cx = player.getBoundsInLocal().getWidth()  / 2;
         final double cy = player.getBoundsInLocal().getHeight() / 2;
-
+        
         if (x - cx >= 0 &&
             x + cx <= W &&
             y - cy >= 0 &&
             y + cy <= H) {
             player.relocate(x - cx, y - cy);
+        	//transitionTo(x-cx, y-cy, player);
         }
+	}
+	public void transitionTo(double x, double y, Node n) {
+		Line line = new Line(n.getBoundsInLocal().getMinX(), n.getBoundsInLocal().getMinY(), x, y);
+		PathTransition trans = new PathTransition();
+		trans.setNode(n);
+		trans.setDuration(Duration.seconds(4));
+		trans.setPath(line);
+		trans.play();
+		
 	}
 	public void moveBoxBy(double dx, double dy) {
 		if (dx == 0 && dy == 0) return;
@@ -95,9 +110,9 @@ public class Display extends Application {
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
 				if (arr[x][y] == 3) {
-					movePlayerTo(TILE_SIZE * x + TILE_SIZE/2, TILE_SIZE * y + TILE_SIZE/2);
+					player.relocate(TILE_SIZE * x, TILE_SIZE * y);
 				} else if (arr[x][y] == 4) {
-					moveBoxTo(TILE_SIZE * x + TILE_SIZE/2, TILE_SIZE * y + TILE_SIZE/2);
+					box.relocate(TILE_SIZE * x, TILE_SIZE * y);
 				} else {
 					Tile tile = new Tile(x, y, arr[x][y]); // change the input
 					root.getChildren().add(tile);
@@ -162,8 +177,8 @@ public class Display extends Application {
 	}
 	private void setImage() {
 
-		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png");
-		boxImage = new Image("http://i.imgur.com/urtoFLR.png");
+		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
+		boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
 
 		player = new ImageView(playerImage);
 		box = new ImageView(boxImage);
