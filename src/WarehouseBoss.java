@@ -34,8 +34,8 @@ public class WarehouseBoss extends Application {
 		totalMoves = 0;
 
 		this.buildBoard(0);
-		//Display display = new Display(board.getNRows(),board.getNCols(),this);
-		Display display = new Display(10,10,this);
+		this.display = new Display(board.getNRows(),board.getNCols(),this);
+		//Display display = new Display(10,10,this);
 		display.init();
 		
 //		output = new Output(this, board);
@@ -62,6 +62,23 @@ public class WarehouseBoss extends Application {
 //		System.exit(1);
 	}
 	
+	public boolean makeMove(int direction)
+	{
+		Move move = new Move(direction);
+		if (player.makeMove(move))
+		{
+			//System.out.println("moved");
+			totalMoves++;
+			return true;
+		}
+		else return false; 
+	}
+	
+//	public void moveBox(Position pos, int direction)
+//	{
+//		System.out.println(display.getWidth());
+//		display.moveBox(pos, direction);
+//	}
 	public Square squareAt(Position pos)
 	{
 		return ((Square) board.retrieveObj(pos));
@@ -73,6 +90,7 @@ public class WarehouseBoss extends Application {
 	public void decrementTargets()
 	{
 		emptyTargets--;
+		System.out.println("Remaining targets: " + this.emptyTargets);
 		if(emptyTargets == 0)
 		{
 			gameOver = true;
@@ -82,8 +100,12 @@ public class WarehouseBoss extends Application {
 	public void incrementTargets()
 	{
 		emptyTargets++;
+		System.out.println("Remaining targets: " + this.emptyTargets);
 	}
-	
+	public Board getBoard()
+	{
+		return this.board;
+	}
 	public void buildBoard(int level)
 	{
 		String levelDirectory = System.getProperty("user.dir") + java.io.File.separator + "Maps" + java.io.File.separator;
@@ -150,6 +172,11 @@ public class WarehouseBoss extends Application {
 		board.setObj(pos, square);
 	}
 	
+	public boolean isGameOver()
+	{
+		return gameOver;
+	}
+	public Display display;
 	private Output output; 
 	private boolean gameOver;
 	private int totalMoves = 0;

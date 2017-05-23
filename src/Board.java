@@ -12,7 +12,10 @@ public class Board {
 		this.nCols = nCols;
 		board = new Object[nRows][nCols];
 	}
-	
+	public Object getObj(int row, int col)
+	{
+		return board[row][col];
+	}
 	public Object retrieveObj(Position p)
 	{
 		return board[p.getRow()][p.getCol()];

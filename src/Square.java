@@ -24,13 +24,12 @@ public class Square extends Object
 			if (this instanceof Target && e instanceof Box && !wasTarget)
 			{
 				game.decrementTargets();
-				System.out.println("Remaining targets: " + game.emptyTargets());
 			} 
 			else if (!(this instanceof Target) && e instanceof Box && wasTarget)
 			{
 				game.incrementTargets();
-				System.out.println("Remaining targets: " + game.emptyTargets());
 			}
+			return true;
 		}
 		return false;
 	}
@@ -61,8 +60,8 @@ public class Square extends Object
 			return false;
 		}
 		Square neighbour = game.squareAt((Position)position.adjacentPos(direction));
+		game.display.moveBox(this.position,direction);
 		neighbour.addEntity(contents);
-		
 		return true;
 	}
 	public void removeContents()
