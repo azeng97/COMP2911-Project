@@ -23,6 +23,7 @@ public class MenuController {
 	    stage.close();
 	    
 		WarehouseBoss game = new WarehouseBoss();
+		
 		game.play();
 		
 		

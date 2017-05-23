@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class WarehouseBoss extends Application {
@@ -31,28 +34,32 @@ public class WarehouseBoss extends Application {
 		totalMoves = 0;
 
 		this.buildBoard(0);
-		output = new Output(this, board);
-		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
-		output.printBoard();
+		//Display display = new Display(board.getNRows(),board.getNCols(),this);
+		Display display = new Display(10,10,this);
+		display.init();
+		
+//		output = new Output(this, board);
+//		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
+//		output.printBoard();
 		
 		//edit test
 		//edit test 2
 		
-		String input = new String();
-		Scanner in = new Scanner(System.in); 
-		while (gameOver == false)
-		{
-			System.out.println("Make a Move!");
-			input = in.next();
-			Move move = new Move(Move.keyToDirection(input));
-			if (move.getDirection() == -1) continue;
-			totalMoves++;
-			player.makeMove(move);
-			output.printBoard();
-		}
-		in.close();
-		System.out.println("You win! Total moves:" + totalMoves);
-		System.exit(1);
+//		String input = new String();
+//		Scanner in = new Scanner(System.in); 
+//		while (gameOver == false)
+//		{
+//			System.out.println("Make a Move!");
+//			input = in.next();
+//			Move move = new Move(Move.keyToDirection(input));
+//			if (move.getDirection() == -1) continue;
+//			totalMoves++;
+//			player.makeMove(move);
+//			output.printBoard();
+//		}
+//		in.close();
+//		System.out.println("You win! Total moves:" + totalMoves);
+//		System.exit(1);
 	}
 	
 	public Square squareAt(Position pos)

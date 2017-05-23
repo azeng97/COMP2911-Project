@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Display extends Application {
+public class Display{
 	private static final int TILE_SIZE = 40;
 	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][] = new int[MAX_ARRAY_SIZE][MAX_ARRAY_SIZE];
@@ -34,14 +34,15 @@ public class Display extends Application {
 	private Node player;
 	private Node box;
 	
-	
+	private WarehouseBoss g;
 	private int arrayWidth; // change
 	private int arrayHeight; // change
 	
 
-	public void dimension(int arrayWidth, int arrayHeight) {
+	public Display(int arrayWidth, int arrayHeight, WarehouseBoss g) {
 		this.arrayWidth = arrayWidth;
 		this.arrayHeight = arrayHeight;
+		this.g = g;
 		
 	}
 	public void movePlayerBy(double dx, double dy) {
@@ -104,9 +105,6 @@ public class Display extends Application {
 		root.setPrefSize(TILE_SIZE * MAX_ARRAY_SIZE, TILE_SIZE * MAX_ARRAY_SIZE);
 		Group p = new Group(player);
 		Group b = new Group(box);
-		// initialise done in backend.
-		dimension(10, 10);
-		// change the size later
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
 				if (arr[x][y] == 3) {
@@ -147,14 +145,15 @@ public class Display extends Application {
 		private Node setImage() {
 			Node retval = null;
 			if (contains == 0) retval = new Text();
-			if (contains == 1) retval = new ImageView(new Image("http://i.imgur.com/nnBEDMn.png"));
-			if (contains >= 2) retval = new ImageView(new Image("http://i.imgur.com/DIbYuK3.png"));
+			if (contains == 1) retval = new ImageView(new Image("http://i.imgur.com/nnBEDMn.png", 40, 40, false, false));
+			if (contains >= 2) retval = new ImageView(new Image("http://i.imgur.com/DIbYuK3.png", 40, 40, false, false));
 			return retval;
 		}
 	}
-	@Override
-	public void start(Stage stage) throws Exception {
-		stage.setTitle("puzzle mzaze #pick a name");
+	
+	public void init(){
+		Stage stage = new Stage();
+		stage.setTitle("Warehouse Bros");
 		setImage();
 		readTxt();
 		Scene scene = new Scene(createContent());
@@ -175,7 +174,7 @@ public class Display extends Application {
         stage.setScene(scene);
         stage.show();
 	}
-	private void setImage() {
+	public void setImage() {
 
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
 		boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
@@ -183,7 +182,7 @@ public class Display extends Application {
 		player = new ImageView(playerImage);
 		box = new ImageView(boxImage);
 	}
-	private void readTxt() {
+	public void readTxt() {
 		Scanner sc = null;
 		int x = 0, y = 0;
 	    try {
@@ -206,9 +205,4 @@ public class Display extends Application {
     	 	if (sc != null) sc.close();
      	}
 	}
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 }
