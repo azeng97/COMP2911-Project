@@ -122,10 +122,26 @@ public class Display {
 		double y = box.getLayoutY();
 		switch (direction)
 		{
-			case North: box.relocate(x, y - 40); box.setPosition((Position)box.getPosition().adjacentPos(North)); break;
-			case South: box.relocate(x, y + 40); box.setPosition((Position)box.getPosition().adjacentPos(South));break;
-			case West: box.relocate(x - 40, y); box.setPosition((Position)box.getPosition().adjacentPos(West));break;
-			case East: box.relocate(x + 40, y); box.setPosition((Position)box.getPosition().adjacentPos(East));break;
+			case North:
+				box.relocate(x, y - 40);
+				box.setPosition((Position)box.getPosition().adjacentPos(North));
+				box.toFront();
+				break;
+			case South:
+				box.relocate(x, y + 40);
+				box.setPosition((Position)box.getPosition().adjacentPos(South));
+				box.toFront();
+				break;
+			case West:
+				box.relocate(x - 40, y);
+				box.setPosition((Position)box.getPosition().adjacentPos(West));
+				box.toFront();
+				break;
+			case East:
+				box.relocate(x + 40, y);
+				box.setPosition((Position)box.getPosition().adjacentPos(East));
+				box.toFront();
+				break;
 		}
 		if (g.isGameOver()) System.exit(1);
 //        }
@@ -133,7 +149,7 @@ public class Display {
 	
 	private Parent createContent(Stage stage) {
 		Pane root = new Pane();
-		root.setPrefSize(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
+		root.setPrefSize(TILE_SIZE * (arrayWidth + 3.5), TILE_SIZE * arrayHeight);
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
 		//boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
 		boxImage = new Image("https://opengameart.org/sites/default/files/crates_study_x2.png", 40, 40 , false, false);
@@ -145,6 +161,7 @@ public class Display {
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
 				Tile floor = new Tile(x, y, 0);
+				floor.toBack();
 				root.getChildren().add(floor);
 				//System.out.println(y + " " + x);
 				if (arr[y][x] == 4) {
@@ -155,19 +172,17 @@ public class Display {
 					Group b = new Group(box);
 					root.getChildren().add(b);
 					box.relocate(TILE_SIZE * x, TILE_SIZE * y);
-				} else {
-					// if (arr[x][y] != 0) {
+				} else if (arr[y][x] != 0) {
 					Tile tile = new Tile(x, y, arr[y][x]);
 					root.getChildren().add(tile);
-					//}
 				}		
 			}
 		}
 		root.getChildren().add(p);
 		//Image background = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/background.png");
 		
-		Rectangle sideMenu = new Rectangle(TILE_SIZE * 5, TILE_SIZE * arrayWidth);
-		sideMenu.setLayoutX(TILE_SIZE * (arrayWidth + 4));
+		Rectangle sideMenu = new Rectangle(TILE_SIZE * 3.5, TILE_SIZE * arrayHeight);
+		sideMenu.setLayoutX(TILE_SIZE * arrayWidth);
 		sideMenu.setLayoutY(0);
 		//sideMenu.setFill(new ImagePattern(background, 0, 0, 1, 1, true));
 		sideMenu.setFill(Color.GRAY);
@@ -197,6 +212,7 @@ public class Display {
 	            pauseRoot.setPadding(new Insets(20));
 
 	            Button resume = new Button("Resume");
+	            resume.setMaxWidth(Double.MAX_VALUE);
 	            pauseRoot.getChildren().add(resume);
 
 	            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
@@ -214,6 +230,18 @@ public class Display {
 					}
 	            	
 	            });
+	            Button quit = new Button("Quit");
+	            quit.setMaxWidth(Double.MAX_VALUE);
+	            pauseRoot.getChildren().add(quit);
+	            quit.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+						System.out.println("Quit Game");
+						
+					}
+	            	
+	            });
 	            popupStage.show();
 
 			}
@@ -221,18 +249,25 @@ public class Display {
 		});
 		pauseBtn.setStyle("-fx-focus-color: transparent;");
 		pauseBtn.setMaxWidth(Double.MAX_VALUE);
-		root.getChildren().add(pauseBtn);
-		Button resetBtn = new Button();
+		Button resetBtn = new Button("Reset");
 		resetBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("reset game");
             }
         });
+		resetBtn.setStyle("-fx-focus-color: transparent;");
+		resetBtn.setMaxWidth(Double.MAX_VALUE);
+		String numString = "0";
+		Label moveCount = new Label();
+		moveCount.setText("Moves: " + numString);
+		moveCount.setMaxWidth(Double.MAX_VALUE);
+		Label undoCount = new Label();
+		undoCount.setText("Undos: " + numString);
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-		vbButtons.getChildren().addAll(pauseBtn, saveBtn);
+		vbButtons.getChildren().addAll(moveCount, undoCount, pauseBtn, saveBtn, resetBtn);
 		vbButtons.setLayoutX((arrayWidth) * TILE_SIZE);
 		vbButtons.setLayoutY(TILE_SIZE);
 		root.getChildren().add(vbButtons);
