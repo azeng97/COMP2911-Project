@@ -1,30 +1,35 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
-
 import javafx.animation.PathTransition;
-import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Display{
+public class Display {
 	private static final int TILE_SIZE = 40;
 //	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][];
@@ -39,6 +44,7 @@ public class Display{
 	private WarehouseBoss g;
 	private int arrayWidth; // change
 	private int arrayHeight; // change
+	private boolean keyPressAllowed;
 	
 	public int getWidth()
 	{
@@ -50,6 +56,7 @@ public class Display{
 		this.arrayHeight = arrayHeight;
 		this.arr = new int[arrayHeight][arrayWidth];
 		this.g = g;
+		this.keyPressAllowed = true;
 		
 	}
 	public void movePlayerBy(double dx, double dy) {
@@ -124,7 +131,7 @@ public class Display{
 //        }
 	}
 	
-	private Parent createContent() {
+	private Parent createContent(Stage stage) {
 		Pane root = new Pane();
 		root.setPrefSize(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
@@ -137,6 +144,8 @@ public class Display{
 		boxes = new ArrayList<DisplayBox>();
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
+				Tile floor = new Tile(x, y, 0);
+				root.getChildren().add(floor);
 				//System.out.println(y + " " + x);
 				if (arr[y][x] == 4) {
 					player.relocate(TILE_SIZE * x, TILE_SIZE * y);
@@ -147,13 +156,86 @@ public class Display{
 					root.getChildren().add(b);
 					box.relocate(TILE_SIZE * x, TILE_SIZE * y);
 				} else {
-					Tile tile = new Tile(x, y, arr[y][x]); // change the input
+					// if (arr[x][y] != 0) {
+					Tile tile = new Tile(x, y, arr[y][x]);
 					root.getChildren().add(tile);
+					//}
 				}		
 			}
 		}
 		root.getChildren().add(p);
+		//Image background = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/background.png");
 		
+		Rectangle sideMenu = new Rectangle(TILE_SIZE * 5, TILE_SIZE * arrayWidth);
+		sideMenu.setLayoutX(TILE_SIZE * (arrayWidth + 4));
+		sideMenu.setLayoutY(0);
+		//sideMenu.setFill(new ImagePattern(background, 0, 0, 1, 1, true));
+		sideMenu.setFill(Color.GRAY);
+		root.getChildren().add(sideMenu);
+		Button saveBtn = new Button("Save Game");
+		saveBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("game saved");
+            }
+        });
+		saveBtn.setStyle("-fx-focus-color: transparent;");
+		saveBtn.setMaxWidth(Double.MAX_VALUE);
+		
+		Button pauseBtn = new Button("Pause Game");
+		pauseBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("pause game");
+				keyPressAllowed = false;
+				root.setEffect(new GaussianBlur());
+				VBox pauseRoot = new VBox(5);
+	            pauseRoot.getChildren().add(new Label("Paused"));
+	            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+	            pauseRoot.setAlignment(Pos.CENTER);
+	            pauseRoot.setPadding(new Insets(20));
+
+	            Button resume = new Button("Resume");
+	            pauseRoot.getChildren().add(resume);
+
+	            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+	            popupStage.initOwner(stage);
+	            popupStage.initModality(Modality.APPLICATION_MODAL);
+	            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+	            resume.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+						root.setEffect(null);
+		                popupStage.hide();
+		                keyPressAllowed = true;
+						
+					}
+	            	
+	            });
+	            popupStage.show();
+
+			}
+			
+		});
+		pauseBtn.setStyle("-fx-focus-color: transparent;");
+		pauseBtn.setMaxWidth(Double.MAX_VALUE);
+		root.getChildren().add(pauseBtn);
+		Button resetBtn = new Button();
+		resetBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("reset game");
+            }
+        });
+		VBox vbButtons = new VBox();
+		vbButtons.setSpacing(10);
+		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
+		vbButtons.getChildren().addAll(pauseBtn, saveBtn);
+		vbButtons.setLayoutX((arrayWidth) * TILE_SIZE);
+		vbButtons.setLayoutY(TILE_SIZE);
+		root.getChildren().add(vbButtons);
 		return root;
 	}
 	private class Tile extends StackPane {
@@ -178,7 +260,7 @@ public class Display{
 		}
 		private Node setImage() {
 			Node retval = null;
-			if (contains == 0) retval = new Text();
+			if (contains == 0) retval = new ImageView(new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/floor.png", 40, 40, false, false));
 			if (contains == 1) retval = new ImageView(new Image("http://i.imgur.com/nnBEDMn.png", 40, 40, false, false));
 			if (contains == 3) retval = new ImageView(new Image("http://i.imgur.com/DIbYuK3.png", 40, 40, false, false));
 			return retval;
@@ -190,15 +272,15 @@ public class Display{
 		stage.setTitle("Warehouse Bros");
 		//setImage();
 		constructBoard();
-		Scene scene = new Scene(createContent());
+		Scene scene = new Scene(createContent(primaryStage));
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    if (g.makeMove(North)) movePlayerBy(0, -40); break;
-                    case DOWN:  if (g.makeMove(South)) movePlayerBy(0, 40); break;
-                    case LEFT:  if(g.makeMove(West)) movePlayerBy(-40, 0); break;
-                    case RIGHT: if(g.makeMove(East)) movePlayerBy(40, 0); break;
+                    case UP:    if (g.makeMove(North) && keyPressAllowed) movePlayerBy(0, -40); break;
+                    case DOWN:  if (g.makeMove(South) && keyPressAllowed) movePlayerBy(0, 40); break;
+                    case LEFT:  if(g.makeMove(West) && keyPressAllowed) movePlayerBy(-40, 0); break;
+                    case RIGHT: if(g.makeMove(East) && keyPressAllowed) movePlayerBy(40, 0); break;
 				default:
 					break;
                 }
