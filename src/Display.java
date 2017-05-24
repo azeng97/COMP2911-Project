@@ -128,7 +128,10 @@ public class Display{
 		Pane root = new Pane();
 		root.setPrefSize(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
-		boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
+		//boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
+		boxImage = new Image("https://opengameart.org/sites/default/files/crates_study_x2.png", 40, 40 , false, false);
+		
+		
 		player = new ImageView(playerImage);
 		Group p = new Group(player);
 		boxes = new ArrayList<DisplayBox>();

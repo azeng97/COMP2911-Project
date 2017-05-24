@@ -121,6 +121,7 @@
   -fx-background-color:#969696;
 }
 
+
 #butBack {
 	-fx-background-color: transparent;
 }
@@ -128,5 +129,16 @@
 	-fx-background-color: #969696;
 }
 #butBack:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butLeaderboards {
+	-fx-background-color: transparent;
+}
+#labLeaderboards {
+	-fx-background-color: #969696;
+}
+#butLeaderboards:hover {
   -fx-background-color:#d6d6d6;
 }

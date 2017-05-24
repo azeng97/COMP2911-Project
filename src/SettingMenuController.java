@@ -53,11 +53,27 @@ public class SettingMenuController {
 		}
 	}
 	
+	public void leaderboards() {
+		Stage primaryStage = (Stage) butBack.getScene().getWindow();
+		primaryStage.setTitle("Warehouse Bros.");
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("Leaderboards.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void back() {
 		//System.out.println("Selected: Settings > Back");
 		
-		Stage stage = (Stage) butBack.getScene().getWindow();
-		Stage primaryStage = stage;
+		Stage primaryStage = (Stage) butBack.getScene().getWindow();
 		primaryStage.setTitle("Warehouse Bros.");
 		Parent root;
 		try {

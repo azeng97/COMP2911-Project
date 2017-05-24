@@ -229,5 +229,32 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ToggleButton>
+      <Label fx:id="labLeaderboards" alignment="CENTER" layoutX="39.0" layoutY="236.0" opacity="0.45" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
+         </effect>
+      </Label>
+      <Label fx:id="labLeaderboardsText" alignment="CENTER" layoutX="39.0" layoutY="236.0" prefHeight="50.0" prefWidth="200.0" text="Leaderboards" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
+         </effect>
+      </Label>
+      <Button fx:id="butLeaderboards" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="236.0" mnemonicParsing="false" onAction="#leaderboards" opacity="0.3" prefHeight="50.0" prefWidth="200.0" text="Leaderboards" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Courier New" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="45.0" radius="22.0" spread="0.3" width="45.0" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
