@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
+   <children>
+      <ImageView fitHeight="327.0" fitWidth="527.0" layoutX="218.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/s29X24F.png" />
+         </image>
+         <effect>
+            <Lighting diffuseConstant="0.75" light="$null" specularConstant="0.0" specularExponent="40.0" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="327.0" fitWidth="527.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/s29X24F.png" />
+         </image>
+         <effect>
+            <Lighting diffuseConstant="0.75" light="$null" specularConstant="0.0" specularExponent="40.0" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="524.0" layoutX="111.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Loading%20text.png" />
+         </image>
+         <effect>
+            <DropShadow height="65.48" radius="32.24" spread="0.22" width="65.48" />
+         </effect>
+      </ImageView>
+   </children>
+</AnchorPane>

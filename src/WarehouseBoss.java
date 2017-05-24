@@ -27,7 +27,7 @@ public class WarehouseBoss extends Application {
 		//System.exit(1);		
 	}
 	
-	public void play()
+	public void play(Stage primaryStage)
 	{
 		gameOver = false;
 		emptyTargets = 0;
@@ -36,7 +36,7 @@ public class WarehouseBoss extends Application {
 		this.buildBoard(0);
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
 		//Display display = new Display(10,10,this);
-		display.init();
+		display.init(primaryStage);
 		
 //		output = new Output(this, board);
 //		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
@@ -90,7 +90,7 @@ public class WarehouseBoss extends Application {
 	public void decrementTargets()
 	{
 		emptyTargets--;
-		System.out.println("Remaining targets: " + this.emptyTargets);
+		//System.out.println("Remaining targets: " + this.emptyTargets);
 		if(emptyTargets == 0)
 		{
 			gameOver = true;
@@ -100,7 +100,7 @@ public class WarehouseBoss extends Application {
 	public void incrementTargets()
 	{
 		emptyTargets++;
-		System.out.println("Remaining targets: " + this.emptyTargets);
+		//System.out.println("Remaining targets: " + this.emptyTargets);
 	}
 	public Board getBoard()
 	{

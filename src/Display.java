@@ -182,8 +182,8 @@ public class Display{
 		}
 	}
 	
-	public void init(){
-		Stage stage = new Stage();
+	public void init(Stage primaryStage){
+		Stage stage = primaryStage;
 		stage.setTitle("Warehouse Bros");
 		//setImage();
 		constructBoard();

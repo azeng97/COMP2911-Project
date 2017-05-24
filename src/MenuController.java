@@ -20,11 +20,26 @@ public class MenuController {
 		//System.out.println("Selected: New Game");
 		
 		Stage stage = (Stage) butNewGame.getScene().getWindow();
-	    stage.close();
+	    //stage.close();
 	    
-		WarehouseBoss game = new WarehouseBoss();
 		
-		game.play();
+		Stage primaryStage = stage;
+		//primaryStage.setTitle("Settings");
+		
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("LoadingScreen.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WarehouseBoss game = new WarehouseBoss();
+		game.play(primaryStage);
 		
 		
 		
