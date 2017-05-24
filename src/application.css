@@ -142,3 +142,16 @@
 #butLeaderboards:hover {
   -fx-background-color:#d6d6d6;
 }
+
+
+
+/* Leaderboards */
+#butLeaderboardsBack {
+	-fx-background-color: transparent;
+}
+#labLeaderboardsBack {
+	-fx-background-color: #969696;
+}
+#butLeaderboardsBack:hover {
+  -fx-background-color:#d6d6d6;
+}
