@@ -21,6 +21,7 @@ public class WarehouseBoss extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 		Stage s = new Stage();
+		s.setTitle("Warehouse Bros.");
 		menuUI ui = new menuUI(s);
 //		menuUI ui = new menuUI(arg0);
 		//ui.showMenu();

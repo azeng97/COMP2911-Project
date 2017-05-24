@@ -58,6 +58,7 @@ public class SettingMenuController {
 		
 		Stage stage = (Stage) butBack.getScene().getWindow();
 		Stage primaryStage = stage;
+		primaryStage.setTitle("Warehouse Bros.");
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));

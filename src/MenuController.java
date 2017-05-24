@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,17 +16,28 @@ public class MenuController {
 	@FXML private javafx.scene.control.Button butNewGame;
 	
 	@FXML private javafx.scene.control.Button butSettings;
+	@FXML private javafx.scene.image.ImageView logoText;
+	private Stage primaryStage;
 	
-	@FXML
 	public void newGame () {
-		//System.out.println("Selected: New Game");
+		this.primaryStage = (Stage) butNewGame.getScene().getWindow();
 		
-		Stage stage = (Stage) butNewGame.getScene().getWindow();
-	    //stage.close();
-	    
-		
-		Stage primaryStage = stage;
-		//primaryStage.setTitle("Settings");
+		Task<Void> task = new Task<Void>() {
+			@Override protected Void call() throws Exception {
+				loadingScreen(primaryStage);
+				Platform.runLater(new Runnable() {
+					@Override public void run() {
+						WarehouseBoss game = new WarehouseBoss();
+						game.play(primaryStage);
+					}
+				});
+				return null;
+			}
+		};
+		 task.run();
+	}
+	
+	public void loadingScreen(Stage primaryStage) {
 		
 		Parent root;
 		try {
@@ -35,15 +48,10 @@ public class MenuController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WarehouseBoss game = new WarehouseBoss();
-		game.play(primaryStage);
-		
-		
-		
 	}
+	
 	
 	public void loadGame() {
 		System.out.println("Selected: Load Game");
@@ -52,9 +60,8 @@ public class MenuController {
 	public void settings() {
 		//System.out.println("Selected: Settings");
 		
-		Stage stage = (Stage) butNewGame.getScene().getWindow();
-		Stage primaryStage = stage;
-		primaryStage.setTitle("Settings");
+		Stage primaryStage = (Stage) butSettings.getScene().getWindow();
+		primaryStage.setTitle("Warehouse Bros. - Settings");
 		
 		Parent root;
 		try {
@@ -73,4 +80,9 @@ public class MenuController {
 	public void exit() {
 		System.exit(0);
 	}
+
+	
 }
+
+
+	

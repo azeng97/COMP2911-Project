@@ -41,7 +41,7 @@
       </ImageView>
       <ButtonBar layoutY="177.0" prefHeight="146.0" prefWidth="534.0">
         <buttons>
-            <ImageView fitHeight="84.0" fitWidth="524.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoText" fitHeight="84.0" fitWidth="524.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/Warehouse-Bros.png" />
                </image>
