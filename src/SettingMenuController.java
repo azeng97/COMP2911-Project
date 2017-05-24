@@ -55,7 +55,7 @@ public class SettingMenuController {
 	
 	public void leaderboards() {
 		Stage primaryStage = (Stage) butBack.getScene().getWindow();
-		primaryStage.setTitle("Warehouse Bros.");
+		primaryStage.setTitle("Warehouse Bros. - Leaderboards");
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("Leaderboards.fxml"));

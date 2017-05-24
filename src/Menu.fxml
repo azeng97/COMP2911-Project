@@ -119,7 +119,7 @@
             <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
          </effect>
       </Label>
-      <Label fx:id="labSettings1" alignment="CENTER" layoutX="39.0" layoutY="137.0" prefHeight="50.0" prefWidth="200.0" text="Settings" textFill="WHITE">
+      <Label fx:id="labSettings1" alignment="CENTER" layoutX="39.0" layoutY="137.0" prefHeight="50.0" prefWidth="200.0" text="Options" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -127,7 +127,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button fx:id="butSettings" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" layoutX="39.0" layoutY="137.0" mnemonicParsing="false" onAction="#settings" opacity="0.25" prefHeight="50.0" prefWidth="200.0" text="Settings" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="butSettings" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" layoutX="39.0" layoutY="137.0" mnemonicParsing="false" onAction="#settings" opacity="0.25" prefHeight="50.0" prefWidth="200.0" text="Options" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
