@@ -154,16 +154,16 @@ public class Display {
 		//boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
 		boxImage = new Image("https://opengameart.org/sites/default/files/crates_study_x2.png", 40, 40 , false, false);
 		
-		
+		Rectangle background = new Rectangle(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
+		Image backgroundImage = new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/floor.png");
+		background.setFill(new ImagePattern(backgroundImage, 0, 0, 1/(float)arrayWidth, 1/(float)arrayHeight, true)); // change the ratio to be dynamic
+		//background.setLayoutX(0);
+		root.getChildren().add(background);
 		player = new ImageView(playerImage);
 		Group p = new Group(player);
 		boxes = new ArrayList<DisplayBox>();
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
-				Tile floor = new Tile(x, y, 0);
-				floor.toBack();
-				root.getChildren().add(floor);
-				//System.out.println(y + " " + x);
 				if (arr[y][x] == 4) {
 					player.relocate(TILE_SIZE * x, TILE_SIZE * y);
 				} else if (arr[y][x] == 2) {
@@ -179,12 +179,11 @@ public class Display {
 			}
 		}
 		root.getChildren().add(p);
-		//Image background = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/background.png");
-		
+		//Image sideMenuImage = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/background.png");
 		Rectangle sideMenu = new Rectangle(TILE_SIZE * 3.5, TILE_SIZE * arrayHeight);
 		sideMenu.setLayoutX(TILE_SIZE * arrayWidth);
 		sideMenu.setLayoutY(0);
-		//sideMenu.setFill(new ImagePattern(background, 0, 0, 1, 1, true));
+		//sideMenu.setFill(new ImagePattern(sideMenuImage, 0, 0, 1, 1, true));
 		sideMenu.setFill(Color.GRAY);
 		root.getChildren().add(sideMenu);
 		Button saveBtn = new Button("Save Game");
