@@ -47,6 +47,9 @@ public class Display {
 	private int arrayHeight; // change
 	private boolean keyPressAllowed;
 	
+	private Stage stage; 
+	private Pane root;
+	
 	public int getWidth()
 	{
 		return arrayWidth;
@@ -144,12 +147,52 @@ public class Display {
 				box.toFront();
 				break;
 		}
-		if (g.isGameOver()) System.exit(1);
-//        }
+		if (g.isGameOver()) { // check
+			System.out.print("game complete");
+			root.setEffect(new GaussianBlur());
+			keyPressAllowed = false;
+			VBox gameOverRoot = new VBox(5);
+            gameOverRoot.getChildren().add(new Label("Paused"));
+            gameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+            gameOverRoot.setAlignment(Pos.CENTER);
+            gameOverRoot.setPadding(new Insets(20));
+
+            Button newGameBtn = new Button("New Game");
+            newGameBtn.setMaxWidth(Double.MAX_VALUE);
+            gameOverRoot.getChildren().add(newGameBtn);
+
+            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+            popupStage.initOwner(stage);
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setScene(new Scene(gameOverRoot, Color.TRANSPARENT));
+            newGameBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("New Game");
+					
+				}
+            	
+            });
+            Button quitBtn = new Button("Quit Game");
+            quitBtn.setMaxWidth(Double.MAX_VALUE);
+            gameOverRoot.getChildren().add(quitBtn);
+            quitBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Quit Game");
+					
+				}
+            	
+            });
+            popupStage.show();
+            System.exit(1);
+		}
 	}
 	
-	private Parent createContent(Stage stage) {
-		Pane root = new Pane();
+	private Parent createContent() {
+		this.root = new Pane();
 		root.setPrefSize(TILE_SIZE * (arrayWidth + 3.5), TILE_SIZE * arrayHeight);
 		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
 		//boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
@@ -312,11 +355,12 @@ public class Display {
 	}
 	
 	public void init(Stage primaryStage){
-		Stage stage = primaryStage;
-		stage.setTitle("Warehouse Bros");
+		this.stage = primaryStage;
+		
+		this.stage.setTitle("Warehouse Bros");
 		//setImage();
 		constructBoard();
-		Scene scene = new Scene(createContent(primaryStage));
+		Scene scene = new Scene(createContent());
 		scene.getStylesheets().add
 		 (Display.class.getResource("application.css").toExternalForm());
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
