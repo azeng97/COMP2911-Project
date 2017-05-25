@@ -1,5 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.animation.PathTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -144,6 +145,16 @@ public class Display {
             Button nextLvlBtn = new Button("Next Level");
             nextLvlBtn.setMaxWidth(Double.MAX_VALUE);
             gameOverRoot.getChildren().add(nextLvlBtn);
+            nextLvlBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Next Level: " + g.level+1);
+					;
+					
+				}
+            	
+            });
 
             Stage popupStage = new Stage(StageStyle.TRANSPARENT);
             popupStage.initOwner(stage);
@@ -154,7 +165,11 @@ public class Display {
 				@Override
 				public void handle(ActionEvent event) {
 					System.out.println("Next level");
-					
+					g.level++;
+					g.play(stage);
+					root.setEffect(null);
+	                popupStage.hide();
+	                keyPressAllowed = true;
 				}
             	
             });
@@ -292,14 +307,20 @@ public class Display {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("reset game");
+                g.play(stage);
+                
             }
         });
 		resetBtn.setMaxWidth(Double.MAX_VALUE);
 		String numString = "0";
+		Label level = new Label();
+		level.setText("Level: " + g.level);
+		level.setTextFill(Color.WHITE);
 		Label moveCount = new Label();
-		moveCount.setText("Moves: " + numString);
+		moveCount.setText("Moves: " + g.totalMoves);
 		moveCount.setTextFill(Color.WHITE);
 		moveCount.setMaxWidth(Double.MAX_VALUE);
+		//moveCount.textProperty().bind(new SimpleIntegerProperty(g.totalMoves).asString());
 		Label undoCount = new Label();
 		undoCount.setText("Undos: " + numString);
 		undoCount.setTextFill(Color.WHITE);
@@ -307,12 +328,10 @@ public class Display {
 		saveBtn.setId("sideMenuButton");
 		resetBtn.setId("sideMenuButton");
 		Label timerLl = new Label();
-		timerLl.setText("Timer: " + timerCounter);
-		timerLl.setTextFill(Color.WHITE);
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-		vbButtons.getChildren().addAll(timerLl, moveCount, undoCount, pauseBtn, saveBtn, resetBtn);
+		vbButtons.getChildren().addAll(level, timerLl, moveCount, undoCount, pauseBtn, saveBtn, resetBtn);
 		vbButtons.setLayoutX((arrayWidth) * TILE_SIZE);
 		vbButtons.setLayoutY(TILE_SIZE);
 		root.getChildren().add(vbButtons);
@@ -332,7 +351,7 @@ public class Display {
                 if (goEast)  dx -= MOVE_LENGTH;
 
                 movePlayerBy(dx, dy);*/
-            	timerLl.setText("timer: " + timerCounter);
+            	timerLl.setText("Timer: " + timerCounter/60);
             }
         };
         timer.start();
@@ -416,6 +435,7 @@ public class Display {
 					break;
                 }
                 g.output.printBoard();
+                System.out.println(g.totalMoves);
                 checkGameOver();
             }            
         });
@@ -464,7 +484,7 @@ public class Display {
 				}
 			}
 		}
-	}
+	} 
 	public static final int North = 0;
 	public static final int East = 1;
 	public static final int South = 2;
