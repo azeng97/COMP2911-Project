@@ -184,7 +184,6 @@ public class Display {
 		sideMenu.setLayoutX(TILE_SIZE * arrayWidth);
 		sideMenu.setLayoutY(0);
 		sideMenu.setFill(new ImagePattern(sideMenuImage, 0, 0, 3, 1, true));
-		//sideMenu.setFill(Color.GRAY);
 		root.getChildren().add(sideMenu);
 		Button saveBtn = new Button("Save Game");
 		saveBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,7 +192,6 @@ public class Display {
                 System.out.println("game saved");
             }
         });
-		saveBtn.setStyle("-fx-focus-color: transparent;");
 		saveBtn.setMaxWidth(Double.MAX_VALUE);
 		
 		Button pauseBtn = new Button("Pause Game");
@@ -246,7 +244,6 @@ public class Display {
 			}
 			
 		});
-		pauseBtn.setStyle("-fx-focus-color: transparent;");
 		pauseBtn.setMaxWidth(Double.MAX_VALUE);
 		Button resetBtn = new Button("Reset");
 		resetBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -255,7 +252,6 @@ public class Display {
                 System.out.println("reset game");
             }
         });
-		resetBtn.setStyle("-fx-focus-color: transparent;");
 		resetBtn.setMaxWidth(Double.MAX_VALUE);
 		String numString = "0";
 		Label moveCount = new Label();
@@ -263,9 +259,9 @@ public class Display {
 		moveCount.setMaxWidth(Double.MAX_VALUE);
 		Label undoCount = new Label();
 		undoCount.setText("Undos: " + numString);
-		//pauseBtn.setStyle("-fx-background-color: grey, transparent;");
-		//saveBtn.setStyle("-fx-background-color: grey, transparent;");
-		//resetBtn.setStyle("-fx-background-color: grey, transparent;");
+		pauseBtn.setId("sideMenuButton");
+		saveBtn.setId("sideMenuButton");
+		resetBtn.setId("sideMenuButton");
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
@@ -310,6 +306,8 @@ public class Display {
 		//setImage();
 		constructBoard();
 		Scene scene = new Scene(createContent(primaryStage));
+		scene.getStylesheets().add
+		 (Display.class.getResource("application.css").toExternalForm());
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
