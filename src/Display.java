@@ -53,7 +53,7 @@ public class Display {
 	private Pane root;
 	//private boolean goNorth, goSouth, goEast, goWest;
 	
-	//private int timerCounter = 0; 
+	private int timerCounter = 0; 
 	
 	public int getWidth()
 	{
@@ -306,13 +306,36 @@ public class Display {
 		pauseBtn.setId("sideMenuButton");
 		saveBtn.setId("sideMenuButton");
 		resetBtn.setId("sideMenuButton");
+		Label timerLl = new Label();
+		timerLl.setText("Timer: " + timerCounter);
+		timerLl.setTextFill(Color.WHITE);
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-		vbButtons.getChildren().addAll(moveCount, undoCount, pauseBtn, saveBtn, resetBtn);
+		vbButtons.getChildren().addAll(timerLl, moveCount, undoCount, pauseBtn, saveBtn, resetBtn);
 		vbButtons.setLayoutX((arrayWidth) * TILE_SIZE);
 		vbButtons.setLayoutY(TILE_SIZE);
 		root.getChildren().add(vbButtons);
+		AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+            	timerCounter ++;
+                /*int dx = 0, dy = 0;
+                if (timerCounter == (TILE_SIZE/MOVE_LENGTH))  {
+                	goNorth = false; goSouth = false; goEast = false; goWest = false;
+                	keyPressAllowed = true;
+                	System.out.println(timerCounter * MOVE_LENGTH);
+                }
+                if (goNorth) dy -= MOVE_LENGTH;
+                if (goSouth) dy += MOVE_LENGTH;
+                if (goWest)  dx += MOVE_LENGTH;
+                if (goEast)  dx -= MOVE_LENGTH;
+
+                movePlayerBy(dx, dy);*/
+            	timerLl.setText("timer: " + timerCounter);
+            }
+        };
+        timer.start();
 		return root;
 	}
 	private class Tile extends StackPane {
@@ -400,10 +423,11 @@ public class Display {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
-  /*      AnimationTimer timer = new AnimationTimer() {
+        AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                int dx = 0, dy = 0;
+            	
+                /*int dx = 0, dy = 0;
                 timerCounter ++;
                 if (timerCounter == (TILE_SIZE/MOVE_LENGTH))  {
                 	goNorth = false; goSouth = false; goEast = false; goWest = false;
@@ -415,10 +439,10 @@ public class Display {
                 if (goWest)  dx += MOVE_LENGTH;
                 if (goEast)  dx -= MOVE_LENGTH;
 
-                movePlayerBy(dx, dy);
+                movePlayerBy(dx, dy);*/
             }
         };
-        timer.start();*/
+        timer.start();
 	}
 
 	public void constructBoard() {
