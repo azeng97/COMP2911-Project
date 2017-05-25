@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -226,6 +227,16 @@ public class Display {
 						
 					}
 	            	
+	            });
+	            pauseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	                @Override
+	                public void handle(KeyEvent event) {
+	                    if (event.getCode() == KeyCode.ESCAPE) {
+	                    	root.setEffect(null);
+			                popupStage.hide();
+			                keyPressAllowed = true;
+	                    }
+	                }            
 	            });
 	            Button quitBtn = new Button("Quit Game");
 	            quitBtn.setMaxWidth(Double.MAX_VALUE);
