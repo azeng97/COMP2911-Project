@@ -1,3 +1,4 @@
+import javafx.animation.AnimationTimer;
 import javafx.animation.PathTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,6 +33,7 @@ import java.util.Iterator;
 
 public class Display {
 	private static final int TILE_SIZE = 40;
+	private static final int MOVE_LENGTH = 5;
 //	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][];
 //	private static final int W = 400, H = 400;
@@ -49,6 +51,9 @@ public class Display {
 	
 	private Stage stage; 
 	private Pane root;
+	private boolean goNorth, goSouth, goEast, goWest;
+	
+	private int timerCounter = 0; 
 	
 	public int getWidth()
 	{
@@ -61,29 +66,33 @@ public class Display {
 		this.arr = new int[arrayHeight][arrayWidth];
 		this.g = g;
 		this.keyPressAllowed = true;
+		this.goNorth = false;
+		this.goSouth = false;
+		this.goEast = false;
+		this.goWest = false;
 		
 	}
 	public void movePlayerBy(double dx, double dy) {
 		if (dx == 0 && dy == 0) return;
-		final double cx = player.getBoundsInLocal().getWidth()  / 2;
-		final double cy = player.getBoundsInLocal().getHeight() / 2;
+		//final double cx = player.getBoundsInLocal().getWidth()  / 2;
+		//final double cy = player.getBoundsInLocal().getHeight() / 2;
 		
-		double x = cx + player.getLayoutX() + dx;
-        double y = cy + player.getLayoutY() + dy;
+		double x = player.getLayoutX() + dx;
+        double y = player.getLayoutY() + dy;
         //System.out.println(player.getLayoutX());
         //System.out.println(player.getLayoutY());
         //System.out.println(x + " " + y);
         movePlayerTo(x, y);
 	}
 	private void movePlayerTo(double x, double y) {
-        final double cx = player.getBoundsInLocal().getWidth()  / 2;
-        final double cy = player.getBoundsInLocal().getHeight() / 2;
+        //final double cx = player.getBoundsInLocal().getWidth()  / 2;
+        //final double cy = player.getBoundsInLocal().getHeight() / 2;
         
 //        if (x - cx >= 0 &&
 //            x + cx <= W &&
 //            y - cy >= 0 &&
 //            y + cy <= H) {
-            player.relocate(x - cx, y - cy);
+            player.relocate(x, y);
         	//transitionTo(x-cx, y-cy, player);
 //        }
 	}
@@ -367,10 +376,34 @@ public class Display {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    if (g.makeMove(North) && keyPressAllowed) movePlayerBy(0, -40); break;
-                    case DOWN:  if (g.makeMove(South) && keyPressAllowed) movePlayerBy(0, 40); break;
-                    case LEFT:  if(g.makeMove(West) && keyPressAllowed) movePlayerBy(-40, 0); break;
-                    case RIGHT: if(g.makeMove(East) && keyPressAllowed) movePlayerBy(40, 0); break;
+                    case UP:
+                    	if (g.makeMove(North) && keyPressAllowed) {
+                    		goNorth = true;
+                    		timerCounter = 0;
+                    		keyPressAllowed = false;
+                    		break;
+                    	}
+                    case DOWN:
+                    	if (g.makeMove(South) && keyPressAllowed) {
+                    		goSouth = true;
+                    		timerCounter = 0;
+                    		keyPressAllowed = false;
+                    		break;
+                    	}
+                    case LEFT:
+                    	if (g.makeMove(West) && keyPressAllowed) {
+                    		goEast = true;
+                    		timerCounter = 0;
+                    		keyPressAllowed = false;
+                    		break;
+                    	}
+                    case RIGHT:
+                    	if (g.makeMove(East) && keyPressAllowed) {
+                    		goWest = true;
+                    		timerCounter = 0;
+                    		keyPressAllowed = false;
+                    		break;
+                    	}
 				default:
 					break;
                 }
@@ -379,6 +412,25 @@ public class Display {
 
         stage.setScene(scene);
         stage.show();
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                int dx = 0, dy = 0;
+                timerCounter ++;
+                if (timerCounter == (TILE_SIZE/MOVE_LENGTH))  {
+                	goNorth = false; goSouth = false; goEast = false; goWest = false;
+                	keyPressAllowed = true;
+                	System.out.println(timerCounter * MOVE_LENGTH);
+                }
+                if (goNorth) dy -= MOVE_LENGTH;
+                if (goSouth) dy += MOVE_LENGTH;
+                if (goWest)  dx += MOVE_LENGTH;
+                if (goEast)  dx -= MOVE_LENGTH;
+
+                movePlayerBy(dx, dy);
+            }
+        };
+        timer.start();
 	}
 //	public void setImage() {
 //
