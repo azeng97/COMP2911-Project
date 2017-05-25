@@ -334,6 +334,7 @@ public class Display {
 		resetBtn.setId("sideMenuButton");
 		Label timerLl = new Label();
 		timerLl.setText("Timer: " + timerCounter);
+		timerLl.setTextFill(Color.WHITE);
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
