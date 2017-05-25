@@ -74,27 +74,13 @@ public class Display {
 	}
 	public void movePlayerBy(double dx, double dy) {
 		if (dx == 0 && dy == 0) return;
-		//final double cx = player.getBoundsInLocal().getWidth()  / 2;
-		//final double cy = player.getBoundsInLocal().getHeight() / 2;
 		
 		double x = player.getLayoutX() + dx;
         double y = player.getLayoutY() + dy;
-        //System.out.println(player.getLayoutX());
-        //System.out.println(player.getLayoutY());
-        //System.out.println(x + " " + y);
         movePlayerTo(x, y);
 	}
 	private void movePlayerTo(double x, double y) {
-        //final double cx = player.getBoundsInLocal().getWidth()  / 2;
-        //final double cy = player.getBoundsInLocal().getHeight() / 2;
-        
-//        if (x - cx >= 0 &&
-//            x + cx <= W &&
-//            y - cy >= 0 &&
-//            y + cy <= H) {
             player.relocate(x, y);
-        	//transitionTo(x-cx, y-cy, player);
-//        }
 	}
 	public void transitionTo(double x, double y, DisplayBox n) {
 		Line line = new Line(n.getBoundsInLocal().getMinX(), n.getBoundsInLocal().getMinY(), x, y);
@@ -105,16 +91,7 @@ public class Display {
 		trans.play();
 		
 	}
-//	public void moveBoxBy(double dx, double dy) {
-//		if (dx == 0 && dy == 0) return;
-//		final double cx = box.getBoundsInLocal().getWidth()  / 2;
-//		final double cy = box.getBoundsInLocal().getHeight() / 2;
-//		
-//		double x = cx + box.getLayoutX() + dx;
-//        double y = cy + box.getLayoutY() + dy;
-//
-//        moveBoxTo(x, y);
-//	}
+
 	public void moveBox(Position position, int direction) {
 		DisplayBox box = null;
 		Iterator<DisplayBox> i = boxes.iterator();
@@ -124,13 +101,6 @@ public class Display {
 			//System.out.println(box.getPosition().getCol() + " " + box.getPosition().getRow());
 			if (box.getPosition().equals(position)) break;
 		}
-//        final double cx = player.getBoundsInLocal().getWidth()  / 2;
- //       final double cy = player.getBoundsInLocal().getHeight() / 2;
-
-//        if (x - cx >= 0 &&
-//            x + cx <= W &&
-//            y - cy >= 0 &&
-//            y + cy <= H) {
 		double x = box.getLayoutX();
 		double y = box.getLayoutY();
 		switch (direction)
@@ -157,6 +127,10 @@ public class Display {
 				break;
 		}
 		System.out.println("g.isGameOver() = " + g.isGameOver());
+		
+	}
+	
+	public void checkGameOver(){
 		if (g.isGameOver()) { // check
 			System.out.println("game complete");
 			root.setEffect(new GaussianBlur());
@@ -389,35 +363,37 @@ public class Display {
                     		//timerCounter = 0;
                     		//keyPressAllowed = false;
                     		movePlayerBy(0, -40);
-                    		break;
                     	}
+                		break;
                     case DOWN:
                     	if (g.makeMove(South) && keyPressAllowed) {
                     		//goSouth = true;
                     		//timerCounter = 0;
                     		//keyPressAllowed = false;
                     		movePlayerBy(0, 40);
-                    		break;
                     	}
+                		break;
                     case LEFT:
                     	if (g.makeMove(West) && keyPressAllowed) {
                     		//goEast = true;
                     		//timerCounter = 0;
                     		//keyPressAllowed = false;
                     		movePlayerBy(-40, 0);
-                    		break;
                     	}
+                    	break;
                     case RIGHT:
                     	if (g.makeMove(East) && keyPressAllowed) {
                     		//goWest = true;
                     		//timerCounter = 0;
                     		//keyPressAllowed = false;
                     		movePlayerBy(40, 0);
-                    		break;
                     	}
+                		break;
 				default:
 					break;
                 }
+                g.output.printBoard();
+                checkGameOver();
             }            
         });
 
@@ -444,39 +420,8 @@ public class Display {
         };
         timer.start();*/
 	}
-//	public void setImage() {
-//
-//		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
-//		boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
-//
-//		player = new ImageView(playerImage);
-//		for (int n=0; n<boxes.length; n++)
-//		{
-//			boxes = new ImageView(boxImage);
-//		}	
-//	}
+
 	public void constructBoard() {
-//		Scanner sc = null;
-//		int x = 0, y = 0;
-//	    try {
-//	        sc = new Scanner(new FileReader("t1.txt"));
-//	        while (sc.hasNext()) {
-//	        	String s = sc.next();
-//	        	arr[x][y] = Integer.parseInt(s);
-//	        	x ++;
-//	        	if (x == 10) {
-//	        		x = 0;
-//	        		y ++;
-//	        		if (sc.hasNextLine()) sc.nextLine();
-//	        	}
-//	        }
-//	    }
-//	    catch (FileNotFoundException e) {
-//   	  		System.out.println("The file not found");
-//     	}
-//	    finally {
-//    	 	if (sc != null) sc.close();
-//     	}
 		Board board = g.getBoard();
 		//System.out.println("Height:" + arrayHeight + " " + "Width:" + arrayWidth);
 		for (int row=0;row<arrayHeight;row++)

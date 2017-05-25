@@ -39,9 +39,9 @@ public class WarehouseBoss extends Application {
 		//Display display = new Display(10,10,this);
 		display.init(primaryStage);
 		
-//		output = new Output(this, board);
+		output = new Output(this, board);
 //		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
-//		output.printBoard();
+		output.printBoard();
 		
 		//edit test
 		//edit test 2
@@ -178,7 +178,7 @@ public class WarehouseBoss extends Application {
 		return gameOver;
 	}
 	public Display display;
-	private Output output; 
+	public Output output; 
 	private boolean gameOver;
 	private int totalMoves = 0;
 	private Player player;
