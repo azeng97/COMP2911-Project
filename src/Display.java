@@ -179,12 +179,12 @@ public class Display {
 			}
 		}
 		root.getChildren().add(p);
-		//Image sideMenuImage = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/background.png");
+		Image sideMenuImage = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/s29X24F.png");
 		Rectangle sideMenu = new Rectangle(TILE_SIZE * 3.5, TILE_SIZE * arrayHeight);
 		sideMenu.setLayoutX(TILE_SIZE * arrayWidth);
 		sideMenu.setLayoutY(0);
-		//sideMenu.setFill(new ImagePattern(sideMenuImage, 0, 0, 1, 1, true));
-		sideMenu.setFill(Color.GRAY);
+		sideMenu.setFill(new ImagePattern(sideMenuImage, 0, 0, 3, 1, true));
+		//sideMenu.setFill(Color.GRAY);
 		root.getChildren().add(sideMenu);
 		Button saveBtn = new Button("Save Game");
 		saveBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -229,10 +229,10 @@ public class Display {
 					}
 	            	
 	            });
-	            Button quit = new Button("Quit");
-	            quit.setMaxWidth(Double.MAX_VALUE);
-	            pauseRoot.getChildren().add(quit);
-	            quit.setOnAction(new EventHandler<ActionEvent>() {
+	            Button quitBtn = new Button("Quit Game");
+	            quitBtn.setMaxWidth(Double.MAX_VALUE);
+	            pauseRoot.getChildren().add(quitBtn);
+	            quitBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override
 					public void handle(ActionEvent event) {
@@ -263,6 +263,9 @@ public class Display {
 		moveCount.setMaxWidth(Double.MAX_VALUE);
 		Label undoCount = new Label();
 		undoCount.setText("Undos: " + numString);
+		//pauseBtn.setStyle("-fx-background-color: grey, transparent;");
+		//saveBtn.setStyle("-fx-background-color: grey, transparent;");
+		//resetBtn.setStyle("-fx-background-color: grey, transparent;");
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
@@ -296,7 +299,7 @@ public class Display {
 			Node retval = null;
 			if (contains == 0) retval = new ImageView(new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/floor.png", 40, 40, false, false));
 			if (contains == 1) retval = new ImageView(new Image("http://i.imgur.com/nnBEDMn.png", 40, 40, false, false));
-			if (contains == 3) retval = new ImageView(new Image("http://i.imgur.com/DIbYuK3.png", 40, 40, false, false));
+			if (contains == 3) retval = new ImageView(new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/target.png", 40, 40, false, false));
 			return retval;
 		}
 	}
