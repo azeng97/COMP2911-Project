@@ -167,7 +167,7 @@ public class Display {
             gameOverRoot.setAlignment(Pos.CENTER);
             gameOverRoot.setPadding(new Insets(20));
 
-            Button nextLvlBtn = new Button("New Game");
+            Button nextLvlBtn = new Button("Next Level");
             nextLvlBtn.setMaxWidth(Double.MAX_VALUE);
             gameOverRoot.getChildren().add(nextLvlBtn);
 
@@ -302,6 +302,7 @@ public class Display {
 					@Override
 					public void handle(ActionEvent event) {
 						System.out.println("Quit Game");
+						System.exit(1);
 						
 					}
 	            	
@@ -323,9 +324,11 @@ public class Display {
 		String numString = "0";
 		Label moveCount = new Label();
 		moveCount.setText("Moves: " + numString);
+		moveCount.setTextFill(Color.WHITE);
 		moveCount.setMaxWidth(Double.MAX_VALUE);
 		Label undoCount = new Label();
 		undoCount.setText("Undos: " + numString);
+		undoCount.setTextFill(Color.WHITE);
 		pauseBtn.setId("sideMenuButton");
 		saveBtn.setId("sideMenuButton");
 		resetBtn.setId("sideMenuButton");
