@@ -33,7 +33,7 @@ import java.util.Iterator;
 
 public class Display {
 	private static final int TILE_SIZE = 40;
-	private static final int MOVE_LENGTH = 5;
+	//private static final int MOVE_LENGTH = 40;
 //	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][];
 //	private static final int W = 400, H = 400;
@@ -51,9 +51,9 @@ public class Display {
 	
 	private Stage stage; 
 	private Pane root;
-	private boolean goNorth, goSouth, goEast, goWest;
+	//private boolean goNorth, goSouth, goEast, goWest;
 	
-	private int timerCounter = 0; 
+	//private int timerCounter = 0; 
 	
 	public int getWidth()
 	{
@@ -66,10 +66,10 @@ public class Display {
 		this.arr = new int[arrayHeight][arrayWidth];
 		this.g = g;
 		this.keyPressAllowed = true;
-		this.goNorth = false;
-		this.goSouth = false;
-		this.goEast = false;
-		this.goWest = false;
+		//this.goNorth = false;
+		//this.goSouth = false;
+		//this.goEast = false;
+		//this.goWest = false;
 		
 	}
 	public void movePlayerBy(double dx, double dy) {
@@ -156,29 +156,30 @@ public class Display {
 				box.toFront();
 				break;
 		}
+		System.out.println("g.isGameOver() = " + g.isGameOver());
 		if (g.isGameOver()) { // check
-			System.out.print("game complete");
+			System.out.println("game complete");
 			root.setEffect(new GaussianBlur());
 			keyPressAllowed = false;
 			VBox gameOverRoot = new VBox(5);
-            gameOverRoot.getChildren().add(new Label("Paused"));
+            gameOverRoot.getChildren().add(new Label("Level Cleared"));
             gameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
             gameOverRoot.setAlignment(Pos.CENTER);
             gameOverRoot.setPadding(new Insets(20));
 
-            Button newGameBtn = new Button("New Game");
-            newGameBtn.setMaxWidth(Double.MAX_VALUE);
-            gameOverRoot.getChildren().add(newGameBtn);
+            Button nextLvlBtn = new Button("New Game");
+            nextLvlBtn.setMaxWidth(Double.MAX_VALUE);
+            gameOverRoot.getChildren().add(nextLvlBtn);
 
             Stage popupStage = new Stage(StageStyle.TRANSPARENT);
             popupStage.initOwner(stage);
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setScene(new Scene(gameOverRoot, Color.TRANSPARENT));
-            newGameBtn.setOnAction(new EventHandler<ActionEvent>() {
+            nextLvlBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
-					System.out.println("New Game");
+					System.out.println("Next level");
 					
 				}
             	
@@ -191,12 +192,13 @@ public class Display {
 				@Override
 				public void handle(ActionEvent event) {
 					System.out.println("Quit Game");
+					System.exit(1);
 					
 				}
             	
             });
             popupStage.show();
-            System.exit(1);
+            //System.exit(1);
 		}
 	}
 	
@@ -258,6 +260,8 @@ public class Display {
 				VBox pauseRoot = new VBox(5);
 	            pauseRoot.getChildren().add(new Label("Paused"));
 	            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+	            //pauseRoot.setLayoutX(((arrayWidth + 3.5)*TILE_SIZE)/ 2);
+	            //pauseRoot.setLayoutY(arrayHeight*TILE_SIZE/2);
 	            pauseRoot.setAlignment(Pos.CENTER);
 	            pauseRoot.setPadding(new Insets(20));
 
@@ -378,30 +382,34 @@ public class Display {
                 switch (event.getCode()) {
                     case UP:
                     	if (g.makeMove(North) && keyPressAllowed) {
-                    		goNorth = true;
-                    		timerCounter = 0;
-                    		keyPressAllowed = false;
+                    		//goNorth = true;
+                    		//timerCounter = 0;
+                    		//keyPressAllowed = false;
+                    		movePlayerBy(0, -40);
                     		break;
                     	}
                     case DOWN:
                     	if (g.makeMove(South) && keyPressAllowed) {
-                    		goSouth = true;
-                    		timerCounter = 0;
-                    		keyPressAllowed = false;
+                    		//goSouth = true;
+                    		//timerCounter = 0;
+                    		//keyPressAllowed = false;
+                    		movePlayerBy(0, 40);
                     		break;
                     	}
                     case LEFT:
                     	if (g.makeMove(West) && keyPressAllowed) {
-                    		goEast = true;
-                    		timerCounter = 0;
-                    		keyPressAllowed = false;
+                    		//goEast = true;
+                    		//timerCounter = 0;
+                    		//keyPressAllowed = false;
+                    		movePlayerBy(-40, 0);
                     		break;
                     	}
                     case RIGHT:
                     	if (g.makeMove(East) && keyPressAllowed) {
-                    		goWest = true;
-                    		timerCounter = 0;
-                    		keyPressAllowed = false;
+                    		//goWest = true;
+                    		//timerCounter = 0;
+                    		//keyPressAllowed = false;
+                    		movePlayerBy(40, 0);
                     		break;
                     	}
 				default:
@@ -411,8 +419,9 @@ public class Display {
         });
 
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
-        AnimationTimer timer = new AnimationTimer() {
+  /*      AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 int dx = 0, dy = 0;
@@ -430,7 +439,7 @@ public class Display {
                 movePlayerBy(dx, dy);
             }
         };
-        timer.start();
+        timer.start();*/
 	}
 //	public void setImage() {
 //
