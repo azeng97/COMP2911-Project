@@ -205,12 +205,12 @@ public class Display {
 	private Parent createContent() {
 		this.root = new Pane();
 		root.setPrefSize(TILE_SIZE * (arrayWidth + 3.5), TILE_SIZE * arrayHeight);
-		playerImage = new Image("http://i.imgur.com/Q5ZkQhI.png", 40, 40, false, false);
+		playerImage = new Image("player.png", 40, 40, false, false);
 		//boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
-		boxImage = new Image("https://opengameart.org/sites/default/files/crates_study_x2.png", 40, 40 , false, false);
+		boxImage = new Image("box2.png", 40, 40 , false, false);
 		
 		Rectangle background = new Rectangle(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
-		Image backgroundImage = new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/floor.png");
+		Image backgroundImage = new Image("floor.png");
 		background.setFill(new ImagePattern(backgroundImage, 0, 0, 1/(float)arrayWidth, 1/(float)arrayHeight, true)); // change the ratio to be dynamic
 		//background.setLayoutX(0);
 		root.getChildren().add(background);
@@ -234,7 +234,7 @@ public class Display {
 			}
 		}
 		root.getChildren().add(p);
-		Image sideMenuImage = new Image("file:///Users/justindaerolee/school/comp2911/workspace/COMP2911-project/images/s29X24F.png");
+		Image sideMenuImage = new Image("s29X24F.png");
 		Rectangle sideMenu = new Rectangle(TILE_SIZE * 3.5, TILE_SIZE * arrayHeight);
 		sideMenu.setLayoutX(TILE_SIZE * arrayWidth);
 		sideMenu.setLayoutY(0);
@@ -363,9 +363,9 @@ public class Display {
 		}
 		private Node setImage() {
 			Node retval = null;
-			if (contains == 0) retval = new ImageView(new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/floor.png", 40, 40, false, false));
-			if (contains == 1) retval = new ImageView(new Image("http://i.imgur.com/nnBEDMn.png", 40, 40, false, false));
-			if (contains == 3) retval = new ImageView(new Image("File:///Users/justindaerolee/school/comp2911/workspace/comp2911-project/images/target.png", 40, 40, false, false));
+			if (contains == 0) retval = new ImageView(new Image("floor.png", 40, 40, false, false));
+			if (contains == 1) retval = new ImageView(new Image("wall.png", 40, 40, false, false));
+			if (contains == 3) retval = new ImageView(new Image("target.png", 40, 40, false, false));
 			return retval;
 		}
 	}
