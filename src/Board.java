@@ -44,6 +44,7 @@ public class Board {
 				else if (s instanceof Target)
 				{
 					if (s.getContents() instanceof Box) line += "X";
+					else if (s.getContents() instanceof Player) line += "P";
 					else line += "O";
 				}
 				else if (board[row][col] instanceof Space)

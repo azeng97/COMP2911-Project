@@ -54,7 +54,21 @@ public class MenuController {
 	
 	
 	public void loadGame() {
-		System.out.println("Selected: Load Game");
+		this.primaryStage = (Stage) butNewGame.getScene().getWindow();
+		
+		Task<Void> task = new Task<Void>() {
+			@Override protected Void call() throws Exception {
+				loadingScreen(primaryStage);
+				Platform.runLater(new Runnable() {
+					@Override public void run() {
+						WarehouseBoss game = new WarehouseBoss();
+						game.resume(primaryStage);
+					}
+				});
+				return null;
+			}
+		};
+		 task.run();
 	}
 	
 	public void settings() {

@@ -62,6 +62,19 @@ public class WarehouseBoss extends Application {
 //		System.exit(1);
 	}
 	
+	public void resume (Stage stage)
+	{
+		gameOver = false;
+		this.loadGame();
+		this.display = new Display(board.getNRows(),board.getNCols(),this);
+		//Display display = new Display(10,10,this);
+		display.init(stage);
+		
+		output = new Output(this, board);
+//		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
+		output.printBoard();
+	}
+	
 	public boolean makeMove(int direction)
 	{
 		Move move = new Move(direction);
@@ -165,11 +178,97 @@ public class WarehouseBoss extends Application {
 			square.addEntity(p);
 			this.player = p;
 			break;
+		case 'P':
+			square = new Target(pos, this);
+			incrementTargets();
+			Player q = new Player(square, this);
+			square.addEntity(q);
+			this.player = q;
+			break;
+		case 'X':
+			square = new Target(pos, this);
+			square.addEntity(new Box(square, this));
+			break;
 		default:
 			square = new Space(pos, this);
 			break;
 		}
 		board.setObj(pos, square);
+	}
+	
+	public void saveGame()
+	{
+		try { 
+			PrintWriter writer = new PrintWriter("save.data","UTF-8");
+			writer.println(level);
+			writer.println(totalMoves);
+			writer.println(emptyTargets);
+			writer.println(nUndos);
+			writer.println(board.getNRows());
+			writer.println(board.getNCols());
+			for (int row=0;row<board.getNRows();row++)
+			{
+				String line = new String();
+				for (int col=0;col<board.getNCols();col++)
+				{
+					Square s = (Square) board.getObj(row,col);
+					if (s instanceof Wall) line += "#";
+					else if (s instanceof Target)
+					{
+						if (s.getContents() instanceof Box) line += "X";
+						else if (s.getContents() instanceof Player) line += "P";
+						else if (s.getContents() == null) line += ".";
+					}
+					else if (s instanceof Space)
+					{
+						if (s.getContents() == null) line += " ";
+						else if (s.getContents() instanceof Player) line += "@";
+						else if (s.getContents() instanceof Box) line += "$";		
+					}
+				}
+				writer.println(line);
+			}
+			writer.close();
+		} catch (IOException e) {
+		}
+	}
+	
+	public void loadGame()
+	{
+		BufferedReader in;
+		try
+		{
+			in = new BufferedReader(new FileReader("save.data"));
+		}
+		catch (FileNotFoundException e)
+		{
+			System.out.println("Cannot find file \"" + "save.data" + "\".");
+			return;
+		}
+		try
+		{
+			level = Integer.valueOf(in.readLine().trim()).intValue();
+			totalMoves = Integer.valueOf(in.readLine().trim()).intValue();
+			emptyTargets = Integer.valueOf(in.readLine().trim()).intValue();
+			nUndos = Integer.valueOf(in.readLine().trim()).intValue();
+			int numRows = Integer.valueOf(in.readLine().trim()).intValue();
+			int numCols = Integer.valueOf(in.readLine().trim()).intValue();
+			board = new Board(numRows,numCols);
+			for (int row=0;row<numRows;row++)
+			{
+				for (int col=0;col<numCols;col++)
+				{
+					this.buildSquare(new Position(row,col), (char) in.read());
+				}
+				in.readLine();
+			}
+			in.close();
+		}
+		catch (IOException e)
+		{
+			System.out.println("File format incorrect");
+			return;
+		}
 	}
 	
 	public boolean isGameOver()
@@ -184,4 +283,6 @@ public class WarehouseBoss extends Application {
 	private int emptyTargets;
 	private Board board;
 	public int level = 0;
+	public int nUndos = 0;
+	private ArrayList<Board> history;
 }

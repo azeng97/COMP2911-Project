@@ -145,16 +145,6 @@ public class Display {
             Button nextLvlBtn = new Button("Next Level");
             nextLvlBtn.setMaxWidth(Double.MAX_VALUE);
             gameOverRoot.getChildren().add(nextLvlBtn);
-            nextLvlBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Next Level: " + g.level+1);
-					;
-					
-				}
-            	
-            });
 
             Stage popupStage = new Stage(StageStyle.TRANSPARENT);
             popupStage.initOwner(stage);
@@ -208,18 +198,20 @@ public class Display {
 		boxes = new ArrayList<DisplayBox>();
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
-				if (arr[y][x] == 4) {
+				if (arr[y][x] == 3 || arr[y][x] == 5) {
 					player.relocate(TILE_SIZE * x, TILE_SIZE * y);
-				} else if (arr[y][x] == 2) {
+				} else if (arr[y][x] == 2 || arr[y][x] == 6) {
 					DisplayBox box = new DisplayBox(boxImage,y,x);
 					boxes.add(box);
 					Group b = new Group(box);
 					root.getChildren().add(b);
 					box.relocate(TILE_SIZE * x, TILE_SIZE * y);
-				} else if (arr[y][x] != 0) {
+				} else if (arr[y][x]!=0)
+				{
 					Tile tile = new Tile(x, y, arr[y][x]);
 					root.getChildren().add(tile);
-				}		
+				}
+
 			}
 		}
 		root.getChildren().add(p);
@@ -234,6 +226,7 @@ public class Display {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("game saved");
+                g.saveGame();
             }
         });
 		saveBtn.setMaxWidth(Double.MAX_VALUE);
@@ -358,7 +351,7 @@ public class Display {
 		return root;
 	}
 	private class Tile extends StackPane {
-		private int contains; // 0 = empty, 1 = wall, 2 = box, 3 = target, 4 = player.
+		private int contains; // 0 = empty, 1 = wall, 2 = box, 3 = player, 4 = target, 5 = player + target, 6 = box + target
 		
 		
 		private Rectangle border = new Rectangle(TILE_SIZE, TILE_SIZE);
@@ -381,7 +374,7 @@ public class Display {
 			Node retval = null;
 			if (contains == 0) retval = new ImageView(new Image("floor.png", 40, 40, false, false));
 			if (contains == 1) retval = new ImageView(new Image("wall.png", 40, 40, false, false));
-			if (contains == 3) retval = new ImageView(new Image("target.png", 40, 40, false, false));
+			if (contains > 3 ) retval = new ImageView(new Image("target.png", 40, 40, false, false));
 			return retval;
 		}
 	}
@@ -475,11 +468,16 @@ public class Display {
 				//System.out.println(row + " " + col);
 				Square s = (Square) board.getObj(row,col);
 				if (s instanceof Wall) arr[row][col] = 1;
-				else if (s instanceof Target) arr[row][col] = 3;
+				else if (s instanceof Target) 
+					{
+						if (s.getContents() == null) arr[row][col] = 4;
+						else if (s.getContents().getName().equals("Player")) arr[row][col] = 5;
+						else if (s.getContents().getName().equals("Box")) arr[row][col] = 6;
+					}
 				else if (s instanceof Space) 
 				{
 					if (s.getContents() == null) arr[row][col] = 0;
-					else if (s.getContents().getName().equals("Player")) arr[row][col] = 4;
+					else if (s.getContents().getName().equals("Player")) arr[row][col] = 3;
 					else if (s.getContents().getName().equals("Box")) arr[row][col] = 2;		
 				}
 			}
