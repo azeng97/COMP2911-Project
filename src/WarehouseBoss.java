@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -80,11 +81,41 @@ public class WarehouseBoss extends Application {
 		Move move = new Move(direction);
 		if (player.makeMove(move))
 		{
+			moveHistory.add(move);
+			boardHistory.add(board);
+			if (moveHistory.size() > maxUndos)
+			{
+				moveHistory.remove(0);
+				boardHistory.remove(0);
+			}
 			//System.out.println("moved");
 			totalMoves++;
+			
 			return true;
 		}
 		else return false; 
+	}
+	
+	public void undoMove(Stage stage)
+	{
+		int n;
+		if(moveHistory.size()>0)
+		{			
+			Move last = moveHistory.remove(moveHistory.size()-1);
+			for (n = moveHistory.size()-1; n>=0; n--){
+				Move move = moveHistory.remove(n);
+				if (!move.equals(last)) break;
+			}
+			Board board = boardHistory.lastElement();
+			for (int k = boardHistory.size()-1; k>n; k--)
+			{
+				board = boardHistory.remove(k);
+			}
+			this.board=board;
+			display.init(stage);
+			nUndos++;
+			totalMoves++;
+		}
 	}
 	
 //	public void moveBox(Position pos, int direction)
@@ -202,7 +233,6 @@ public class WarehouseBoss extends Application {
 			PrintWriter writer = new PrintWriter("save.data","UTF-8");
 			writer.println(level);
 			writer.println(totalMoves);
-			writer.println(emptyTargets);
 			writer.println(nUndos);
 			writer.println(board.getNRows());
 			writer.println(board.getNCols());
@@ -249,7 +279,6 @@ public class WarehouseBoss extends Application {
 		{
 			level = Integer.valueOf(in.readLine().trim()).intValue();
 			totalMoves = Integer.valueOf(in.readLine().trim()).intValue();
-			emptyTargets = Integer.valueOf(in.readLine().trim()).intValue();
 			nUndos = Integer.valueOf(in.readLine().trim()).intValue();
 			int numRows = Integer.valueOf(in.readLine().trim()).intValue();
 			int numCols = Integer.valueOf(in.readLine().trim()).intValue();
@@ -270,6 +299,13 @@ public class WarehouseBoss extends Application {
 			return;
 		}
 	}
+//	public void deleteSave()
+//	{
+//		try {
+//			File f = new File("save.data");
+//			f.delete();
+//		} catch(Exception e) {}
+//	}
 	
 	public boolean isGameOver()
 	{
@@ -281,8 +317,10 @@ public class WarehouseBoss extends Application {
 	public int totalMoves;
 	private Player player;
 	private int emptyTargets;
+	private int maxUndos = 10;
 	private Board board;
 	public int level = 0;
 	public int nUndos = 0;
-	private ArrayList<Board> history;
+	public Vector<Board> boardHistory = new Vector<Board>();
+	public Vector<Move> moveHistory = new Vector<Move>();
 }

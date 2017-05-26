@@ -198,6 +198,7 @@ public class Display {
 		boxes = new ArrayList<DisplayBox>();
 		for(int y = 0; y < arrayHeight; y ++) {
 			for (int x = 0; x < arrayWidth; x ++) {
+
 				if (arr[y][x] == 3 || arr[y][x] == 5) {
 					player.relocate(TILE_SIZE * x, TILE_SIZE * y);
 				} else if (arr[y][x] == 2 || arr[y][x] == 6) {
@@ -206,12 +207,12 @@ public class Display {
 					Group b = new Group(box);
 					root.getChildren().add(b);
 					box.relocate(TILE_SIZE * x, TILE_SIZE * y);
-				} else if (arr[y][x]!=0)
+				}
+				if (arr[y][x]!=0 && arr[y][x]!=2 && arr[y][x]!=3)
 				{
 					Tile tile = new Tile(x, y, arr[y][x]);
 					root.getChildren().add(tile);
 				}
-
 			}
 		}
 		root.getChildren().add(p);
@@ -236,61 +237,7 @@ public class Display {
 
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("pause game");
-				keyPressAllowed = false;
-				root.setEffect(new GaussianBlur());
-				VBox pauseRoot = new VBox(5);
-	            pauseRoot.getChildren().add(new Label("Paused"));
-	            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
-	            //pauseRoot.setLayoutX(((arrayWidth + 3.5)*TILE_SIZE)/ 2);
-	            //pauseRoot.setLayoutY(arrayHeight*TILE_SIZE/2);
-	            pauseRoot.setAlignment(Pos.CENTER);
-	            pauseRoot.setPadding(new Insets(20));
-
-	            Button resume = new Button("Resume");
-	            resume.setMaxWidth(Double.MAX_VALUE);
-	            pauseRoot.getChildren().add(resume);
-
-	            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
-	            popupStage.initOwner(stage);
-	            popupStage.initModality(Modality.APPLICATION_MODAL);
-	            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
-	            resume.setOnAction(new EventHandler<ActionEvent>() {
-
-					@Override
-					public void handle(ActionEvent event) {
-						root.setEffect(null);
-		                popupStage.hide();
-		                keyPressAllowed = true;
-						
-					}
-	            	
-	            });
-	            pauseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	                @Override
-	                public void handle(KeyEvent event) {
-	                    if (event.getCode() == KeyCode.ESCAPE) {
-	                    	root.setEffect(null);
-			                popupStage.hide();
-			                keyPressAllowed = true;
-	                    }
-	                }            
-	            });
-	            Button quitBtn = new Button("Quit Game");
-	            quitBtn.setMaxWidth(Double.MAX_VALUE);
-	            pauseRoot.getChildren().add(quitBtn);
-	            quitBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("Quit Game");
-						System.exit(1);
-						
-					}
-	            	
-	            });
-	            popupStage.show();
-
+				pauseScreen();
 			}
 			
 		});
@@ -372,7 +319,7 @@ public class Display {
 		}
 		private Node setImage() {
 			Node retval = null;
-			if (contains == 0) retval = new ImageView(new Image("floor.png", 40, 40, false, false));
+			//if (contains == 0 || contains == 2 || contains == 3) retval = new ImageView(new Image("floor.png", 40, 40, false, false));
 			if (contains == 1) retval = new ImageView(new Image("wall.png", 40, 40, false, false));
 			if (contains > 3 ) retval = new ImageView(new Image("target.png", 40, 40, false, false));
 			return retval;
@@ -424,11 +371,16 @@ public class Display {
                     		movePlayerBy(40, 0);
                     	}
                 		break;
+                    case ESCAPE:
+                    	pauseScreen();
+                    	break;
+                    case BACK_SPACE:
+                    	g.undoMove(primaryStage);
+                    	break;
 				default:
 					break;
                 }
                 g.output.printBoard();
-                System.out.println(g.totalMoves);
                 checkGameOver();
             }            
         });
@@ -483,6 +435,63 @@ public class Display {
 			}
 		}
 	} 
+	
+	public void pauseScreen(){
+		System.out.println("pause game");
+		keyPressAllowed = false;
+		root.setEffect(new GaussianBlur());
+		VBox pauseRoot = new VBox(5);
+        pauseRoot.getChildren().add(new Label("Paused"));
+        pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+        //pauseRoot.setLayoutX(((arrayWidth + 3.5)*TILE_SIZE)/ 2);
+        //pauseRoot.setLayoutY(arrayHeight*TILE_SIZE/2);
+        pauseRoot.setAlignment(Pos.CENTER);
+        pauseRoot.setPadding(new Insets(20));
+
+        Button resume = new Button("Resume");
+        resume.setMaxWidth(Double.MAX_VALUE);
+        pauseRoot.getChildren().add(resume);
+
+        Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+        popupStage.initOwner(stage);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+        resume.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				root.setEffect(null);
+                popupStage.hide();
+                keyPressAllowed = true;
+				
+			}
+        	
+        });
+        pauseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                	root.setEffect(null);
+	                popupStage.hide();
+	                keyPressAllowed = true;
+                }
+            }            
+        });
+        Button quitBtn = new Button("Quit Game");
+        quitBtn.setMaxWidth(Double.MAX_VALUE);
+        pauseRoot.getChildren().add(quitBtn);
+        quitBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Quit Game");
+				System.exit(1);
+				
+			}
+        	
+        });
+        popupStage.show();
+	}
 	public static final int North = 0;
 	public static final int East = 1;
 	public static final int South = 2;

@@ -1,5 +1,5 @@
 import java.io.IOException;
-
+import java.io.File;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -58,13 +58,20 @@ public class MenuController {
 		
 		Task<Void> task = new Task<Void>() {
 			@Override protected Void call() throws Exception {
+				File f = new File("save.data");
+				if (f.exists()){ 
 				loadingScreen(primaryStage);
 				Platform.runLater(new Runnable() {
 					@Override public void run() {
 						WarehouseBoss game = new WarehouseBoss();
-						game.resume(primaryStage);
+						
+							game.resume(primaryStage);
+						
 					}
 				});
+				} else {
+					System.out.println("No save detected");
+				}
 				return null;
 			}
 		};

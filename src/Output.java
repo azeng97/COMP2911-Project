@@ -8,6 +8,9 @@ public class Output {
 	public void printBoard()
 	{
 		b.printBoard();
+		System.out.println("Number of undos: " + game.nUndos);
+		System.out.println("Number of moves: " + game.totalMoves);
+		System.out.println("Size of Move History: " + game.moveHistory.size());
 	}
 	private WarehouseBoss game;
 	private Board b;

@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -90,6 +91,10 @@ public class SettingMenuController {
 	}
 	
 	public void deleteSave() {
-		System.out.println("Selected: Settings > Delete save");
+		//System.out.println("Selected: Settings > Delete save");
+		try {
+			File f = new File("save.data");
+			f.delete();
+		} catch(Exception e) {}
 	}
 }

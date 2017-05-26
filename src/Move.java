@@ -46,6 +46,7 @@ public class Move {
 	{
 		this.pushed = e;
 	}
+	
 	private int direction;
 	private Entity pushed;
 	
