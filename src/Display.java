@@ -71,7 +71,16 @@ public class Display {
 	{
 		return arrayWidth;
 	}
-
+	/**
+	 * 
+	 * @param arrayHeight
+	 * @param arrayWidth
+	 * @param g
+	 * @pre given arrayHeight:int, arrayWidth:int, g:WarehouseBoss
+	 * @post initialise the private values with the same name, initalised keyPressAllowed : boolean to true
+	 * to allow key presses.
+	 * 
+	 */
 	public Display(int arrayHeight, int arrayWidth, WarehouseBoss g) {
 		this.arrayWidth = arrayWidth;
 		this.arrayHeight = arrayHeight;
@@ -91,10 +100,25 @@ public class Display {
         double y = player.getLayoutY() + dy;
         movePlayerTo(x, y);
 	}
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @pre @param x : double, y:double is the new coordinates of the player:Group
+	 * @post player:Group is relocated using relocate and the @param x, y
+	 */
 	private void movePlayerTo(double x, double y) {
 			this.moveCount.setText("Moves: " + g.totalMoves);
             player.relocate(x, y);
 	}
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param n
+	 * @pre
+	 * @post
+	 */
 	public void transitionTo(double x, double y, DisplayBox n) {
 		Line line = new Line(n.getBoundsInLocal().getMinX(), n.getBoundsInLocal().getMinY(), x, y);
 		PathTransition trans = new PathTransition();
@@ -108,7 +132,13 @@ public class Display {
 	{
 		 this.undoCount.setText("Undos remaining: " + g.undosRemaining());
 	}
-	
+	/**
+	 * 
+	 * @param position
+	 * @param direction
+	 * @pre given the @param position:Position, direction:int
+	 * @post relocate the box based on the direction and initial position:Position.
+	 */
 	public void moveBox(Position position, int direction) {
 		DisplayBox box = null;
 		Iterator<DisplayBox> i = boxes.iterator();
@@ -146,7 +176,11 @@ public class Display {
 		System.out.println("g.isGameOver() = " + g.isGameOver());
 		
 	}
-	
+	/**
+	 * @pre true
+	 * @post if (g.isGameOver() == true) produce a game-over-menu 
+	 * else skip.
+	 */
 	public void checkGameOver(){
 		if (g.isGameOver()) { // check
 			System.out.println("game complete");
@@ -196,7 +230,10 @@ public class Display {
             //System.exit(1);
 		}
 	}
-	
+	/**
+	 * @pre true
+	 * @post @return the root:Pane 
+	 */
 	private Parent createContent() {
 		this.root = new Pane();
 		root.setPrefSize(TILE_SIZE * (arrayWidth + 3.5), TILE_SIZE * arrayHeight);
@@ -319,7 +356,14 @@ public class Display {
 		
 		
 		private Rectangle border = new Rectangle(TILE_SIZE, TILE_SIZE);
-
+		/**
+		 * 
+		 * @param x
+		 * @param y
+		 * @param contains  value that describes the image the tile will contain
+		 * @pre given the @param x:int, y:int, contains:int
+		 * @post creates the Tile
+		 */
 		public Tile(int x, int y, int contains) {
 			this.contains = contains;
 			
@@ -334,6 +378,11 @@ public class Display {
 			this.setTranslateX(x * TILE_SIZE);
 			this.setTranslateY(y * TILE_SIZE);
 		}
+		/**
+		 * @pre this.contains has been initialised
+		 * @post creates a new Node with an Image put inside of it.
+		 * @return
+		 */
 		private Node setImage() {
 			Node retval = null;
 			if (contains == 1) retval = new ImageView(new Image("wall.png", 40, 40, false, false));
@@ -341,7 +390,11 @@ public class Display {
 			return retval;
 		}
 	}
-	
+	/**
+	 * @pre true
+	 * @post creates the stage
+	 * @param primaryStage
+	 */
 	public void init(Stage primaryStage){
 		this.stage = primaryStage;
 		
@@ -425,7 +478,10 @@ public class Display {
         };
         timer2.start();
 	}
-
+	/**
+	 * @pre given this.g:WareHouseBoss
+	 * @post constructs the map by initalising arr:int[][]
+	 */
 	public void constructBoard() {
 		Board board = g.getBoard();
 		//System.out.println("Height:" + arrayHeight + " " + "Width:" + arrayWidth);
@@ -451,7 +507,10 @@ public class Display {
 			}
 		}
 	} 
-	
+	/**
+	 * @pre true
+	 * @post constructs a pauseGame menu on top of the root:Pane and disenables all movement of the player and boxes.
+	 */
 	public void pauseScreen(){
 		System.out.println("pause game");
 		keyPressAllowed = false;
@@ -521,7 +580,10 @@ public class Display {
         });
         popupStage.show();
 	}
-	
+	/**
+	 * @pre true
+	 * @post disenables all movement of the boxes and player, shows a save menu on-top of root:Pane
+	 */
 	public void saveScreen(){
 		System.out.println("Game saved");
 		keyPressAllowed = false;
