@@ -73,9 +73,9 @@ public class Display {
 	}
 	/**
 	 * 
-	 * @param arrayHeight
-	 * @param arrayWidth
-	 * @param g
+	 * @param arrayHeight height of arr:int[][]
+	 * @param arrayWidth width of arr:int[][]
+	 * @param g the WareHouseBros object
 	 * @pre given arrayHeight:int, arrayWidth:int, g:WarehouseBoss
 	 * @post initialise the private values with the same name, initalised keyPressAllowed : boolean to true
 	 * to allow key presses.
@@ -93,6 +93,14 @@ public class Display {
 		//this.goWest = false;
 		
 	}
+	/**
+	 * 
+	 * @param dx : change in position of player on the x axis
+	 * @param dy : change in position of player on the y axis
+	 * @pre given the @params dx:double, dy:double
+	 * @post x:double, and y:double is set to the coordinates of the new location that the player is to be moved
+	 * 
+	 */
 	public void movePlayerBy(double dx, double dy) {
 		if (dx == 0 && dy == 0) return;
 		
@@ -102,8 +110,8 @@ public class Display {
 	}
 	/**
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x the new LayoutX
+	 * @param y the new LayoutY 
 	 * @pre @param x : double, y:double is the new coordinates of the player:Group
 	 * @post player:Group is relocated using relocate and the @param x, y
 	 */
@@ -134,8 +142,8 @@ public class Display {
 	}
 	/**
 	 * 
-	 * @param position
-	 * @param direction
+	 * @param position the x and y of the box
+	 * @param direction the direction the box is being pushed by the player
 	 * @pre given the @param position:Position, direction:int
 	 * @post relocate the box based on the direction and initial position:Position.
 	 */
@@ -358,8 +366,8 @@ public class Display {
 		private Rectangle border = new Rectangle(TILE_SIZE, TILE_SIZE);
 		/**
 		 * 
-		 * @param x
-		 * @param y
+		 * @param x position of the tile on the x axis
+		 * @param y postion of the tile on the y axis
 		 * @param contains  value that describes the image the tile will contain
 		 * @pre given the @param x:int, y:int, contains:int
 		 * @post creates the Tile
