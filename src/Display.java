@@ -76,7 +76,7 @@ public class Display {
 	 * @param arrayHeight height of arr:int[][]
 	 * @param arrayWidth width of arr:int[][]
 	 * @param g the WareHouseBros object
-	 * @pre given arrayHeight:int, arrayWidth:int, g:WarehouseBoss
+	 * @pre given arrayHeight:int, arrayWidth:int, g:WarehouseBosss
 	 * @post initialise the private values with the same name, initalised keyPressAllowed : boolean to true
 	 * to allow key presses.
 	 * 
