@@ -240,7 +240,7 @@ public class Display {
 
 			@Override
 			public void handle(ActionEvent event) {
-				pauseScreen();
+				
 				System.out.println("pause game");
 				keyPressAllowed = false;
 				root.setEffect(new GaussianBlur());
@@ -550,8 +550,16 @@ public class Display {
 
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Quit Game");
-				System.exit(1);
+				try {
+					root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+					Scene scene = new Scene(root);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+					stage.setScene(scene);
+					stage.show();
+					popupStage.close();
+				} 
+				catch (IOException e) { e.printStackTrace(); }
 				
 			}
         	
