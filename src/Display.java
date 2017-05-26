@@ -191,7 +191,7 @@ public class Display {
 	 * else skip.
 	 */
 	public void checkGameOver(){
-		if (g.isGameOver()) { // check
+		if (g.isGameOver() && !g.endGame()) { // check
 			System.out.println("game complete");
 			root.setEffect(new GaussianBlur());
 			keyPressAllowed = false;
@@ -245,7 +245,7 @@ public class Display {
             });
             popupStage.show();
             //System.exit(1);
-		} else if (false) {
+		} else if (g.endGame()) {
 			root.setEffect(new GaussianBlur());
 			keyPressAllowed = false;
 			VBox WGameOverRoot = new VBox(5);

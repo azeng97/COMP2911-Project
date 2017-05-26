@@ -100,16 +100,14 @@ public class WarehouseBoss extends Application {
 	}
 	public void nextLevel(Stage stage)
 	{
-		if (level == finalLevel) endGame(stage);
 		level++;
 		totalScore += levelScore;
 		play(stage);
 	}
 	
-	public void endGame(Stage stage)
+	public boolean endGame()
 	{
-		System.exit(1);
-		return;
+		return (level == finalLevel);
 	}
 	public void resume (Stage stage)
 	{
