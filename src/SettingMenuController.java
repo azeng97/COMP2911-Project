@@ -59,7 +59,7 @@ public class SettingMenuController {
 			labDifficultyHardOff.setVisible(true);
 			labDifficultyHardOn.setVisible(false);
 		}
-		WarehouseBoss.changeDifficulty(1);
+		WarehouseBoss.setDifficulty(0);
 	}
 	
 	public void changeDifficultyHard() {
@@ -70,7 +70,7 @@ public class SettingMenuController {
 			labDifficultyEasyOff.setVisible(true);
 			labDifficultyEasyOn.setVisible(false);
 		}
-		WarehouseBoss.changeDifficulty(0);
+		WarehouseBoss.setDifficulty(1);
 	}
 	
 	public void leaderboards() {

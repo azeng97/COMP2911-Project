@@ -77,15 +77,16 @@ public class WarehouseBoss extends Application {
 		} 
 		catch (IOException e) { e.printStackTrace(); }	
 		totalScore = 0;
+		
 	}
 	
 	public void play(Stage primaryStage)
 	{
-		
 		gameOver = false;
 		emptyTargets = 0;
 		totalMoves = 0;
-
+		
+		System.out.println("Level: " + level);
 		this.buildBoard(level);
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
 		levelScore = board.maxScore;
@@ -99,11 +100,17 @@ public class WarehouseBoss extends Application {
 	}
 	public void nextLevel(Stage stage)
 	{
+		if (level == finalLevel) endGame(stage);
 		level++;
 		totalScore += levelScore;
 		play(stage);
 	}
 	
+	public void endGame(Stage stage)
+	{
+		System.exit(1);
+		return;
+	}
 	public void resume (Stage stage)
 	{
 		gameOver = false;
@@ -285,6 +292,9 @@ public class WarehouseBoss extends Application {
 		try { 
 			PrintWriter writer = new PrintWriter("save.data","UTF-8");
 			writer.println(level);
+			writer.println(difficulty);
+			writer.println(totalScore);
+			writer.println(levelScore);
 			writer.println(totalMoves);
 			writer.println(nUndos);
 			writer.println(board.getNRows());
@@ -331,6 +341,8 @@ public class WarehouseBoss extends Application {
 		try
 		{
 			level = Integer.valueOf(in.readLine().trim()).intValue();
+			totalScore = Integer.valueOf(in.readLine().trim()).intValue();
+			levelScore = Integer.valueOf(in.readLine().trim()).intValue();
 			totalMoves = Integer.valueOf(in.readLine().trim()).intValue();
 			nUndos = Integer.valueOf(in.readLine().trim()).intValue();
 			int numRows = Integer.valueOf(in.readLine().trim()).intValue();
@@ -353,11 +365,19 @@ public class WarehouseBoss extends Application {
 		}
 	}
 	
-	public static void changeDifficulty (int d)
+	public static void setDifficulty (int d)
 	{
-		if (d == 0)  maxUndos = 3;
-		if (d == 1)  maxUndos = 6;
-		
+		difficulty = d;
+		changeDifficulty();
+	}
+	public static void changeDifficulty ()
+	{
+		if (difficulty == 1)  
+			{maxUndos = 3; level = 20; finalLevel = 50; 
+			}
+		else 
+			{ maxUndos = 6; level = 0; finalLevel = 19;
+			}
 	}
 	public int undosRemaining()
 	{
@@ -387,8 +407,10 @@ public class WarehouseBoss extends Application {
 	{
 		levelScore = n;
 	}
+	private static int difficulty = 0;
 	private int totalScore = 0;
 	private int levelScore = 0;
+	private static int finalLevel = 0;
 	public Display display;
 	public Output output; 
 	private boolean gameOver;
@@ -398,7 +420,7 @@ public class WarehouseBoss extends Application {
 	private int maxMoves = 100;
 	public static int maxUndos = 6;
 	private Board board;
-	public int level = 0;
+	public static int level;
 	public int nUndos = 0;
 	public Vector<Move> moveHistory = new Vector<Move>();
 	private static final int LOOP_CONTINUOUSLY = 9999;
