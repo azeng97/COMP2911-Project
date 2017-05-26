@@ -137,7 +137,10 @@ public class WarehouseBoss extends Application {
 		if (player.makeMove(move))
 		{
 			moveHistory.add(move);
-			boardHistory.add(board);
+			boardHistory.add(this.board);
+//			System.out.println("DEBUG BOARD");
+//			this.board.printBoard();
+//			System.out.println("DEBUG BOARD");
 			if (moveHistory.size() > maxUndos)
 			{
 				moveHistory.remove(0);
@@ -158,14 +161,24 @@ public class WarehouseBoss extends Application {
 		{			
 			Move last = moveHistory.remove(moveHistory.size()-1);
 			for (n = moveHistory.size()-1; n>=0; n--){
-				Move move = moveHistory.remove(n);
-				if (!move.equals(last)) break;
+				Move move = moveHistory.elementAt(n);
+				if (move.getDirection()!=last.getDirection()) break;
+				moveHistory.remove(n);
 			}
+			System.out.print("Index of last move: " + n);
 			Board board = boardHistory.lastElement();
 			for (int k = boardHistory.size()-1; k>n; k--)
 			{
-				board = boardHistory.remove(k);
+				System.out.println("Index of board: " + k);
+				board = boardHistory.elementAt(k);
+				boardHistory.remove(k);
+				System.out.println("DEBUG BOARD");
+				board.printBoard();
+				System.out.println("DEBUG BOARD");
 			}
+//			System.out.println("DEBUG BOARD");
+//			board.printBoard();
+//			System.out.println("DEBUG BOARD");
 			this.board=board;
 			display.init(stage);
 			nUndos++;
