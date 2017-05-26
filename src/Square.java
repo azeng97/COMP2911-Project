@@ -57,7 +57,6 @@ public class Square extends Object
 	{
 		if(!canPush(direction))
 		{
-			//System.out.println("Can't Push");
 			return false;
 		}
 		Square neighbour = game.squareAt((Position)position.adjacentPos(direction));

@@ -28,7 +28,6 @@ public class SettingMenuController {
 	public static Clip clip;
 
 	public void toggleSound () {
-		//System.out.println("Selected: Settings > Toggle sound");
 		if (unmuteImg.isVisible() == true) {
 			unmuteImg.setVisible(false);
 			muteImg.setVisible(true);
@@ -41,7 +40,6 @@ public class SettingMenuController {
 	}
 	
 	public void toggleSoundImage () {
-		//System.out.println("Selected: Settings > Toggle sound");
 		if (unmuteImg.isVisible() == true) {
 			unmuteImg.setVisible(false);
 			muteImg.setVisible(true);
@@ -85,13 +83,11 @@ public class SettingMenuController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void back() {
-		//System.out.println("Selected: Settings > Back");
 		
 		Stage primaryStage = (Stage) butBack.getScene().getWindow();
 		primaryStage.setTitle("Warehouse Bros.");
@@ -104,13 +100,11 @@ public class SettingMenuController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void deleteSave() {
-		//System.out.println("Selected: Settings > Delete save");
 		try {
 			File f = new File("save.data");
 			f.delete();

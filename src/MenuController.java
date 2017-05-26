@@ -85,7 +85,6 @@ public class MenuController {
 	}
 	
 	public void settings() {
-		//System.out.println("Selected: Settings");
 		
 		Stage primaryStage = (Stage) butSettings.getScene().getWindow();
 		primaryStage.setTitle("Warehouse Bros. - Settings");
@@ -102,7 +101,6 @@ public class MenuController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -125,7 +123,6 @@ public class MenuController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

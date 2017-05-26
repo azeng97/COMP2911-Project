@@ -20,7 +20,6 @@ public class menuUI {
 		Parent root;
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-			//root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 			Scene scene = new Scene(loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 

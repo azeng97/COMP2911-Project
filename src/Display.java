@@ -37,27 +37,22 @@ import java.util.Iterator;
 
 public class Display {
 	private static final int TILE_SIZE = 40;
-	//private static final int MOVE_LENGTH = 40;
-//	private static final int MAX_ARRAY_SIZE = 10; // change later
 	private int arr[][];
-//	private static final int W = 400, H = 400;
 	
 	private Image playerImage;
 	private Image boxImage;
 	AnimationTimer timer1;
-	AnimationTimer timer2;
 	
 	private Node player;
 	static private ArrayList<DisplayBox> boxes;
 	
 	private WarehouseBoss g;
-	private int arrayWidth; // change
-	private int arrayHeight; // change
+	private int arrayWidth; 
+	private int arrayHeight; 
 	private boolean keyPressAllowed;
 	
 	private Stage stage; 
 	private Pane root;
-	//private boolean goNorth, goSouth, goEast, goWest;
 	
 	private int timerCounter = 0; 
 	private Label moveCount;
@@ -88,10 +83,6 @@ public class Display {
 		this.arr = new int[arrayHeight][arrayWidth];
 		this.g = g;
 		this.keyPressAllowed = true;
-		//this.goNorth = false;
-		//this.goSouth = false;
-		//this.goEast = false;
-		//this.goWest = false;
 		
 	}
 	/**
@@ -151,10 +142,8 @@ public class Display {
 	public void moveBox(Position position, int direction) {
 		DisplayBox box = null;
 		Iterator<DisplayBox> i = boxes.iterator();
-		//System.out.println("Expected: " + position.getCol() + " " + position.getRow());
 		while (i.hasNext()){
 			box = i.next();
-			//System.out.println(box.getPosition().getCol() + " " + box.getPosition().getRow());
 			if (box.getPosition().equals(position)) break;
 		}
 		double x = box.getLayoutX();
@@ -182,7 +171,6 @@ public class Display {
 				box.toFront();
 				break;
 		}
-		System.out.println("g.isGameOver() = " + g.isGameOver());
 		
 	}
 	/**
@@ -191,8 +179,7 @@ public class Display {
 	 * else skip.
 	 */
 	public void checkGameOver(){
-		if (g.isGameOver() && !g.endGame()) { // check
-			System.out.println("game complete");
+		if (g.isGameOver() && !g.endGame()) {
 			root.setEffect(new GaussianBlur());
 			keyPressAllowed = false;
 			VBox gameOverRoot = new VBox(5);
@@ -214,7 +201,6 @@ public class Display {
 
 				@Override
 				public void handle(ActionEvent event) {
-					System.out.println("Next level");
 					g.nextLevel(stage);
 					root.setEffect(null);
 	                popupStage.hide();
@@ -293,13 +279,11 @@ public class Display {
 		this.root = new Pane();
 		root.setPrefSize(TILE_SIZE * (arrayWidth + 3.5), TILE_SIZE * arrayHeight);
 		playerImage = new Image("player.png", 40, 40, false, false);
-		//boxImage = new Image("http://i.imgur.com/urtoFLR.png", 40, 40 , false, false);
 		boxImage = new Image("box2.png", 40, 40 , false, false);
 		
 		Rectangle background = new Rectangle(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
 		Image backgroundImage = new Image("floor.png");
-		background.setFill(new ImagePattern(backgroundImage, 0, 0, 1/(float)arrayWidth, 1/(float)arrayHeight, true)); // change the ratio to be dynamic
-		//background.setLayoutX(0);
+		background.setFill(new ImagePattern(backgroundImage, 0, 0, 1/(float)arrayWidth, 1/(float)arrayHeight, true)); 
 		root.getChildren().add(background);
 		player = new ImageView(playerImage);
 		Group p = new Group(player);
@@ -364,7 +348,6 @@ public class Display {
 		resetBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("reset game");
                 g.setLevelScore(g.getBoard().minScore);
                 g.play(stage);
                 
@@ -382,7 +365,6 @@ public class Display {
 		moveCount.setText("Moves: " + g.totalMoves);
 		moveCount.setTextFill(Color.WHITE);
 		moveCount.setMaxWidth(Double.MAX_VALUE);
-		//moveCount.textProperty().bind(new SimpleIntegerProperty(g.totalMoves).asString());
 		undoCount = new Label();
 		undoCount.setText("Undos remaining: " + g.undosRemaining());
 		undoCount.setTextFill(Color.WHITE);
@@ -403,18 +385,7 @@ public class Display {
             public void handle(long now) {
             	timerCounter ++;
             	if (timerCounter%60 == 0) g.changeScore(-1); score.setText("Level Score: " + g.getLevelScore());
-                /*int dx = 0, dy = 0;
-                if (timerCounter == (TILE_SIZE/MOVE_LENGTH))  {
-                	goNorth = false; goSouth = false; goEast = false; goWest = false;
-                	keyPressAllowed = true;
-                	System.out.println(timerCounter * MOVE_LENGTH);
-                }
-                if (goNorth) dy -= MOVE_LENGTH;
-                if (goSouth) dy += MOVE_LENGTH;
-                if (goWest)  dx += MOVE_LENGTH;
-                if (goEast)  dx -= MOVE_LENGTH;
 
-                movePlayerBy(dx, dy);*/
             	timerLl.setText("Timer: " + timerCounter/60);
             }
         };
@@ -469,7 +440,6 @@ public class Display {
 		this.stage = primaryStage;
 		
 		this.stage.setTitle("Warehouse Bros");
-		//setImage();
 		constructBoard();
 		Scene scene = new Scene(createContent());
 		scene.getStylesheets().add
@@ -480,33 +450,22 @@ public class Display {
                 switch (event.getCode()) {
                     case UP:
                     	if (g.makeMove(North) && keyPressAllowed) {
-                    		//goNorth = true;
-                    		//timerCounter = 0;
-                    		//keyPressAllowed = false;
+
                     		movePlayerBy(0, -40);
                     	}
                 		break;
                     case DOWN:
                     	if (g.makeMove(South) && keyPressAllowed) {
-                    		//goSouth = true;
-                    		//timerCounter = 0;
-                    		//keyPressAllowed = false;
                     		movePlayerBy(0, 40);
                     	}
                 		break;
                     case LEFT:
                     	if (g.makeMove(West) && keyPressAllowed) {
-                    		//goEast = true;
-                    		//timerCounter = 0;
-                    		//keyPressAllowed = false;
                     		movePlayerBy(-40, 0);
                     	}
                     	break;
                     case RIGHT:
                     	if (g.makeMove(East) && keyPressAllowed) {
-                    		//goWest = true;
-                    		//timerCounter = 0;
-                    		//keyPressAllowed = false;
                     		movePlayerBy(40, 0);
                     	}
                 		break;
@@ -519,7 +478,6 @@ public class Display {
 				default:
 					break;
                 }
-                g.output.printBoard();
                 checkGameOver();
             }            
         });
@@ -527,26 +485,6 @@ public class Display {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
-        this.timer2 = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-            	
-                /*int dx = 0, dy = 0;
-                timerCounter ++;
-                if (timerCounter == (TILE_SIZE/MOVE_LENGTH))  {
-                	goNorth = false; goSouth = false; goEast = false; goWest = false;
-                	keyPressAllowed = true;
-                	System.out.println(timerCounter * MOVE_LENGTH);
-                }
-                if (goNorth) dy -= MOVE_LENGTH;
-                if (goSouth) dy += MOVE_LENGTH;
-                if (goWest)  dx += MOVE_LENGTH;
-                if (goEast)  dx -= MOVE_LENGTH;
-
-                movePlayerBy(dx, dy);*/
-            }
-        };
-        timer2.start();
 	}
 	/**
 	 * @pre given this.g:WareHouseBoss
@@ -554,12 +492,10 @@ public class Display {
 	 */
 	public void constructBoard() {
 		Board board = g.getBoard();
-		//System.out.println("Height:" + arrayHeight + " " + "Width:" + arrayWidth);
 		for (int row=0;row<arrayHeight;row++)
 		{
 			for (int col=0;col<arrayWidth;col++)
 			{
-				//System.out.println(row + " " + col);
 				Square s = (Square) board.getObj(row,col);
 				if (s instanceof Wall) arr[row][col] = 1;
 				else if (s instanceof Target) 
@@ -582,15 +518,12 @@ public class Display {
 	 * @post constructs a pauseGame menu on top of the root:Pane and disenables all movement of the player and boxes.
 	 */
 	public void pauseScreen(){
-		System.out.println("pause game");
 		keyPressAllowed = false;
 		timer1.stop();
 		root.setEffect(new GaussianBlur());
 		VBox pauseRoot = new VBox(5);
         pauseRoot.getChildren().add(new Label("Paused"));
         pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
-        //pauseRoot.setLayoutX(((arrayWidth + 3.5)*TILE_SIZE)/ 2);
-        //pauseRoot.setLayoutY(arrayHeight*TILE_SIZE/2);
         pauseRoot.setAlignment(Pos.CENTER);
         pauseRoot.setPadding(new Insets(20));
 
@@ -655,7 +588,6 @@ public class Display {
 	 * @post disenables all movement of the boxes and player, shows a save menu on-top of root:Pane
 	 */
 	public void saveScreen(){
-		System.out.println("Game saved");
 		keyPressAllowed = false;
 		timer1.stop();
 		root.setEffect(new GaussianBlur());

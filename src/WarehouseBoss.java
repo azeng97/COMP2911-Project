@@ -65,7 +65,6 @@ public class WarehouseBoss extends Application {
 		primaryStage.setTitle("Warehouse Bros.");
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-			//root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 			Scene scene = new Scene(loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
@@ -86,16 +85,10 @@ public class WarehouseBoss extends Application {
 		emptyTargets = 0;
 		totalMoves = 0;
 		nUndos = 0;
-		System.out.println("Level: " + level);
 		this.buildBoard(level);
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
 		levelScore = board.maxScore;
-		//Display display = new Display(10,10,this);
 		display.init(primaryStage);
-		
-		//output = new Output(this, board);
-//		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
-		//output.printBoard();
 
 	}
 	public void nextLevel(Stage stage)
@@ -107,8 +100,6 @@ public class WarehouseBoss extends Application {
 	
 	public boolean endGame()
 	{
-		System.out.println("level" + level);
-		System.out.println("final" + finalLevel);
 		if (level > finalLevel)
 		{
 			try 
@@ -127,12 +118,7 @@ public class WarehouseBoss extends Application {
 		this.loadGame();
 		changeDifficulty();
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
-		//Display display = new Display(10,10,this);
 		display.init(stage);
-		
-		//output = new Output(this, board);
-//		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
-		//tput.printBoard();
 	}
 	
 	public boolean makeMove(int direction)
@@ -145,7 +131,6 @@ public class WarehouseBoss extends Application {
 			{
 				moveHistory.remove(0);
 			}
-			//System.out.println("moved");
 			totalMoves++;
 			changeScore(-2);
 			return true;
@@ -167,7 +152,6 @@ public class WarehouseBoss extends Application {
 				player.undoMove(move);
 				moveHistory.remove(n);
 			}
-			System.out.print("Index of last move: " + n);
 			display.init(stage);
 			nUndos++;
 			display.setUndos();
@@ -176,11 +160,7 @@ public class WarehouseBoss extends Application {
 		}
 	}
 	
-//	public void moveBox(Position pos, int direction)
-//	{
-//		System.out.println(display.getWidth());
-//		display.moveBox(pos, direction);
-//	}
+
 	public Square squareAt(Position pos)
 	{
 		return ((Square) board.retrieveObj(pos));
@@ -192,17 +172,14 @@ public class WarehouseBoss extends Application {
 	public void decrementTargets()
 	{
 		emptyTargets--;
-		//System.out.println("Remaining targets: " + this.emptyTargets);
 		if(emptyTargets == 0)
 		{
 			gameOver = true;
-			System.out.println("Level Cleared!");
 		}
 	}
 	public void incrementTargets()
 	{
 		emptyTargets++;
-		//System.out.println("Remaining targets: " + this.emptyTargets);
 	}
 	public void changeScore(int i)
 	{
@@ -395,13 +372,6 @@ public class WarehouseBoss extends Application {
 	{
 		return maxUndos-nUndos;
 	}
-//	public void deleteSave()
-//	{
-//		try {
-//			File f = new File("save.data");
-//			f.delete();
-//		} catch(Exception e) {}
-//	}
 	
 	public boolean isGameOver()
 	{
@@ -428,7 +398,6 @@ public class WarehouseBoss extends Application {
 	private int levelScore = 0;
 	private static int finalLevel = 19;
 	public Display display;
-	public Output output; 
 	private boolean gameOver;
 	public int totalMoves;
 	private Player player;

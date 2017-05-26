@@ -17,7 +17,6 @@ public class LeaderboardsController {
 	
 	
 	public void back() {
-		//System.out.println("Selected: Settings > Back");
 		
 		Stage primaryStage = (Stage) butLeaderboardsBack.getScene().getWindow();
 		primaryStage.setTitle("Warehouse Bros. - Settings");
@@ -31,7 +30,6 @@ public class LeaderboardsController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
