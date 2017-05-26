@@ -18,6 +18,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 public class WarehouseBoss extends Application {
@@ -25,39 +26,14 @@ public class WarehouseBoss extends Application {
 	
 	public static void main(String args[])
 	{
-		//Stage arg0 = new Stage();
-		//menuUI ui = new menuUI(arg0);
-		
-		launch();
-		
-		//WarehouseBoss game = new WarehouseBoss();
-		//game.play();
-	}
-	
-	@Override
-	public void start(Stage arg0) throws Exception {
-		Stage s = new Stage();
-		s.setTitle("Warehouse Bros.");
-		menuUI ui = new menuUI(s);
-//		menuUI ui = new menuUI(arg0);
-		//ui.showMenu();
-		//System.exit(1);		
-	}
-	
-	public void play(Stage primaryStage)
-	{
-		
 		Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
 		Mixer mixer = AudioSystem.getMixer(mixerInfos[0]);
-		
-		
-		
 		DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
 		try { clip = (Clip) mixer.getLine(dataInfo);	}
 		catch (LineUnavailableException lue) {	lue.printStackTrace();	}
 		
 		try {
-			URL soundURL = WarehouseBoss.class.getResource("/images/Dungeon_King_Loop.wav");
+			URL soundURL = WarehouseBoss.class.getResource("Dungeon_King_Loop.wav");
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
 			clip.open(audioStream);
 		}
@@ -65,26 +41,31 @@ public class WarehouseBoss extends Application {
 		catch (UnsupportedAudioFileException uafe) { uafe.printStackTrace();	}
 		catch (IOException ioe) {	ioe.printStackTrace();	}
 		
-		clip.start();
+		Task<Void> task = new Task<Void>() {
+			@Override protected Void call() throws Exception {
+				clip.loop(LOOP_CONTINUOUSLY);
+				do {
+					try { Thread.sleep(100); } 
+					catch (InterruptedException e) { e.printStackTrace(); }
+				} while (clip.isActive());
+				return null;
+			}
+		};
 		
-		do {
-			try { Thread.sleep(50); } 
-			catch (InterruptedException e) { e.printStackTrace(); }
-		} while (clip.isActive());
-		
-//		Task<Void> task = new Task<Void>() {
-//			@Override protected Void call() throws Exception {
-//				loadingScreen(primaryStage);
-//				Platform.runLater(new Runnable() {
-//					@Override public void run() {
-//						WarehouseBoss game = new WarehouseBoss();
-//						game.play(primaryStage);
-//					}
-//				});
-//				return null;
-//			}
-//		};
-//		 task.run();
+		Thread thread = new Thread(task);
+		thread.start();
+		launch();
+	}
+	
+	@Override
+	public void start(Stage arg0) throws Exception {
+		Stage s = new Stage();
+		s.setTitle("Warehouse Bros.");
+		menuUI ui = new menuUI(s);
+	}
+	
+	public void play(Stage primaryStage)
+	{
 		
 		gameOver = false;
 		emptyTargets = 0;
@@ -391,4 +372,6 @@ public class WarehouseBoss extends Application {
 	public int nUndos = 0;
 	public Vector<Board> boardHistory = new Vector<Board>();
 	public Vector<Move> moveHistory = new Vector<Move>();
+	private static final int LOOP_CONTINUOUSLY = 9999;
+	
 }
