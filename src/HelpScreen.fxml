@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -37,7 +38,7 @@
             </Lighting>
          </effect>
       </ImageView>
-      <Label fx:id="labLeaderboardsBack" alignment="CENTER" layoutX="388.0" layoutY="24.0" opacity="0.45" prefHeight="50.0" prefWidth="128.0" textFill="WHITE">
+      <Label fx:id="labLeaderboardsBack" alignment="CENTER" layoutX="388.0" layoutY="24.0" opacity="0.45" prefHeight="35.0" prefWidth="128.0" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -45,7 +46,7 @@
             <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
          </effect>
       </Label>
-      <Label fx:id="labBackText" alignment="CENTER" layoutX="388.0" layoutY="24.0" prefHeight="50.0" prefWidth="128.0" text="Back" textFill="WHITE">
+      <Label fx:id="labBackText" alignment="CENTER" layoutX="388.0" layoutY="24.0" prefHeight="35.0" prefWidth="128.0" text="Back" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
@@ -53,7 +54,7 @@
             <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
          </effect>
       </Label>
-      <Button fx:id="butBack" alignment="CENTER" contentDisplay="CENTER" layoutX="388.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" opacity="0.3" prefHeight="50.0" prefWidth="128.0" text="Back" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="butBack" alignment="CENTER" contentDisplay="CENTER" layoutX="388.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" opacity="0.3" prefHeight="35.0" prefWidth="128.0" text="Back" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
@@ -64,15 +65,24 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="62.0" fitWidth="162.0" layoutX="24.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="129.0" layoutX="24.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/help.png" />
          </image>
       </ImageView>
-      <Label fx:id="labHelp" layoutX="24.0" layoutY="86.0" opacity="0.51" prefHeight="214.0" prefWidth="493.0">
+      <Label fx:id="labHelp" layoutX="26.0" layoutY="70.0" opacity="0.51" prefHeight="240.0" prefWidth="493.0">
          <effect>
             <DropShadow height="50.65" radius="27.79" spread="0.48" width="62.51" />
          </effect></Label>
-      <Label fx:id="labHelpText" layoutX="24.0" layoutY="86.0" prefHeight="214.0" prefWidth="493.0" text="testign kav dv" />
+      <Label fx:id="labHelpText" alignment="TOP_LEFT" layoutX="26.0" layoutY="70.0" prefHeight="240.0" prefWidth="493.0" text="The objective is for the character to move a number of &#10;boxes into the same number of goal squares to complete &#10;the level. Once a box reaches a goal it will change &#10;colour. Complete all levels in the shortest time with &#10;the least amount of moves to score well on the &#10;leaderboards.&#10;&#10;- Arrow keys - Move the character.&#10;- Escape - Pause game.&#10;- Backspace - Undo previous move&#10;&#10;WARNING: Save Game will overwrite the most recently &#10;saved game" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding></Label>
    </children>
 </AnchorPane>
