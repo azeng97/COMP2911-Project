@@ -63,6 +63,10 @@ public class Display {
 	private int moveCounter = 0;
 	private Label moveCount;
 	
+	/**
+	 * @pre this.arrayWidth has been initialised
+	 * @post @return this.arrayWidth
+	 */
 	public int getWidth()
 	{
 		return arrayWidth;
@@ -329,7 +333,6 @@ public class Display {
 		}
 		private Node setImage() {
 			Node retval = null;
-			//if (contains == 0 || contains == 2 || contains == 3) retval = new ImageView(new Image("floor.png", 40, 40, false, false));
 			if (contains == 1) retval = new ImageView(new Image("wall.png", 40, 40, false, false));
 			if (contains > 3 ) retval = new ImageView(new Image("target.png", 40, 40, false, false)); //target goal FOUND
 			return retval;
@@ -524,8 +527,6 @@ public class Display {
 		VBox pauseRoot = new VBox(5);
         pauseRoot.getChildren().add(new Label("Game saved"));
         pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
-        //pauseRoot.setLayoutX(((arrayWidth + 3.5)*TILE_SIZE)/ 2);
-        //pauseRoot.setLayoutY(arrayHeight*TILE_SIZE/2);
         pauseRoot.setAlignment(Pos.CENTER);
         pauseRoot.setPadding(new Insets(20));
 
