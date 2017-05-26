@@ -131,7 +131,7 @@ public class WarehouseBoss extends Application {
 		if (player.makeMove(move))
 		{
 			moveHistory.add(move);
-			if (moveHistory.size() > maxUndos)
+			if (moveHistory.size() > maxMoves)
 			{
 				moveHistory.remove(0);
 			}
@@ -146,6 +146,7 @@ public class WarehouseBoss extends Application {
 	public void undoMove(Stage stage)
 	{
 		int n;
+		if (nUndos>=maxUndos) return;
 		if(moveHistory.size()>0)
 		{			
 			Move last = moveHistory.remove(moveHistory.size()-1);
@@ -363,6 +364,7 @@ public class WarehouseBoss extends Application {
 	public int totalMoves;
 	private Player player;
 	private int emptyTargets;
+	private int maxMoves = 100;
 	private int maxUndos = 10;
 	private Board board;
 	public int level = 0;
