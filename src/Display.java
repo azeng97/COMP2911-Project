@@ -121,7 +121,7 @@ public class Display {
 	}
 	/**
 	 * 
-	 * @param x
+	 * @param x 
 	 * @param y
 	 * @param n
 	 * @pre
@@ -401,7 +401,7 @@ public class Display {
 	/**
 	 * @pre true
 	 * @post creates the stage
-	 * @param primaryStage
+	 * @param primaryStage 
 	 */
 	public void init(Stage primaryStage){
 		this.stage = primaryStage;
