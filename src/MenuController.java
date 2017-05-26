@@ -33,6 +33,7 @@ public class MenuController {
 				Platform.runLater(new Runnable() {
 					@Override public void run() {
 						WarehouseBoss game = new WarehouseBoss();
+						game.setTotalScore(0);
 						game.play(primaryStage);
 					}
 				});

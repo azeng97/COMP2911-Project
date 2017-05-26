@@ -107,7 +107,19 @@ public class WarehouseBoss extends Application {
 	
 	public boolean endGame()
 	{
-		return (level == finalLevel);
+		System.out.println("level" + level);
+		System.out.println("final" + finalLevel);
+		if (level > finalLevel)
+		{
+			try 
+			{
+				PrintWriter writer = new PrintWriter("leaderboard.txt","UTF-8");
+				writer.println(totalScore);
+				writer.close();
+			} catch (IOException e) {};
+			return true;
+		}
+		else return false;
 	}
 	public void resume (Stage stage)
 	{
@@ -397,6 +409,10 @@ public class WarehouseBoss extends Application {
 	{
 		return totalScore;
 	}
+	public void setTotalScore(int n)
+	{
+		totalScore = n;
+	}
 	public int getLevelScore()
 	{
 		return levelScore;
@@ -408,7 +424,7 @@ public class WarehouseBoss extends Application {
 	private static int difficulty = 0;
 	private int totalScore = 0;
 	private int levelScore = 0;
-	private static int finalLevel = 0;
+	private static int finalLevel = 19;
 	public Display display;
 	public Output output; 
 	private boolean gameOver;
@@ -418,7 +434,7 @@ public class WarehouseBoss extends Application {
 	private int maxMoves = 100;
 	public static int maxUndos = 6;
 	private Board board;
-	public static int level;
+	public static int level = 0;
 	public int nUndos = 0;
 	public Vector<Move> moveHistory = new Vector<Move>();
 	private static final int LOOP_CONTINUOUSLY = 9999;

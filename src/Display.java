@@ -250,7 +250,7 @@ public class Display {
 			keyPressAllowed = false;
 			VBox WGameOverRoot = new VBox(5);
 			int temp = g.getTotalScore() + g.getLevelScore();
-            WGameOverRoot.getChildren().add(new Label("Level Cleared. Score: " +  temp));
+            WGameOverRoot.getChildren().add(new Label("Game Completed. Score: " +  temp));
             WGameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
             WGameOverRoot.setAlignment(Pos.CENTER);
             WGameOverRoot.setPadding(new Insets(20));
@@ -344,6 +344,7 @@ public class Display {
             @Override
             public void handle(ActionEvent event) {
             	g.setLevelScore(0);
+            	checkGameOver();
             	g.nextLevel(stage);
             }
         });
