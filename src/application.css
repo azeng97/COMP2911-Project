@@ -50,6 +50,17 @@
 }
 
 
+#butHelp {
+	-fx-background-color: transparent;
+}
+#labHelp {
+	-fx-background-color: #969696;
+}
+#butHelp:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
 
 
 /* Settings Menu */

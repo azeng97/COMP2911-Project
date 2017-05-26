@@ -39,9 +39,9 @@
             </Lighting>
          </effect>
       </ImageView>
-      <ButtonBar layoutY="177.0" prefHeight="146.0" prefWidth="534.0">
+      <ButtonBar layoutY="165.0" prefHeight="146.0" prefWidth="534.0">
         <buttons>
-            <ImageView fx:id="logoText" fitHeight="84.0" fitWidth="524.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoText" fitHeight="126.0" fitWidth="524.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Warehouse-Bros.png" />
                </image>
@@ -157,6 +157,39 @@
       <Button fx:id="butExit" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" layoutX="300.0" layoutY="136.0" mnemonicParsing="false" onAction="#exit" opacity="0.25" prefHeight="50.0" prefWidth="200.0" text="Exit" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="17.79" radius="8.395" spread="0.29" width="17.79" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="labHelp" alignment="CENTER" contentDisplay="BOTTOM" layoutX="503.0" layoutY="282.0" opacity="0.45" prefHeight="30.0" prefWidth="30.0" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="25.0" radius="12.0" spread="0.7" width="25.0" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="100.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="labHelpText" alignment="CENTER" contentDisplay="BOTTOM" layoutX="503.0" layoutY="282.0" prefHeight="30.0" prefWidth="30.0" text="?" textFill="WHITE">
+         <font>
+            <Font name="Courier New Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow height="53.26" radius="30.692500000000003" spread="0.49" width="71.51" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="100.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </Label>
+      <Button fx:id="butHelp" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" ellipsisString="" graphicTextGap="0.0" layoutX="498.0" layoutY="286.0" maxHeight="50.0" mnemonicParsing="false" onAction="#newGame" opacity="0.0" pickOnBounds="false" prefHeight="44.0" prefWidth="39.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="275.0">
+         <font>
+            <Font name="Courier New Bold" size="24.0" />
          </font>
          <effect>
             <DropShadow height="17.79" radius="8.395" spread="0.29" width="17.79" />
