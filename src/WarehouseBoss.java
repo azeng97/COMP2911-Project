@@ -85,7 +85,7 @@ public class WarehouseBoss extends Application {
 		gameOver = false;
 		emptyTargets = 0;
 		totalMoves = 0;
-		
+		nUndos = 0;
 		System.out.println("Level: " + level);
 		this.buildBoard(level);
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
@@ -125,6 +125,7 @@ public class WarehouseBoss extends Application {
 	{
 		gameOver = false;
 		this.loadGame();
+		changeDifficulty();
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
 		//Display display = new Display(10,10,this);
 		display.init(stage);
@@ -351,6 +352,7 @@ public class WarehouseBoss extends Application {
 		try
 		{
 			level = Integer.valueOf(in.readLine().trim()).intValue();
+			difficulty = Integer.valueOf(in.readLine().trim()).intValue();
 			totalScore = Integer.valueOf(in.readLine().trim()).intValue();
 			levelScore = Integer.valueOf(in.readLine().trim()).intValue();
 			totalMoves = Integer.valueOf(in.readLine().trim()).intValue();
@@ -383,7 +385,7 @@ public class WarehouseBoss extends Application {
 	public static void changeDifficulty ()
 	{
 		if (difficulty == 1)  
-			{maxUndos = 3; level = 20; finalLevel = 50; 
+			{ maxUndos = 3; level = 20; finalLevel = 50; 
 			}
 		else 
 			{ maxUndos = 6; level = 0; finalLevel = 19;
