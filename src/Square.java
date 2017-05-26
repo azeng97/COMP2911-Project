@@ -23,6 +23,7 @@ public class Square extends Object
 			
 			if (this instanceof Target && e instanceof Box && !wasTarget)
 			{
+				isInsideTarget = true;
 				game.decrementTargets();
 			} 
 			else if (!(this instanceof Target) && e instanceof Box && wasTarget)
@@ -68,6 +69,10 @@ public class Square extends Object
 	{
 		contents = null;
 	}
+	public boolean getIsInsideTarget() {
+		return this.isInsideTarget;
+	}
+	private boolean isInsideTarget = false;
 	protected Position position;
 	protected WarehouseBoss game;
 	protected Entity contents;
