@@ -60,6 +60,8 @@ public class Display {
 	//private boolean goNorth, goSouth, goEast, goWest;
 	
 	private int timerCounter = 0; 
+	private int moveCounter = 0;
+	private Label moveCount;
 	
 	public int getWidth()
 	{
@@ -86,6 +88,8 @@ public class Display {
         movePlayerTo(x, y);
 	}
 	private void movePlayerTo(double x, double y) {
+			this.moveCounter ++;
+			this.moveCount.setText("Moves: " + moveCounter);
             player.relocate(x, y);
 	}
 	public void transitionTo(double x, double y, DisplayBox n) {
@@ -261,7 +265,7 @@ public class Display {
 		Label level = new Label();
 		level.setText("Level: " + g.level);
 		level.setTextFill(Color.WHITE);
-		Label moveCount = new Label();
+		moveCount = new Label();
 		moveCount.setText("Moves: " + g.totalMoves);
 		moveCount.setTextFill(Color.WHITE);
 		moveCount.setMaxWidth(Double.MAX_VALUE);
@@ -273,6 +277,7 @@ public class Display {
 		saveBtn.setId("sideMenuButton");
 		resetBtn.setId("sideMenuButton");
 		Label timerLl = new Label();
+		timerLl.setTextFill(Color.WHITE);
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
