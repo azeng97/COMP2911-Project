@@ -21,6 +21,30 @@ public class Position {
 	public int getRow(){
 		return row;
 	}
+	
+	public static int reverseDirection(int whichDir) {
+		switch (whichDir) {
+		case North:
+			return South;
+		case South:
+			return North;
+		case East:
+			return West;
+		case West:
+			return East;
+		case Northeast:
+			return Southwest;
+		case Northwest:
+			return Southeast;
+		case Southeast:
+			return Northwest;
+		case Southwest:
+			return Northeast;
+		default:
+			throw new IndexOutOfBoundsException();
+		}
+	}
+	
 	public Object adjacentPos(int direction) {
 		switch (direction) {
 		case North:

@@ -118,14 +118,9 @@ public class WarehouseBoss extends Application {
 		if (player.makeMove(move))
 		{
 			moveHistory.add(move);
-			boardHistory.add(this.board);
-//			System.out.println("DEBUG BOARD");
-//			this.board.printBoard();
-//			System.out.println("DEBUG BOARD");
 			if (moveHistory.size() > maxUndos)
 			{
 				moveHistory.remove(0);
-				boardHistory.remove(0);
 			}
 			//System.out.println("moved");
 			totalMoves++;
@@ -141,26 +136,14 @@ public class WarehouseBoss extends Application {
 		if(moveHistory.size()>0)
 		{			
 			Move last = moveHistory.remove(moveHistory.size()-1);
+			player.undoMove(last);
 			for (n = moveHistory.size()-1; n>=0; n--){
 				Move move = moveHistory.elementAt(n);
 				if (move.getDirection()!=last.getDirection()) break;
+				player.undoMove(move);
 				moveHistory.remove(n);
 			}
 			System.out.print("Index of last move: " + n);
-			Board board = boardHistory.lastElement();
-			for (int k = boardHistory.size()-1; k>n; k--)
-			{
-				System.out.println("Index of board: " + k);
-				board = boardHistory.elementAt(k);
-				boardHistory.remove(k);
-				System.out.println("DEBUG BOARD");
-				board.printBoard();
-				System.out.println("DEBUG BOARD");
-			}
-//			System.out.println("DEBUG BOARD");
-//			board.printBoard();
-//			System.out.println("DEBUG BOARD");
-			this.board=board;
 			display.init(stage);
 			nUndos++;
 			totalMoves++;
@@ -370,7 +353,6 @@ public class WarehouseBoss extends Application {
 	private Board board;
 	public int level = 0;
 	public int nUndos = 0;
-	public Vector<Board> boardHistory = new Vector<Board>();
 	public Vector<Move> moveHistory = new Vector<Move>();
 	private static final int LOOP_CONTINUOUSLY = 9999;
 	

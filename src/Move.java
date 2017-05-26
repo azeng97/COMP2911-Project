@@ -34,7 +34,7 @@ public class Move {
 	{
 		return direction;
 	}
-	public Entity getPushed()
+	public boolean getPushed()
 	{
 		return pushed;
 	}
@@ -42,13 +42,13 @@ public class Move {
 	{
 		this.direction = direction;
 	}
-	public void setPushed(Entity e)
+	public void setPushed(boolean t)
 	{
-		this.pushed = e;
+		this.pushed = t;
 	}
 	
 	private int direction;
-	private Entity pushed;
+	private boolean pushed;
 	
 	public static final int North = 0;
 	public static final int East = 1;

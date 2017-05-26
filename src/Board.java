@@ -32,6 +32,7 @@ public class Board {
 	{
 		return nRows;
 	}
+	
 	public void printBoard()
 	{
 		for (int row=0;row<nRows;row++)
