@@ -16,6 +16,8 @@ public class MenuController {
 	@FXML private javafx.scene.control.Button butNewGame;
 	
 	@FXML private javafx.scene.control.Button butSettings;
+	@FXML private javafx.scene.control.Button butHelp;
+
 	@FXML private javafx.scene.image.ImageView logoText;
 	private Stage primaryStage;
 	
@@ -100,6 +102,24 @@ public class MenuController {
 	
 	public void exit() {
 		System.exit(0);
+	}
+	
+	public void help() {
+		Stage primaryStage = (Stage) butHelp.getScene().getWindow();
+		primaryStage.setTitle("Warehouse Bros. - Help");
+		
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("HelpScreen.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

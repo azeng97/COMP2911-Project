@@ -187,7 +187,7 @@
             <Insets bottom="100.0" right="10.0" top="10.0" />
          </opaqueInsets>
       </Label>
-      <Button fx:id="butHelp" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" ellipsisString="" graphicTextGap="0.0" layoutX="498.0" layoutY="286.0" maxHeight="50.0" mnemonicParsing="false" onAction="#newGame" opacity="0.0" pickOnBounds="false" prefHeight="44.0" prefWidth="39.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="275.0">
+      <Button fx:id="butHelp" alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" ellipsisString="" graphicTextGap="0.0" layoutX="498.0" layoutY="286.0" maxHeight="50.0" mnemonicParsing="false" onAction="#help" opacity="0.0" pickOnBounds="false" prefHeight="44.0" prefWidth="39.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="275.0">
          <font>
             <Font name="Courier New Bold" size="24.0" />
          </font>

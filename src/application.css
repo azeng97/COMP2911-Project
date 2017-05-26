@@ -155,3 +155,12 @@
 #butLeaderboardsBack:hover {
   -fx-background-color:#d6d6d6;
 }
+
+
+/* Help Screen */
+
+#labHelp {
+	-fx-background-color: #969696;
+}
+
+
