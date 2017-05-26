@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.Clip;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,8 +22,23 @@ public class SettingMenuController {
 	@FXML private javafx.scene.control.Label labDifficultyEasyOn;
 	@FXML private javafx.scene.control.Label labDifficultyHardOff;
 	@FXML private javafx.scene.control.Label labDifficultyHardOn;
+	
+	public static Clip clip;
 
 	public void toggleSound () {
+		//System.out.println("Selected: Settings > Toggle sound");
+		if (unmuteImg.isVisible() == true) {
+			unmuteImg.setVisible(false);
+			muteImg.setVisible(true);
+			clip.stop();
+		} else {
+			unmuteImg.setVisible(true);
+			muteImg.setVisible(false);
+			clip.start();
+		}
+	}
+	
+	public void toggleSoundImage () {
 		//System.out.println("Selected: Settings > Toggle sound");
 		if (unmuteImg.isVisible() == true) {
 			unmuteImg.setVisible(false);
@@ -30,7 +47,6 @@ public class SettingMenuController {
 			unmuteImg.setVisible(true);
 			muteImg.setVisible(false);
 		}
-//		
 	}
 	
 	public void changeDifficultyEasy() {
@@ -96,5 +112,14 @@ public class SettingMenuController {
 			File f = new File("save.data");
 			f.delete();
 		} catch(Exception e) {}
+	}
+
+	public void initData(Clip clip) {
+		this.clip = clip;
+		if (clip.isActive() && unmuteImg.isVisible() == false) {
+			toggleSoundImage();
+		}  else if (!clip.isActive() && muteImg.isVisible() == false) {
+			toggleSoundImage();
+		}
 	}
 }

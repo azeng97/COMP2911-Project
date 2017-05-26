@@ -1,4 +1,7 @@
 import java.io.IOException;
+
+import javax.sound.sampled.Clip;
+
 import java.io.File;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -14,12 +17,12 @@ import javafx.stage.Stage;
 public class MenuController {
 
 	@FXML private javafx.scene.control.Button butNewGame;
-	
 	@FXML private javafx.scene.control.Button butSettings;
 	@FXML private javafx.scene.control.Button butHelp;
-
 	@FXML private javafx.scene.image.ImageView logoText;
 	private Stage primaryStage;
+	public static Clip clip;
+	
 	
 	public void newGame () {
 		this.primaryStage = (Stage) butNewGame.getScene().getWindow();
@@ -88,10 +91,13 @@ public class MenuController {
 		
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
-			Scene scene = new Scene(root);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingMenu.fxml"));
+			Scene scene = new Scene(loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
+			SettingMenuController controller =  loader.<SettingMenuController>getController();
+			controller.initData(clip);
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
@@ -120,6 +126,10 @@ public class MenuController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void initData(Clip clip) {
+		this.clip = clip;		
 	}
 
 	

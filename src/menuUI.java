@@ -1,29 +1,32 @@
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javax.sound.sampled.Clip;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class menuUI {
-
-	public menuUI (Stage arg) {
+	public static Clip clip;
+	
+	public menuUI (Stage arg, Clip clip) {
+		this.clip = clip;
 		ConstructUI(arg);
+		
 	}
 	
 	public void ConstructUI(Stage primaryStage) {
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-			Scene scene = new Scene(root);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+			//root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+			Scene scene = new Scene(loader.load());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
+			MenuController controller =  loader.<MenuController>getController();
+			controller.initData(clip);
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} 

@@ -61,7 +61,7 @@ public class WarehouseBoss extends Application {
 	public void start(Stage arg0) throws Exception {
 		Stage s = new Stage();
 		s.setTitle("Warehouse Bros.");
-		menuUI ui = new menuUI(s);
+		menuUI ui = new menuUI(s, clip);
 	}
 	
 	public void play(Stage primaryStage)
