@@ -229,14 +229,61 @@ public class Display {
 
 				@Override
 				public void handle(ActionEvent event) {
-					System.out.println("Quit Game");
-					System.exit(1);
+					try {
+						root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+						Scene scene = new Scene(root);
+						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+						stage.setScene(scene);
+						stage.show();
+						popupStage.close();
+					} 
+					catch (IOException e) { e.printStackTrace(); }
 					
 				}
             	
             });
             popupStage.show();
             //System.exit(1);
+		} else if (false) {
+			System.out.println("Entire game complete");
+			root.setEffect(new GaussianBlur());
+			keyPressAllowed = false;
+			VBox WGameOverRoot = new VBox(5);
+			int temp = g.getTotalScore() + g.getLevelScore();
+            WGameOverRoot.getChildren().add(new Label("Level Cleared. Score: " +  temp));
+            WGameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+            WGameOverRoot.setAlignment(Pos.CENTER);
+            WGameOverRoot.setPadding(new Insets(20));
+
+            Button quitBtn = new Button("Quit Game");
+            quitBtn.setMaxWidth(Double.MAX_VALUE);
+            WGameOverRoot.getChildren().add(quitBtn);
+
+            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+            popupStage.initOwner(stage);
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setScene(new Scene(WGameOverRoot, Color.TRANSPARENT));
+            quitBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					try {
+						root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+						Scene scene = new Scene(root);
+						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+						stage.setScene(scene);
+						stage.show();
+						popupStage.close();
+					} 
+					catch (IOException e) { e.printStackTrace(); }
+					
+				}
+            	
+            });
+            popupStage.show();
+            
 		}
 	}
 	/**
@@ -324,7 +371,6 @@ public class Display {
             }
         });
 		resetBtn.setMaxWidth(Double.MAX_VALUE);
-		String numString = "0";
 		Label level = new Label();
 		level.setText("Level: " + g.level);
 		level.setTextFill(Color.WHITE);
