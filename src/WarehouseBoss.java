@@ -356,6 +356,7 @@ public class WarehouseBoss extends Application {
 	{
 		return gameOver;
 	}
+	private int score = 0;
 	public Display display;
 	public Output output; 
 	private boolean gameOver;
