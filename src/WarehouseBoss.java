@@ -93,9 +93,9 @@ public class WarehouseBoss extends Application {
 		//Display display = new Display(10,10,this);
 		display.init(primaryStage);
 		
-		output = new Output(this, board);
+		//output = new Output(this, board);
 //		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
-		output.printBoard();
+		//output.printBoard();
 
 	}
 	public void nextLevel(Stage stage)
@@ -130,9 +130,9 @@ public class WarehouseBoss extends Application {
 		//Display display = new Display(10,10,this);
 		display.init(stage);
 		
-		output = new Output(this, board);
+		//output = new Output(this, board);
 //		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
-		output.printBoard();
+		//tput.printBoard();
 	}
 	
 	public boolean makeMove(int direction)
