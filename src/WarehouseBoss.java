@@ -1,22 +1,60 @@
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.Mixer.Info;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 public class WarehouseBoss extends Application {
+	public static Clip clip;
+	
 	public static void main(String args[])
 	{
-		//Stage arg0 = new Stage();
-		//menuUI ui = new menuUI(arg0);
+		Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
+		Mixer mixer = AudioSystem.getMixer(mixerInfos[0]);
+		DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+		try { clip = (Clip) mixer.getLine(dataInfo);	}
+		catch (LineUnavailableException lue) {	lue.printStackTrace();	}
 		
+		try {
+			URL soundURL = WarehouseBoss.class.getResource("Dungeon_King_Loop.wav");
+			AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
+			clip.open(audioStream);
+		}
+		catch (LineUnavailableException lue) {	lue.printStackTrace();	}
+		catch (UnsupportedAudioFileException uafe) { uafe.printStackTrace();	}
+		catch (IOException ioe) {	ioe.printStackTrace();	}
+		
+		Task<Void> task = new Task<Void>() {
+			@Override protected Void call() throws Exception {
+				clip.loop(LOOP_CONTINUOUSLY);
+				do {
+					try { Thread.sleep(100); } 
+					catch (InterruptedException e) { e.printStackTrace(); }
+				} while (clip.isActive());
+				return null;
+			}
+		};
+		
+		Thread thread = new Thread(task);
+		thread.start();
 		launch();
-		
-		//WarehouseBoss game = new WarehouseBoss();
-		//game.play();
 	}
 	
 	@Override
@@ -24,13 +62,11 @@ public class WarehouseBoss extends Application {
 		Stage s = new Stage();
 		s.setTitle("Warehouse Bros.");
 		menuUI ui = new menuUI(s);
-//		menuUI ui = new menuUI(arg0);
-		//ui.showMenu();
-		//System.exit(1);		
 	}
 	
 	public void play(Stage primaryStage)
 	{
+		
 		gameOver = false;
 		emptyTargets = 0;
 		totalMoves = 0;
@@ -318,4 +354,6 @@ public class WarehouseBoss extends Application {
 	public int level = 0;
 	public int nUndos = 0;
 	public Vector<Move> moveHistory = new Vector<Move>();
+	private static final int LOOP_CONTINUOUSLY = 9999;
+	
 }
