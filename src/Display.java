@@ -246,7 +246,6 @@ public class Display {
             popupStage.show();
             //System.exit(1);
 		} else if (false) {
-			System.out.println("Entire Game Complete");
 			root.setEffect(new GaussianBlur());
 			keyPressAllowed = false;
 			VBox WGameOverRoot = new VBox(5);
