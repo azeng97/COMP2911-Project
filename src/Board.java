@@ -60,6 +60,8 @@ public class Board {
 	}
 	private int nRows;
 	private int nCols;
+	public int nBoxes = 0;
+	public int nSpaces = 0;
 	private Object board[][];
 	
 }

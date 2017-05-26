@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+
 
 public class SettingMenuController {
 	
@@ -50,24 +52,25 @@ public class SettingMenuController {
 	}
 	
 	public void changeDifficultyEasy() {
-		//System.out.println("Selected: Settings > Difficulty set to Easy");
+		System.out.println("Selected: Settings > Difficulty set to Easy");
 		if (labDifficultyEasyOn.isVisible() != true) {
 			labDifficultyEasyOff.setVisible(false);
 			labDifficultyEasyOn.setVisible(true);
 			labDifficultyHardOff.setVisible(true);
 			labDifficultyHardOn.setVisible(false);
 		}
-		
+		WarehouseBoss.changeDifficulty(1);
 	}
 	
 	public void changeDifficultyHard() {
-		//System.out.println("Selected: Settings > Difficulty set to Hard");
+		System.out.println("Selected: Settings > Difficulty set to Hard");
 		if (labDifficultyHardOn.isVisible() != true) {
 			labDifficultyHardOff.setVisible(false);
 			labDifficultyHardOn.setVisible(true);
 			labDifficultyEasyOff.setVisible(true);
 			labDifficultyEasyOn.setVisible(false);
 		}
+		WarehouseBoss.changeDifficulty(0);
 	}
 	
 	public void leaderboards() {

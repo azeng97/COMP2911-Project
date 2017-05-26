@@ -60,8 +60,8 @@ public class Display {
 	//private boolean goNorth, goSouth, goEast, goWest;
 	
 	private int timerCounter = 0; 
-	private int moveCounter = 0;
 	private Label moveCount;
+	private Label undoCount;
 	
 	/**
 	 * @pre this.arrayWidth has been initialised
@@ -92,8 +92,7 @@ public class Display {
         movePlayerTo(x, y);
 	}
 	private void movePlayerTo(double x, double y) {
-			this.moveCounter ++;
-			this.moveCount.setText("Moves: " + moveCounter);
+			this.moveCount.setText("Moves: " + g.totalMoves);
             player.relocate(x, y);
 	}
 	public void transitionTo(double x, double y, DisplayBox n) {
@@ -105,7 +104,11 @@ public class Display {
 		trans.play();
 		
 	}
-
+	public void setUndos()
+	{
+		 this.undoCount.setText("Undos remaining: " + g.undosRemaining());
+	}
+	
 	public void moveBox(Position position, int direction) {
 		DisplayBox box = null;
 		Iterator<DisplayBox> i = boxes.iterator();
@@ -274,8 +277,8 @@ public class Display {
 		moveCount.setTextFill(Color.WHITE);
 		moveCount.setMaxWidth(Double.MAX_VALUE);
 		//moveCount.textProperty().bind(new SimpleIntegerProperty(g.totalMoves).asString());
-		Label undoCount = new Label();
-		undoCount.setText("Undos: " + numString);
+		undoCount = new Label();
+		undoCount.setText("Undos remaining: " + g.undosRemaining());
 		undoCount.setTextFill(Color.WHITE);
 		pauseBtn.setId("sideMenuButton");
 		saveBtn.setId("sideMenuButton");

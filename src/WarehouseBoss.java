@@ -75,7 +75,9 @@ public class WarehouseBoss extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} 
-		catch (IOException e) { e.printStackTrace(); }	}
+		catch (IOException e) { e.printStackTrace(); }	
+		score = 0;
+	}
 	
 	public void play(Stage primaryStage)
 	{
@@ -86,6 +88,7 @@ public class WarehouseBoss extends Application {
 
 		this.buildBoard(level);
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
+		score += (board.nBoxes*1000)/board.nSpaces;
 		//Display display = new Display(10,10,this);
 		display.init(primaryStage);
 		
@@ -137,7 +140,7 @@ public class WarehouseBoss extends Application {
 			}
 			//System.out.println("moved");
 			totalMoves++;
-			
+			;
 			return true;
 		}
 		else return false; 
@@ -153,13 +156,14 @@ public class WarehouseBoss extends Application {
 			player.undoMove(last);
 			for (n = moveHistory.size()-1; n>=0; n--){
 				Move move = moveHistory.elementAt(n);
-				if (move.getDirection()!=last.getDirection()) break;
+				if (move.getDirection()!=last.getDirection() || move.getPushed() != last.getPushed()) break;
 				player.undoMove(move);
 				moveHistory.remove(n);
 			}
 			System.out.print("Index of last move: " + n);
 			display.init(stage);
 			nUndos++;
+			display.setUndos();
 			totalMoves++;
 		}
 	}
@@ -192,6 +196,10 @@ public class WarehouseBoss extends Application {
 		emptyTargets++;
 		//System.out.println("Remaining targets: " + this.emptyTargets);
 	}
+	public void changeScore(int i)
+	{
+		if (score>=100) score+= i;
+	}
 	public Board getBoard()
 	{
 		return this.board;
@@ -216,6 +224,7 @@ public class WarehouseBoss extends Application {
 			int numRows = Integer.valueOf(in.readLine().trim()).intValue();
 			int numCols = Integer.valueOf(in.readLine().trim()).intValue();
 			board = new Board(numRows,numCols);
+			
 			for (int row=0;row<numRows;row++)
 			{
 				for (int col=0;col<numCols;col++)
@@ -241,9 +250,14 @@ public class WarehouseBoss extends Application {
 		case '#':
 			square = new Wall(pos, this);
 			break;
+		case ' ':
+			square = new Space(pos, this);
+			this.board.nSpaces++;
+			break;
 		case '$':
 			square = new Space(pos, this);
 			square.addEntity(new Box(square, this));
+			this.board.nBoxes++;
 			break;
 		case '.':
 			square = new Target(pos, this);
@@ -345,6 +359,17 @@ public class WarehouseBoss extends Application {
 			return;
 		}
 	}
+	
+	public static void changeDifficulty (int d)
+	{
+		if (d == 0)  maxUndos = 3;
+		if (d == 1)  maxUndos = 6;
+		
+	}
+	public int undosRemaining()
+	{
+		return maxUndos-nUndos;
+	}
 //	public void deleteSave()
 //	{
 //		try {
@@ -365,7 +390,7 @@ public class WarehouseBoss extends Application {
 	private Player player;
 	private int emptyTargets;
 	private int maxMoves = 100;
-	private int maxUndos = 10;
+	public static int maxUndos = 6;
 	private Board board;
 	public int level = 0;
 	public int nUndos = 0;
