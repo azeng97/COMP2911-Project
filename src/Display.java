@@ -3,6 +3,7 @@ import javafx.animation.PathTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -29,6 +30,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -238,6 +241,69 @@ public class Display {
 			@Override
 			public void handle(ActionEvent event) {
 				pauseScreen();
+				System.out.println("pause game");
+				keyPressAllowed = false;
+				root.setEffect(new GaussianBlur());
+				VBox pauseRoot = new VBox(5);
+	            pauseRoot.getChildren().add(new Label("Paused"));
+	            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+	            //pauseRoot.setLayoutX(((arrayWidth + 3.5)*TILE_SIZE)/ 2);
+	            //pauseRoot.setLayoutY(arrayHeight*TILE_SIZE/2);
+	            pauseRoot.setAlignment(Pos.CENTER);
+	            pauseRoot.setPadding(new Insets(20));
+
+	            Button resume = new Button("Resume");
+	            resume.setMaxWidth(Double.MAX_VALUE);
+	            pauseRoot.getChildren().add(resume);
+
+	            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+	            popupStage.initOwner(stage);
+	            popupStage.initModality(Modality.APPLICATION_MODAL);
+	            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+	            resume.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+						root.setEffect(null);
+		                popupStage.hide();
+		                keyPressAllowed = true;
+						
+					}
+	            	
+	            });
+	            pauseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	                @Override
+	                public void handle(KeyEvent event) {
+	                    if (event.getCode() == KeyCode.ESCAPE) {
+	                    	root.setEffect(null);
+			                popupStage.hide();
+			                keyPressAllowed = true;
+	                    }
+	                }            
+	            });
+	            Button quitBtn = new Button("Quit Game");
+	            quitBtn.setMaxWidth(Double.MAX_VALUE);
+	            pauseRoot.getChildren().add(quitBtn);
+	            quitBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+						try {
+							root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+							Scene scene = new Scene(root);
+							scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+							stage.setScene(scene);
+							stage.show();
+							popupStage.close();
+						} 
+						catch (IOException e) { e.printStackTrace(); }
+						
+					}
+	            	
+	            });
+	            popupStage.show();
+
 			}
 			
 		});

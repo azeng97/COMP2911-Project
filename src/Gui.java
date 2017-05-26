@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -171,19 +173,42 @@ public class Gui extends Application {
 				System.out.println("pause game");
 				keyPressAllowed = false;
 				root.setEffect(new GaussianBlur());
-				VBox pauseRoot = new VBox(5);
-	            pauseRoot.getChildren().add(new Label("Paused"));
-	            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
-	            pauseRoot.setAlignment(Pos.CENTER);
-	            pauseRoot.setPadding(new Insets(20));
-
-	            Button resume = new Button("Resume");
-	            pauseRoot.getChildren().add(resume);
-
+				
+//				VBox pauseRoot = new VBox(5);
+//	            pauseRoot.getChildren().add(new Label("Paused"));
+//	            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+//	            pauseRoot.setAlignment(Pos.CENTER);
+//	            pauseRoot.setPadding(new Insets(20));
+//
+//	            Button resume = new Button("Resume");
+//	            pauseRoot.getChildren().add(resume);
+//
+//	            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+//	            popupStage.initOwner(stage);
+//	            popupStage.initModality(Modality.APPLICATION_MODAL);
+//	            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+	            
+	            Parent pauseRoot;
 	            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
-	            popupStage.initOwner(stage);
-	            popupStage.initModality(Modality.APPLICATION_MODAL);
-	            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+	    		try {
+	    			pauseRoot = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
+	    			
+	    			Scene scene = new Scene(pauseRoot);
+	    			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	    			
+	    			
+		            popupStage.initOwner(stage);
+		            popupStage.initModality(Modality.APPLICATION_MODAL);
+		            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+	    			
+		            popupStage.setScene(scene);
+	    			//primaryStage.show();
+	    		} catch (IOException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	    		
+	    		Button resume = new Button("Resume");
 	            resume.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override
@@ -200,7 +225,8 @@ public class Gui extends Application {
 			}
 			
 		});
-		pauseBtn.setStyle("-fx-focus-color: transparent;");
+		pauseBtn.setStyle("-fx-focus-color: transparent; ");
+		pauseBtn.setStyle("-fx-background-color: #969696;");
 		pauseBtn.setMaxWidth(Double.MAX_VALUE);
 		root.getChildren().add(pauseBtn);
 		VBox vbButtons = new VBox();
