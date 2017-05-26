@@ -76,7 +76,7 @@ public class WarehouseBoss extends Application {
 			primaryStage.show();
 		} 
 		catch (IOException e) { e.printStackTrace(); }	
-		score = 0;
+		totalScore = 0;
 	}
 	
 	public void play(Stage primaryStage)
@@ -88,31 +88,20 @@ public class WarehouseBoss extends Application {
 
 		this.buildBoard(level);
 		this.display = new Display(board.getNRows(),board.getNCols(),this);
-		score += (board.nBoxes*1000)/board.nSpaces;
+		levelScore = board.maxScore;
 		//Display display = new Display(10,10,this);
 		display.init(primaryStage);
 		
 		output = new Output(this, board);
 //		System.out.println("Game starting. Use W,A,S,D to move. Player is P, boxes are $, and targets are O");
 		output.printBoard();
-		//edit test
-		//edit test 2
-		
-//		String input = new String();
-//		Scanner in = new Scanner(System.in); 
-//		while (gameOver == false)
-//		{
-//			System.out.println("Make a Move!");
-//			input = in.next();
-//			Move move = new Move(Move.keyToDirection(input));
-//			if (move.getDirection() == -1) continue;
-//			totalMoves++;
-//			player.makeMove(move);
-//			output.printBoard();
-//		}
-//		in.close();
-//		System.out.println("You win! Total moves:" + totalMoves);
-//		System.exit(1);
+
+	}
+	public void nextLevel(Stage stage)
+	{
+		level++;
+		totalScore += levelScore;
+		play(stage);
 	}
 	
 	public void resume (Stage stage)
@@ -140,7 +129,7 @@ public class WarehouseBoss extends Application {
 			}
 			//System.out.println("moved");
 			totalMoves++;
-			;
+			changeScore(-2);
 			return true;
 		}
 		else return false; 
@@ -165,6 +154,7 @@ public class WarehouseBoss extends Application {
 			nUndos++;
 			display.setUndos();
 			totalMoves++;
+			changeScore(-10);
 		}
 	}
 	
@@ -198,7 +188,7 @@ public class WarehouseBoss extends Application {
 	}
 	public void changeScore(int i)
 	{
-		if (score>=100) score+= i;
+		if (levelScore>=board.minScore) levelScore+= i;
 	}
 	public Board getBoard()
 	{
@@ -234,12 +224,15 @@ public class WarehouseBoss extends Application {
 				in.readLine();
 			}
 			in.close();
+			board.maxScore = (board.nBoxes*numRows*numCols*10000)/(board.nSpaces*board.nSpaces);
+			board.minScore = (board.nBoxes*numRows*numCols*10)/board.nSpaces;
 		}
 		catch (IOException e)
 		{
 			System.out.println("File format incorrect");
 			return;
 		}
+		
 		
 	}
 	public void buildSquare(Position pos, char c)
@@ -382,7 +375,20 @@ public class WarehouseBoss extends Application {
 	{
 		return gameOver;
 	}
-	private int score = 0;
+	public int getTotalScore()
+	{
+		return totalScore;
+	}
+	public int getLevelScore()
+	{
+		return levelScore;
+	}
+	public void setLevelScore(int n)
+	{
+		levelScore = n;
+	}
+	private int totalScore = 0;
+	private int levelScore = 0;
 	public Display display;
 	public Output output; 
 	private boolean gameOver;

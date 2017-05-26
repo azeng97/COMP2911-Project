@@ -11,6 +11,7 @@ public class Output {
 		System.out.println("Number of undos: " + game.nUndos);
 		System.out.println("Number of moves: " + game.totalMoves);
 		System.out.println("Size of Move History: " + game.moveHistory.size());
+		System.out.println("Score: " + game.getLevelScore());
 	}
 	private WarehouseBoss game;
 	private Board b;
