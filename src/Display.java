@@ -318,6 +318,7 @@ public class Display {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("reset game");
+                g.setLevelScore(g.getBoard().minScore);
                 g.play(stage);
                 
             }
