@@ -12,7 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
-
+/**
+ * Controller for settings menu
+ * @author Cam Horsley
+ *
+ */
 
 public class SettingMenuController {
 	

@@ -22,7 +22,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
-
+/**
+ * Main Game class
+ * @author Avan
+ *
+ */
 public class WarehouseBoss extends Application {
 	public static Clip clip;
 	

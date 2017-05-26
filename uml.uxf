@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>765</x>
+      <y>243</y>
+      <w>315</w>
+      <h>639</h>
+    </coordinates>
+    <panel_attributes>::WarehouseBoss
+--
++clip: Clip
+-difficulty = 0: int
+-totalScore = 0: int
+-levelScore = 0: int
+-finalLevel = 19: int
++display: Display
+-gameOver: boolean
++totalMoves: int
+-player: Player
+-emptyTargets: int
+-maxMoves = 100: int
++maxUndos = 6: int
+-board: Board
++level = 0: int
++nUndos = 0: int
++moveHistory = new Vector&lt;Move&gt;(): Vector&lt;Move&gt;
+--
++main(String args[]): void
++start(Stage arg0): void
++play(Stage primaryStage): void
++nextLevel(Stage stage): void
++endGame(): boolean
++resume(Stage stage): void
++makeMove(int direction): boolean
++undoMove(Stage stage): void
++squareAt(Position pos): Square
++emptyTargets(): int
++decrementTargets(): void
++incrementTargets(): void
++changeScore(int i): void
++getBoard(): Board
++buildBoard(int level): void
++buildSquare(Position pos, char c): void
++saveGame(): void
++loadGame(): void
++setDifficulty(int d): void
++changeDifficulty(): void
++undosRemaining(): int
++isGameOver(): boolean
++getTotalScore(): int
++setTotalScore(int n): void
++getLevelScore(): int
++setLevelScore(int n): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>306</x>
+      <y>810</y>
+      <w>396</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>::Display
+--
+-arr[][]: int
+-playerImage: Image
+-boxImage: Image
+~timer1: AnimationTimer
+-player: Node
+-boxes: ArrayList&lt;DisplayBox&gt;
+-g: WarehouseBoss
+-arrayWidth: int
+-arrayHeight: int
+-keyPressAllowed: boolean
+-stage: Stage
+-root: Pane
+-timerCounter = 0: int
+-moveCount: Label
+-undoCount: Label
+-score: Label
+--
++Display(int arrayHeight, int arrayWidth, WarehouseBoss g): ctor
++getWidth(): int
++movePlayerBy(double dx, double dy): void
+-movePlayerTo(double x, double y): void
++transitionTo(double x, double y, DisplayBox n): void
++setUndos(): void
++moveBox(Position position, int direction): void
++checkGameOver(): void
+-createContent(): Parent
++init(Stage primaryStage): void
++constructBoard(): void
++pauseScreen(): void
++saveScreen(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>189</y>
+      <w>270</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>::SettingMenuController
+--
++clip: Clip
+--
++toggleSound(): void
++toggleSoundImage(): void
++changeDifficultyEasy(): void
++changeDifficultyHard(): void
++leaderboards(): void
++back(): void
++deleteSave(): void
++initData(Clip clip): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1251</x>
+      <y>432</y>
+      <w>207</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>::Position
+--
+-row: int
+-col: int
+--
++Position(int row, int col): ctor
++equals(Object o): boolean
++getCol(): int
++getRow(): int
++reverseDirection(int whichDir): int
++adjacentPos(int direction): Object</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>846</x>
+      <y>981</y>
+      <w>207</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>::Board
+--
+-nRows: int
+-nCols: int
++nBoxes: int
++nSpaces: int
++maxScore: int
++minScore: int
+-board[][]: Object
+--
++Board(int nRows, int nCols): ctor
++getObj(int row, int col): Object
++retrieveObj(Position p): Object
++setObj(Position p, Object o): void
++getNCols(): int
++getNRows(): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>396</x>
+      <y>405</y>
+      <w>252</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>::MenuController
+--
+-butNewGame: javafx.scene.control.Button
+-butSettings: javafx.scene.control.Button
+-butHelp: javafx.scene.control.Button
+-logoText: javafx.scene.image.ImageView
+-primaryStage: Stage
++clip: Clip
+--
++newGame(): void
++loadingScreen(Stage primaryStage): void
++loadGame(): void
++settings(): void
++exit(): void
++help(): void
++initData(Clip clip): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1260</x>
+      <y>135</y>
+      <w>270</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>::Square
+--
+-isInsideTarget = false: boolean
+#position: Position
+#game: WarehouseBoss
+#contents: Entity
+--
++Square(Position p, WarehouseBoss g): ctor
++addEntity(Entity e): boolean
++isEmpty(): boolean
++canPush(int direction): boolean
++getPosition(): Position
++getContents(): Entity
++pushContents(int direction): boolean
++removeContents(): void
++getIsInsideTarget(): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1287</x>
+      <y>639</y>
+      <w>207</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>::Move
+--
+-direction: int
+-pushed: boolean
+
+--
++Move(int direction): ctor
++keyToDirection(String move): int
++getDirection(): int
++getPushed(): boolean
++setDirection(int direction): void
++setPushed(boolean t): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1305</x>
+      <y>873</y>
+      <w>252</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>/::Entity/
+--
+#square: Square
+#game: WarehouseBoss
+--
++Entity(Square s, WarehouseBoss g): ctor
++getPosition(): Position
++getSquare(): Square
++setSquare(Square s): void
++getName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>819</x>
+      <y>90</y>
+      <w>252</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>::DisplayBox
+--
+-p: Position
+--
++DisplayBox(Image i, int row, int col): ctor
++getPosition(): Position
++setPosition(Position pos): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1629</x>
+      <y>972</y>
+      <w>252</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>::Player
+--
+--
++Player(Square s, WarehouseBoss g): ctor
++makeMove(Move m): boolean
++undoMove(Move m): void
++getName(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>81</x>
+      <y>468</y>
+      <w>243</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>::menuUI
+--
++clip: Clip
+--
++menuUI(Stage arg, Clip clip): ctor
++ConstructUI(Stage primaryStage): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1647</x>
+      <y>828</y>
+      <w>243</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>::Box
+--
+--
++Box(Square s, WarehouseBoss g): ctor
++getName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>45</y>
+      <w>297</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>::LeaderboardsController
+--
+--
++back(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1575</x>
+      <y>234</y>
+      <w>261</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>::Space
+--
+--
++Space(Position p, WarehouseBoss g): ctor
++getName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1566</x>
+      <y>117</y>
+      <w>261</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>::Target
+--
+--
++Target(Position p, WarehouseBoss g): ctor
++getName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1575</x>
+      <y>360</y>
+      <w>252</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>::Wall
+--
+--
++Wall(Position p, WarehouseBoss g): ctor
++isEmpty(): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>117</x>
+      <y>720</y>
+      <w>144</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>::GameMenuController
+--
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1521</x>
+      <y>153</y>
+      <w>63</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1521</x>
+      <y>252</y>
+      <w>72</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1521</x>
+      <y>315</y>
+      <w>72</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1548</x>
+      <y>873</y>
+      <w>117</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1548</x>
+      <y>972</y>
+      <w>99</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1494</x>
+      <y>351</y>
+      <w>45</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30.0;580.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1350</x>
+      <y>351</y>
+      <w>54</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1044</x>
+      <y>576</y>
+      <w>243</w>
+      <h>468</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;10.0;500.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1071</x>
+      <y>747</y>
+      <w>252</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>260.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1071</x>
+      <y>306</y>
+      <w>207</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>180</y>
+      <w>225</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>230.0;280.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1071</x>
+      <y>630</y>
+      <w>234</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>240.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1413</x>
+      <y>810</y>
+      <w>27</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1458</x>
+      <y>351</y>
+      <w>36</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>351</y>
+      <w>27</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>639</x>
+      <y>441</y>
+      <w>144</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>140.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>108</y>
+      <w>27</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>765</y>
+      <w>135</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>315</x>
+      <y>486</y>
+      <w>99</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>945</x>
+      <y>873</y>
+      <w>27</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>585</x>
+      <y>666</y>
+      <w>198</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1044</x>
+      <y>351</y>
+      <w>243</w>
+      <h>648</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;10.0;700.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1044</x>
+      <y>999</y>
+      <w>279</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>495</x>
+      <y>621</y>
+      <w>27</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>1053</y>
+      <w>171</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

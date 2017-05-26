@@ -34,7 +34,11 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**
+ * Display and input class
+ * @author Avan
+ *
+ */
 public class Display {
 	private static final int TILE_SIZE = 40;
 	private int arr[][];

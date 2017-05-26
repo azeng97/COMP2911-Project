@@ -1,4 +1,8 @@
-
+/**
+ * Player class, handles movement
+ * @author Avan
+ *
+ */
 public class Player extends Entity{
 	public Player(Square s, WarehouseBoss g)
 	{
