@@ -44,6 +44,8 @@ public class Display {
 	
 	private Image playerImage;
 	private Image boxImage;
+	AnimationTimer timer1;
+	AnimationTimer timer2;
 	
 	private Node player;
 	static private ArrayList<DisplayBox> boxes;
@@ -278,7 +280,7 @@ public class Display {
 		vbButtons.setLayoutX((arrayWidth) * TILE_SIZE);
 		vbButtons.setLayoutY(TILE_SIZE);
 		root.getChildren().add(vbButtons);
-		AnimationTimer timer = new AnimationTimer() {
+		this.timer1 = new AnimationTimer() {
             @Override
             public void handle(long now) {
             	timerCounter ++;
@@ -297,7 +299,7 @@ public class Display {
             	timerLl.setText("Timer: " + timerCounter/60);
             }
         };
-        timer.start();
+        timer1.start();
 		return root;
 	}
 	private class Tile extends StackPane {
@@ -391,7 +393,7 @@ public class Display {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
-        AnimationTimer timer = new AnimationTimer() {
+        this.timer2 = new AnimationTimer() {
             @Override
             public void handle(long now) {
             	
@@ -410,7 +412,7 @@ public class Display {
                 movePlayerBy(dx, dy);*/
             }
         };
-        timer.start();
+        timer2.start();
 	}
 
 	public void constructBoard() {
@@ -442,6 +444,7 @@ public class Display {
 	public void pauseScreen(){
 		System.out.println("pause game");
 		keyPressAllowed = false;
+		timer1.stop();
 		root.setEffect(new GaussianBlur());
 		VBox pauseRoot = new VBox(5);
         pauseRoot.getChildren().add(new Label("Paused"));
@@ -459,6 +462,8 @@ public class Display {
         popupStage.initOwner(stage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+        
+        
         resume.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -466,6 +471,7 @@ public class Display {
 				root.setEffect(null);
                 popupStage.hide();
                 keyPressAllowed = true;
+                timer1.start();
 				
 			}
         	
