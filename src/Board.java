@@ -57,11 +57,14 @@ public class Board {
 			}
 			System.out.print(line + "\n");
 		}
+		
 	}
 	private int nRows;
 	private int nCols;
-	public int nBoxes = 0;
-	public int nSpaces = 0;
+	public int nBoxes;
+	public int nSpaces;
+	public int maxScore;
+	public int minScore;
 	private Object board[][];
 	
 }

@@ -62,6 +62,7 @@ public class Display {
 	private int timerCounter = 0; 
 	private Label moveCount;
 	private Label undoCount;
+	private Label score;
 	
 	/**
 	 * @pre this.arrayWidth has been initialised
@@ -195,7 +196,8 @@ public class Display {
 			root.setEffect(new GaussianBlur());
 			keyPressAllowed = false;
 			VBox gameOverRoot = new VBox(5);
-            gameOverRoot.getChildren().add(new Label("Level Cleared"));
+			int temp = g.getTotalScore() + g.getLevelScore();
+            gameOverRoot.getChildren().add(new Label("Level Cleared. Score: " +  temp));
             gameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
             gameOverRoot.setAlignment(Pos.CENTER);
             gameOverRoot.setPadding(new Insets(20));
@@ -213,8 +215,7 @@ public class Display {
 				@Override
 				public void handle(ActionEvent event) {
 					System.out.println("Next level");
-					g.level++;
-					g.play(stage);
+					g.nextLevel(stage);
 					root.setEffect(null);
 	                popupStage.hide();
 	                keyPressAllowed = true;
@@ -292,6 +293,15 @@ public class Display {
             }
         });
 		saveBtn.setMaxWidth(Double.MAX_VALUE);
+		Button skipBtn = new Button("Skip Level");
+		skipBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	g.setLevelScore(0);
+            	g.nextLevel(stage);
+            }
+        });
+		skipBtn.setMaxWidth(Double.MAX_VALUE);
 		
 		Button pauseBtn = new Button("Pause Game");
 		pauseBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -317,6 +327,10 @@ public class Display {
 		Label level = new Label();
 		level.setText("Level: " + g.level);
 		level.setTextFill(Color.WHITE);
+		score = new Label();
+		score.setText("Level Score: " + g.getLevelScore());
+		score.setTextFill(Color.WHITE);
+		score.setMaxWidth(Double.MAX_VALUE);
 		moveCount = new Label();
 		moveCount.setText("Moves: " + g.totalMoves);
 		moveCount.setTextFill(Color.WHITE);
@@ -333,7 +347,7 @@ public class Display {
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-		vbButtons.getChildren().addAll(level, timerLl, moveCount, undoCount, pauseBtn, saveBtn, resetBtn);
+		vbButtons.getChildren().addAll(level, score, timerLl, moveCount, undoCount, pauseBtn, saveBtn, resetBtn, skipBtn);
 		vbButtons.setLayoutX((arrayWidth) * TILE_SIZE);
 		vbButtons.setLayoutY(TILE_SIZE);
 		root.getChildren().add(vbButtons);
@@ -341,6 +355,7 @@ public class Display {
             @Override
             public void handle(long now) {
             	timerCounter ++;
+            	if (timerCounter%60 == 0) g.changeScore(-1); score.setText("Level Score: " + g.getLevelScore());
                 /*int dx = 0, dy = 0;
                 if (timerCounter == (TILE_SIZE/MOVE_LENGTH))  {
                 	goNorth = false; goSouth = false; goEast = false; goWest = false;
