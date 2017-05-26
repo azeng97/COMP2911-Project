@@ -107,6 +107,7 @@ public class MenuController {
 	}
 	
 	public void exit() {
+		clip.stop();
 		System.exit(0);
 	}
 	
