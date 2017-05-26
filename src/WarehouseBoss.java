@@ -16,6 +16,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
@@ -59,10 +61,21 @@ public class WarehouseBoss extends Application {
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
-		Stage s = new Stage();
-		s.setTitle("Warehouse Bros.");
-		menuUI ui = new menuUI(s, clip);
-	}
+		Stage primaryStage = new Stage();
+		primaryStage.setTitle("Warehouse Bros.");
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+			//root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+			Scene scene = new Scene(loader.load());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+			MenuController controller =  loader.<MenuController>getController();
+			controller.initData(clip);
+			
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} 
+		catch (IOException e) { e.printStackTrace(); }	}
 	
 	public void play(Stage primaryStage)
 	{

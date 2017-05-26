@@ -326,7 +326,7 @@ public class Display {
 			Node retval = null;
 			//if (contains == 0 || contains == 2 || contains == 3) retval = new ImageView(new Image("floor.png", 40, 40, false, false));
 			if (contains == 1) retval = new ImageView(new Image("wall.png", 40, 40, false, false));
-			if (contains > 3 ) retval = new ImageView(new Image("target.png", 40, 40, false, false));
+			if (contains > 3 ) retval = new ImageView(new Image("target.png", 40, 40, false, false)); //target goal FOUND
 			return retval;
 		}
 	}
