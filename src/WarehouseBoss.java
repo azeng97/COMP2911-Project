@@ -1,13 +1,28 @@
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.Mixer.Info;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class WarehouseBoss extends Application {
+	public static Clip clip;
+	
 	public static void main(String args[])
 	{
 		//Stage arg0 = new Stage();
@@ -31,6 +46,46 @@ public class WarehouseBoss extends Application {
 	
 	public void play(Stage primaryStage)
 	{
+		
+		Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
+		Mixer mixer = AudioSystem.getMixer(mixerInfos[0]);
+		
+		
+		
+		DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+		try { clip = (Clip) mixer.getLine(dataInfo);	}
+		catch (LineUnavailableException lue) {	lue.printStackTrace();	}
+		
+		try {
+			URL soundURL = WarehouseBoss.class.getResource("/images/Dungeon_King_Loop.wav");
+			AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
+			clip.open(audioStream);
+		}
+		catch (LineUnavailableException lue) {	lue.printStackTrace();	}
+		catch (UnsupportedAudioFileException uafe) { uafe.printStackTrace();	}
+		catch (IOException ioe) {	ioe.printStackTrace();	}
+		
+		clip.start();
+		
+		do {
+			try { Thread.sleep(50); } 
+			catch (InterruptedException e) { e.printStackTrace(); }
+		} while (clip.isActive());
+		
+//		Task<Void> task = new Task<Void>() {
+//			@Override protected Void call() throws Exception {
+//				loadingScreen(primaryStage);
+//				Platform.runLater(new Runnable() {
+//					@Override public void run() {
+//						WarehouseBoss game = new WarehouseBoss();
+//						game.play(primaryStage);
+//					}
+//				});
+//				return null;
+//			}
+//		};
+//		 task.run();
+		
 		gameOver = false;
 		emptyTargets = 0;
 		totalMoves = 0;
