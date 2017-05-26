@@ -17,7 +17,6 @@ public class menuUI {
 		ConstructUI(arg);
 	}
 	
-
 	public void ConstructUI(Stage primaryStage) {
 		Parent root;
 		try {
@@ -27,12 +26,7 @@ public class menuUI {
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
+		} 
+		catch (IOException e) { e.printStackTrace(); }
 	}
-	
-	
 }

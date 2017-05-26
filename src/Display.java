@@ -3,6 +3,7 @@ import javafx.animation.PathTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -29,6 +30,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -283,8 +286,16 @@ public class Display {
 
 					@Override
 					public void handle(ActionEvent event) {
-						System.out.println("Quit Game");
-						System.exit(1);
+						try {
+							root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+							Scene scene = new Scene(root);
+							scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+							stage.setScene(scene);
+							stage.show();
+							popupStage.close();
+						} 
+						catch (IOException e) { e.printStackTrace(); }
 						
 					}
 	            	
