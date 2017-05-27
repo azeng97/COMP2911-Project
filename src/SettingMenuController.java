@@ -54,7 +54,6 @@ public class SettingMenuController {
 	}
 	
 	public void changeDifficultyEasy() {
-		System.out.println("Selected: Settings > Difficulty set to Easy");
 		if (labDifficultyEasyOn.isVisible() != true) {
 			labDifficultyEasyOff.setVisible(false);
 			labDifficultyEasyOn.setVisible(true);
@@ -65,7 +64,6 @@ public class SettingMenuController {
 	}
 	
 	public void changeDifficultyHard() {
-		System.out.println("Selected: Settings > Difficulty set to Hard");
 		if (labDifficultyHardOn.isVisible() != true) {
 			labDifficultyHardOff.setVisible(false);
 			labDifficultyHardOn.setVisible(true);
@@ -74,7 +72,19 @@ public class SettingMenuController {
 		}
 		WarehouseBoss.setDifficulty(1);
 	}
-	
+	public void setDifficulty() {
+		if (WarehouseBoss.difficulty==0) {
+			labDifficultyEasyOff.setVisible(false);
+			labDifficultyEasyOn.setVisible(true);
+			labDifficultyHardOff.setVisible(true);
+			labDifficultyHardOn.setVisible(false);
+		} else {
+			labDifficultyHardOff.setVisible(false);
+			labDifficultyHardOn.setVisible(true);
+			labDifficultyEasyOff.setVisible(true);
+			labDifficultyEasyOn.setVisible(false);
+		}
+	}
 	public void leaderboards() {
 		Stage primaryStage = (Stage) butBack.getScene().getWindow();
 		primaryStage.setTitle("Warehouse Bros. - Leaderboards");

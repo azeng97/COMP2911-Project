@@ -5,23 +5,43 @@
  *
  */
 public class Position {
+	/**
+	 * Create Position from row and column
+	 * @param row
+	 * @param col
+	 */
 	public Position(int row, int col)
 	{
 		this.row = row;
 		this.col = col;
 	}
+	/**
+	 * Compare two positions
+	 */
 	public boolean equals(Object o)
 	{
 		return ((o instanceof Position) && ((Position) o).row == this.row && ((Position) o).col == this.col);
 	}
+	/**
+	 * Getter for column
+	 * @return integer column
+	 */
 	public int getCol()
 	{
 		return col;
 	}
+	/**
+	 * Getter for row
+	 * @return integer row
+	 */
 	public int getRow(){
 		return row;
 	}
-	
+	/**
+	 * Reverse direction
+	 * @param whichDir	direction (integer)
+	 * @return	integer for opposite direction
+	 */
 	public static int reverseDirection(int whichDir) {
 		switch (whichDir) {
 		case North:
@@ -44,7 +64,11 @@ public class Position {
 			throw new IndexOutOfBoundsException();
 		}
 	}
-	
+	/**
+	 * Returns adjacent position in given direction
+	 * @param direction integer direction
+	 * @return	position adjacent
+	 */
 	public Object adjacentPos(int direction) {
 		switch (direction) {
 		case North:

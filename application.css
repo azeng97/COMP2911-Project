@@ -1,0 +1,166 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#sideMenuButton {
+	-fx-background-color: rgba(50,50,50,0.5);
+	-fx-text-fill: white;
+	-fx-focus-color: transparent;
+}
+
+/* Main Menu */
+#butNewGame {
+	-fx-background-color: transparent;
+}
+#labNewGame {
+	-fx-background-color: #969696;
+}
+#butNewGame:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butLoadGame {
+	-fx-background-color: transparent;
+}
+#labLoadGame {
+	-fx-background-color: #969696;
+}
+#butLoadGame:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butSettings {
+	-fx-background-color: transparent;
+}
+#labSettings {
+	-fx-background-color: #969696;
+}
+#butSettings:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butExit {
+	-fx-background-color: transparent;
+}
+#labExit {
+	-fx-background-color: #969696;
+}
+#butExit:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butHelp {
+	-fx-background-color: transparent;
+}
+#labHelp {
+	-fx-background-color: #969696;
+}
+#butHelp:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+
+
+/* Settings Menu */
+#butSound {
+	-fx-background-color: transparent;
+}
+#labSound {
+	-fx-background-color: #969696;
+}
+#butSound:hover {
+  -fx-background-color:#d6d6d6;
+}
+#labMuteIcon {
+	-fx-background-color: black;
+	
+}
+
+
+
+#butDeleteSave {
+	-fx-background-color: transparent;
+}
+#labDeleteSave {
+	-fx-background-color: #969696;
+}
+#butDeleteSave:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#labDifficulty {
+	-fx-background-color: #969696;
+}
+
+#labDifficultyEasyOff {
+	-fx-background-color: #4d4d4d;
+}
+#labDifficultyEasyOn {
+	-fx-background-color: #d6d6d6;
+}
+#butDiffEasy {
+	-fx-background-color: transparent;
+}
+#butDiffEasy:hover {
+  -fx-background-color:#969696;
+}
+
+#labDifficultyHardOff {
+	-fx-background-color: #4d4d4d;
+}
+#labDifficultyHardOn {
+	-fx-background-color: #d6d6d6;
+}
+#butDiffHard {
+	-fx-background-color: transparent;
+}
+#butDiffHard:hover {
+  -fx-background-color:#969696;
+}
+
+
+#butBack {
+	-fx-background-color: transparent;
+}
+#labBack {
+	-fx-background-color: #969696;
+}
+#butBack:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+#butLeaderboards {
+	-fx-background-color: transparent;
+}
+#labLeaderboards {
+	-fx-background-color: #969696;
+}
+#butLeaderboards:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+
+/* Leaderboards */
+#butLeaderboardsBack {
+	-fx-background-color: transparent;
+}
+#labLeaderboardsBack {
+	-fx-background-color: #969696;
+}
+#butLeaderboardsBack:hover {
+  -fx-background-color:#d6d6d6;
+}
+
+
+/* Help Screen */
+
+#labHelp {
+	-fx-background-color: #969696;
+}
+
+

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 /**
  * Display and input class
- * @author Avan
+ * @author Justin Daero Lee, Avan Zeng, Cam Horsley
  *
  */
 public class Display {
@@ -45,6 +45,7 @@ public class Display {
 	
 	private Image playerImage;
 	private Image boxImage;
+	private Image boxImage2;
 	AnimationTimer timer1;
 	
 	private Node player;
@@ -62,6 +63,8 @@ public class Display {
 	private Label moveCount;
 	private Label undoCount;
 	private Label score;
+	private Label timerLl;
+	private Label level;
 	
 	/**
 	 * @pre this.arrayWidth has been initialised
@@ -236,43 +239,7 @@ public class Display {
             popupStage.show();
             //System.exit(1);
 		} else if (g.endGame()) {
-			root.setEffect(new GaussianBlur());
-			keyPressAllowed = false;
-			VBox WGameOverRoot = new VBox(5);
-			int temp = g.getTotalScore() + g.getLevelScore();
-            WGameOverRoot.getChildren().add(new Label("Game Completed. Score: " +  temp));
-            WGameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
-            WGameOverRoot.setAlignment(Pos.CENTER);
-            WGameOverRoot.setPadding(new Insets(20));
-
-            Button quitBtn = new Button("Quit Game");
-            quitBtn.setMaxWidth(Double.MAX_VALUE);
-            WGameOverRoot.getChildren().add(quitBtn);
-
-            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
-            popupStage.initOwner(stage);
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.setScene(new Scene(WGameOverRoot, Color.TRANSPARENT));
-            quitBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					try {
-						root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-						Scene scene = new Scene(root);
-						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-						stage.setScene(scene);
-						stage.show();
-						popupStage.close();
-					} 
-					catch (IOException e) { e.printStackTrace(); }
-					
-				}
-            	
-            });
-            popupStage.show();
-            
+			endGameScreen();
 		}
 	}
 	/**
@@ -281,10 +248,10 @@ public class Display {
 	 */
 	private Parent createContent() {
 		this.root = new Pane();
-		root.setPrefSize(TILE_SIZE * (arrayWidth + 3.5), TILE_SIZE * arrayHeight);
+		root.setPrefSize(TILE_SIZE * (arrayWidth + SIDEBAR_WIDTH), TILE_SIZE * arrayHeight);
 		playerImage = new Image("player.png", 40, 40, false, false);
 		boxImage = new Image("box2.png", 40, 40 , false, false);
-		
+		boxImage2 = new Image("box3.png", 40, 40 , false, false);
 		Rectangle background = new Rectangle(TILE_SIZE * arrayWidth, TILE_SIZE * arrayHeight);
 		Image backgroundImage = new Image("floor.png");
 		background.setFill(new ImagePattern(backgroundImage, 0, 0, 1/(float)arrayWidth, 1/(float)arrayHeight, true)); 
@@ -297,8 +264,14 @@ public class Display {
 
 				if (arr[y][x] == 3 || arr[y][x] == 5) {
 					player.relocate(TILE_SIZE * x, TILE_SIZE * y);
-				} else if (arr[y][x] == 2 || arr[y][x] == 6) {
+				} else if (arr[y][x] == 2) {
 					DisplayBox box = new DisplayBox(boxImage,y,x);
+					boxes.add(box);
+					Group b = new Group(box);
+					root.getChildren().add(b);
+					box.relocate(TILE_SIZE * x, TILE_SIZE * y);
+				} else if (arr[y][x] == 6) {
+					DisplayBox box = new DisplayBox(boxImage2,y,x);
 					boxes.add(box);
 					Group b = new Group(box);
 					root.getChildren().add(b);
@@ -313,7 +286,7 @@ public class Display {
 		}
 		root.getChildren().add(p);
 		Image sideMenuImage = new Image("s29X24F.png");
-		Rectangle sideMenu = new Rectangle(TILE_SIZE * 3.5, TILE_SIZE * arrayHeight);
+		Rectangle sideMenu = new Rectangle(TILE_SIZE * SIDEBAR_WIDTH, TILE_SIZE * arrayHeight);
 		sideMenu.setLayoutX(TILE_SIZE * arrayWidth);
 		sideMenu.setLayoutY(0);
 		sideMenu.setFill(new ImagePattern(sideMenuImage, 0, 0, 3, 1, true));
@@ -332,8 +305,13 @@ public class Display {
             @Override
             public void handle(ActionEvent event) {
             	g.setLevelScore(0);
-            	checkGameOver();
+            	if (g.endGame()){
+            		endGameScreen();
+            		timer1.stop();
+            		return;
+            	}
             	g.nextLevel(stage);
+            	timer1.stop();
             }
         });
 		skipBtn.setMaxWidth(Double.MAX_VALUE);
@@ -352,13 +330,13 @@ public class Display {
 		resetBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                g.setLevelScore(g.getBoard().minScore);
                 g.play(stage);
-                
+         		g.setLevelScore(g.getBoard().minScore);
+         		timer1.stop();     
             }
         });
 		resetBtn.setMaxWidth(Double.MAX_VALUE);
-		Label level = new Label();
+		level = new Label();
 		level.setText("Level: " + g.level);
 		level.setTextFill(Color.WHITE);
 		score = new Label();
@@ -375,7 +353,8 @@ public class Display {
 		pauseBtn.setId("sideMenuButton");
 		saveBtn.setId("sideMenuButton");
 		resetBtn.setId("sideMenuButton");
-		Label timerLl = new Label();
+		skipBtn.setId("sideMenuButton");
+		timerLl = new Label();
 		timerLl.setTextFill(Color.WHITE);
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
@@ -517,6 +496,70 @@ public class Display {
 			}
 		}
 	} 
+
+	public void changeBox(Position p)
+	{
+		DisplayBox box = null;
+		Iterator<DisplayBox> i = boxes.iterator();
+		while (i.hasNext()){
+			box = i.next();
+			if (box.getPosition().equals(p)) break;
+		}
+		box.setImage(boxImage2);
+	}
+	
+	public void stopTimer()
+	{
+		timer1.stop();
+	}
+	public void changeBoxBack(Position p)
+	{
+		DisplayBox box = null;
+		Iterator<DisplayBox> i = boxes.iterator();
+		while (i.hasNext()){
+			box = i.next();
+			if (box.getPosition().equals(p)) break;
+		}
+		box.setImage(boxImage);
+	}
+	public void endGameScreen(){
+		root.setEffect(new GaussianBlur());
+		keyPressAllowed = false;
+		VBox WGameOverRoot = new VBox(5);
+		int temp = g.getTotalScore() + g.getLevelScore();
+        WGameOverRoot.getChildren().add(new Label("Game Completed. Score: " +  temp));
+        WGameOverRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+        WGameOverRoot.setAlignment(Pos.CENTER);
+        WGameOverRoot.setPadding(new Insets(20));
+
+        Button quitBtn = new Button("Quit Game");
+        quitBtn.setMaxWidth(Double.MAX_VALUE);
+        WGameOverRoot.getChildren().add(quitBtn);
+
+        Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+        popupStage.initOwner(stage);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setScene(new Scene(WGameOverRoot, Color.TRANSPARENT));
+        quitBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+					Scene scene = new Scene(root);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+					stage.setScene(scene);
+					stage.show();
+					popupStage.close();
+				} 
+				catch (IOException e) { e.printStackTrace(); }
+				
+			}
+        	
+        });
+        popupStage.show();
+	}
 	/**
 	 * @pre true
 	 * @post constructs a pauseGame menu on top of the root:Pane and disenables all movement of the player and boxes.
@@ -657,6 +700,15 @@ public class Display {
         });
         popupStage.show();
 	}
+	public int getTimerCounter()
+	{
+		return timerCounter;
+	}
+	public void setTimerCounter(int d)
+	{
+		timerCounter = d;
+	}
+	public static final int SIDEBAR_WIDTH = 4;
 	public static final int North = 0;
 	public static final int East = 1;
 	public static final int South = 2;

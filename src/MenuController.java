@@ -33,6 +33,7 @@ public class MenuController {
 				Platform.runLater(new Runnable() {
 					@Override public void run() {
 						WarehouseBoss game = new WarehouseBoss();
+						WarehouseBoss.level = 0;
 						game.setTotalScore(0);
 						game.play(primaryStage);
 					}
@@ -96,6 +97,7 @@ public class MenuController {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			SettingMenuController controller =  loader.<SettingMenuController>getController();
+			controller.setDifficulty();
 			controller.initData(clip);
 			
 			primaryStage.setScene(scene);

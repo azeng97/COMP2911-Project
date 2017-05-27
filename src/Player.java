@@ -4,11 +4,20 @@
  *
  */
 public class Player extends Entity{
+	/**
+	 * Create player that is subclass of entity
+	 * @param s
+	 * @param g
+	 */
 	public Player(Square s, WarehouseBoss g)
 	{
 		super(s,g);
 	}
-	
+	/**
+	 * Make a move and push box if present
+	 * @param m	Move to make
+	 * @return	true if move was made successfully
+	 */
 	public boolean makeMove(Move m)
 	{
 		int direction = m.getDirection();
@@ -26,7 +35,10 @@ public class Player extends Entity{
 		}
 		return false;
 	}
-	
+	/**
+	 * Undo move and unpush box if required
+	 * @param m	Move to be undone
+	 */
 	public void undoMove(Move m)
 	{
 		int direction1 = m.getDirection();
@@ -38,6 +50,9 @@ public class Player extends Entity{
 		newSquare.addEntity(this);
 		if (m.getPushed() == true) boxSquare.pushContents(direction);
 	}
+	/**
+	 * get name of player
+	 */
 	public String getName()
 	{
 		return "Player";
